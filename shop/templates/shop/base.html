@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Главная{% endblock %}</title>
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+</head>
+<body>
+   <!-- <nav>
+        <label class="logo">Ноябрь</label>
+        <ul>
+            <li><a href="#">Одежда</a></li>
+            <li><a href="#">Обувь</a></li>
+            <li><a href="#">Скейт</a></li>
+            <li><a href="#">Бренды</a></li>
+            <li><a href="#">Sale</a></li>
+        </ul>
+    </nav> -->
+ <header>
+       <nav>
+           <ul class="nav__links">
+               <li><a href="#">Одежда</a></li>
+               <li><a href="#">Обувь</a></li>
+               <li><a href="#">Скейт</a></li>
+               <li><a href="#">Бренды</a></li>
+               <li><a href="#">Sale</a></li>
+               <li><label class="logo">Ноябрь</label></li>
+               <li>Блог</li>
+               <li>Профиль</li>
+               <li><button>Поиск</button></li>
+               <li>Корзина</li>
+           </ul>
+
+       </nav>
+   </header>
+
+
+
+{% block content %}
+
+{% endblock content %}
+
+</body>
+</html>
