@@ -1,49 +1,105 @@
-*{
-    box-sizing: border-box;
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap');
+* {
+    font-size: 24px;
+    font-family: 'Merriweather', serif;
+}
+
+/* NAVBAR */
+.navbar {
+    position: absolute;
+    top: 0;
+    z-index: 1000;
+    color: black;
+    width: 100%;
+    padding: 20px 0 27px;
+}
+
+/* SLIDER */
+
+.home-slider {
+    position: relative;
+    height: 100vh;
+    color: white;
+    background-color: white;
+
+}
+
+.products {
+    position: relative;
+}
+
+.left-menu li a {
+    color: black; /* Цвет ссылок */
+    text-decoration: none;
+}
+
+
+a:visited {
+    color: black; /* Цвет посещенных ссылок */
+}
+
+a:active {
+    color: black; /* Цвет активных ссылок */
+}
+
+.right-auth li a {
+    color: black; /* Цвет ссылок */
+    text-decoration: none;
+}
+
+
+.right-auth li {
+    list-style: none;
+    margin: 0;
+    padding: 4px;
+    display: inline-block;
+    letter-spacing: 5px;
+}
+
+.right-auth li:hover {
+    border-bottom: 2px solid black;
+}
+
+.left-menu li {
+    list-style: none;
+    margin: 0;
+    padding: 4px;
+    display: inline-block;
+    letter-spacing: 5px;
+}
+
+.left-menu li:hover {
+    border-bottom: 2px solid black;
+}
+
+.right-auth {
     margin: 0;
     padding: 0;
-    background-color: white;
+    text-align: right;
 }
-li, a, button{
-    font-family: "Times New Roman";
-    font-weight: 500;
-    font-size: 30px;
+
+.left-menu {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+
+.logo a{
     color: black;
     text-decoration: none;
 }
-header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 30px 10%;
-}
-.logo{
-    font-size: 50px;
-    cursor: pointer;
-}
-.nav__links{
-    list-style: none;
-}
-.nav__links li{
-    display: inline-block;
-    padding: 0px 20px;
-}
-.nav__links li a{
-    transition: all 0.3s ease 0s;
-}
-.nav__links li a:hover{
-    text-underline: black;
-}
-.button{
-    padding: 9px 25px;
-    background-color: white;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease 0s;
 
+.logo a:active {
+    color: black;
 }
-.button:hover{
-    text-underline: black;
+
+.logo a:visited {
+    color: black;
+}
+
+.logo {
+    text-align: center;
+    margin: 0;
+    padding: 4px;
 }
 

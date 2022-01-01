@@ -3,45 +3,52 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0 maximum-scale=1.0, user-scalable=no">
     <title>{% block title %}Главная{% endblock %}</title>
-    <link href="{% static 'css/style.css' %}" rel="stylesheet">
-
+    <link rel=stylesheet href="{% static 'css/style.css' %}">
+    <link rel=stylesheet href="{% static 'css/media.css' %}">
+    <link rel="stylesheet" href="{% static '/js/libs/bootstrap/css/bootstrap-reboot.min.css' %}">
+    <link rel="stylesheet" href="{% static '/js/libs/bootstrap/css/bootstrap-grid.min.css' %}">
 </head>
 <body>
-   <!-- <nav>
-        <label class="logo">Ноябрь</label>
-        <ul>
-            <li><a href="#">Одежда</a></li>
-            <li><a href="#">Обувь</a></li>
-            <li><a href="#">Скейт</a></li>
-            <li><a href="#">Бренды</a></li>
-            <li><a href="#">Sale</a></li>
-        </ul>
-    </nav> -->
- <header>
-       <nav>
-           <ul class="nav__links">
-               <li><a href="#">Одежда</a></li>
-               <li><a href="#">Обувь</a></li>
-               <li><a href="#">Скейт</a></li>
-               <li><a href="#">Бренды</a></li>
-               <li><a href="#">Sale</a></li>
-               <li><label class="logo">Ноябрь</label></li>
-               <li>Блог</li>
-               <li>Профиль</li>
-               <li><button>Поиск</button></li>
-               <li>Корзина</li>
-           </ul>
 
-       </nav>
-   </header>
+<div class="navbar">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="products col-md-4">
+                <ul class="left-menu">
+                    <li><a href="#">Одежда</a></li>
+                    <li><a href="#">Обувь</a></li>
+                    <li><a href="#">Скейт</a></li>
+                    <li><a href="#">Бренды</a></li>
+                    <li><a href="#">Sale</a></li>
+                </ul>
+            </div>
+            <div class="logo col-md-4">
+                <a href="#"><img src="{% static 'img/logo.png' %}" alt="logo"> </a>
+            </div>
+            <div class="auth col-md-4">
+                <ul class="right-auth">
+                    <li><a href="#">Блог</a></li>
+                    <li><a href=" #">Профиль</a></li>
+                    <li><a href="#">Поиск</a></li>
+                    <li><a href="#">Корзина <span>[]</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
 
 
 
 {% block content %}
-
 {% endblock content %}
+<script src="{% static 'js/libs/jquery/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'js/common.js' %}"></script>
 
 </body>
 </html>
