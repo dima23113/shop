@@ -19,24 +19,23 @@
             <div class="products col-md-5 col-sm-3 col-lg-5 menu-container">
                 <i class="menu-toggle"></i>
                 <ul class="left-menu">
-                    <!--
                     <li class="left-menu__item"><a href="#">Одежда</a></li>
                     <li class="left-menu__item"><a href="#">Обувь</a></li>
                     <li class="left-menu__item"><a href="#">Скейт</a></li>
-                    <li class="left-menu__item"><a href="#">Бренды</a></li>
+                    <li class="left-menu__item"><a href="{% url 'shop:brand_list' %}">Бренды</a></li>
                     <li class="left-menu__item"><a href="#">Sale</a></li>
-                    -->
-                    {% for i in categories %}
-                        <li class="left-menu__item"><a href="{% url 'shop:product_list_by_category' i.slug %}">{{ i.name }}</a></li>
-                    {% endfor %}
-                    <li class="left-menu__item"><a href="#">Sale</a></li>
+
+                    <!-- for i in categories
+                         <li class="left-menu__item"><a href=" shop:product_list_by_category' i.slug ">i.name </a></li>
+                     -->
                 </ul>
             </div>
             <div class="logo col-md-2 col-sm-4 col-lg-2">
-                <a href="{% url 'shop:index' %}"><img class="logo-img" src=" {% static 'img/logo.png' %}" alt="logo"> </a>
+                <a href="{% url 'shop:index' %}"><img class="logo-img" src=" {% static 'img/logo.png' %}" alt="logo">
+                </a>
                 <a class="cart" href="#"></a>
             </div>
-            <div class="auth col-md-5 col-sm-3 col-lg-5 menu-container" >
+            <div class="auth col-md-5 col-sm-3 col-lg-5 menu-container">
 
                 <ul class="right-auth">
                     <li class="right-menu__item"><a href="#">Блог</a></li>
@@ -48,8 +47,11 @@
         </div>
     </div>
 </div>
-
+<br>
+<br>
+<br>
 {% block content %}
+
 {% endblock content %}
 <script src="{% static 'js/libs/jquery/jquery-3.6.0.min.js' %}"></script>
 <script src="{% static 'js/common.js' %}"></script>

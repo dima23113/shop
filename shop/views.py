@@ -15,6 +15,16 @@ class IndexView(View):
         return render(request, 'shop/base.html', context=context)
 
 
+class BrandList(View):
+
+    def get(self, request, *args, **kwargs):
+        brand = Brand.objects.all()
+        context = {
+            'brand': brand
+        }
+        return render(request, 'shop/product/brand_list.html', context=context)
+
+
 class ProductListByCategory(View):
 
     def get(self, request, *args, **kwargs):
@@ -28,8 +38,8 @@ class ProductListByCategory(View):
 class ProductListByBrand(View):
 
     def get(self, request, *args, **kwargs):
-        brand = Product.objects.get(slug=kwargs['slug'])
-        products = Product.objects.filter(brand__slug=kwargs['slug'], available=True)
+        brand = Brand.objects.get(slug=kwargs['slug'])
+        products = Product.objects.filter(brand=brand, available=True)
         context = {
             'products': products,
             'brand': brand

@@ -183,3 +183,10 @@ a:active {
 .right-auth.right-auth_active li {
     display: block;
 }
+
+
+.brand-list {
+    text-align: center;
+    display: block;
+
+}
