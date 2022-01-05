@@ -1,0 +1,43 @@
+{% extends 'shop/base.html' %}
+
+
+{% block title %}{{ brand.name }}-Ноябрь Скейтшоп{% endblock %}
+
+
+{% block content %}
+
+    <div class="content-items">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="sidebar col-md-3 col-sm-3 col-lg-3"></div>
+                <div class="products col-md-9 col-sm-9 col-lg-9">
+                    <h1>{{ brand.name }}</h1>
+                    <div class="about">{{ brand.description }}<br></div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="product-list col-md-12 col-sm-12 col-lg-12">
+                                <ul class="products-list">
+                                    {% for i in products %}
+                                        <li class="product">
+                                        <div class="col-item">
+                                            <a class="col-item-a" href="#"><img src="{{ i.product_img.img.url}}"> {{ i.product_img.name }}</a>
+                                            <div class="col-item-about">
+                                                <div class="col-item__title">
+                                                    <p>{{ i.brand }}</p>
+                                                    <p>{{ i.name }}</p>
+                                                </div>
+                                                <div class="price">{{ i.price }}</div>
+                                            </div>
+                                        </div>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

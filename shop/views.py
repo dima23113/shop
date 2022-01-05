@@ -44,7 +44,7 @@ class ProductListByBrand(View):
             'products': products,
             'brand': brand
         }
-        return render(request, 'shop/product/product_list.html', context=context)
+        return render(request, 'shop/product/product_by_brand.html', context=context)
 
 
 class ProductListBySubcategory(View):
