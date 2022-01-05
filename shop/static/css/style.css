@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap');
+
 * {
-    font-size: 24px;
+    font-size: 22px;
     font-family: 'Merriweather', serif;
 }
 
@@ -79,12 +80,12 @@ a:active {
 }
 
 .left-menu {
-    margin: 0;
+    margin-left: 26px;
     padding: 0;
     text-align: left;
 }
 
-.logo a{
+.logo a {
     color: black;
     text-decoration: none;
 }
@@ -103,3 +104,82 @@ a:active {
     padding: 4px;
 }
 
+.menu-container {
+    position: relative;
+}
+
+.menu-toggle {
+    width: 25px;
+    height: 40px;
+    background-image: url(../img/menu-dark.svg);
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    top: 2px;
+    display: none;
+
+}
+
+.cart {
+    width: 25px;
+    height: 40px;
+    background-image: url(../img/cart.png);
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    top: 2px;
+    display: none;
+    text-align: right;
+}
+
+.menu-toggle_active {
+    background-image: url(../img/x.svg);
+    width: 22px;
+    height: 40px;
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    top: 2px;
+}
+
+.left-menu.left-menu_active {
+    visibility: visible;
+    opacity: 1;
+    display: block;
+    text-align: center;
+    left: 0;
+    top: 50px;
+    /*
+    top: 30px;
+    padding: 0;
+    margin-left: 30%;
+    margin-right: 30%;*/
+}
+
+.left-menu.left-menu_active li {
+    display: block;
+}
+
+
+.right-auth.right-auth_active {
+    visibility: visible;
+    opacity: 1;
+    display: block;
+    text-align: center;
+    top: 26px;
+    right: 0;
+    /*top: 131px;
+    padding: 0;
+    margin-left: 30%;
+    margin-right: 30%;*/
+}
+
+.right-auth.right-auth_active li {
+    display: block;
+}

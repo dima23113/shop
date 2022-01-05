@@ -16,34 +16,38 @@
 <div class="navbar">
     <div class="container-fluid">
         <div class="row">
-            <div class="products col-md-4">
+            <div class="products col-md-5 col-sm-3 col-lg-5 menu-container">
+                <i class="menu-toggle"></i>
                 <ul class="left-menu">
-                    <li><a href="#">Одежда</a></li>
-                    <li><a href="#">Обувь</a></li>
-                    <li><a href="#">Скейт</a></li>
-                    <li><a href="#">Бренды</a></li>
-                    <li><a href="#">Sale</a></li>
+                    <!--
+                    <li class="left-menu__item"><a href="#">Одежда</a></li>
+                    <li class="left-menu__item"><a href="#">Обувь</a></li>
+                    <li class="left-menu__item"><a href="#">Скейт</a></li>
+                    <li class="left-menu__item"><a href="#">Бренды</a></li>
+                    <li class="left-menu__item"><a href="#">Sale</a></li>
+                    -->
+                    {% for i in categories %}
+                        <li class="left-menu__item"><a href="{% url 'shop:product_list_by_category' i.slug %}">{{ i.name }}</a></li>
+                    {% endfor %}
+                    <li class="left-menu__item"><a href="#">Sale</a></li>
                 </ul>
             </div>
-            <div class="logo col-md-4">
-                <a href="#"><img src="{% static 'img/logo.png' %}" alt="logo"> </a>
+            <div class="logo col-md-2 col-sm-4 col-lg-2">
+                <a href="{% url 'shop:index' %}"><img class="logo-img" src=" {% static 'img/logo.png' %}" alt="logo"> </a>
+                <a class="cart" href="#"></a>
             </div>
-            <div class="auth col-md-4">
+            <div class="auth col-md-5 col-sm-3 col-lg-5 menu-container" >
+
                 <ul class="right-auth">
-                    <li><a href="#">Блог</a></li>
-                    <li><a href=" #">Профиль</a></li>
-                    <li><a href="#">Поиск</a></li>
-                    <li><a href="#">Корзина <span>[]</span></a></li>
+                    <li class="right-menu__item"><a href="#">Блог</a></li>
+                    <li class="right-menu__item"><a href=" #">Профиль</a></li>
+                    <li class="right-menu__item"><a href="#">Поиск</a></li>
+                    <li class="right-menu__item"><a href="#">Корзина <span>[]</span></a></li>
                 </ul>
             </div>
         </div>
     </div>
-
 </div>
-
-
-
-
 
 {% block content %}
 {% endblock content %}

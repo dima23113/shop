@@ -1,27 +1,99 @@
 /* === DESKTOP FIRST === */
 
 /* xl <= Extra extra large (xxl) */
-@media (max-width : 1400px) {
-
+@media (max-width: 1488px) {
+    * {
+        font-size: 18px;
+        font-family: 'Merriweather', serif;
+    }
 }
 
 /* lg <= Extra large (xl) */
-@media (max-width : 1200px) {
+@media (max-width: 1308px) {
+    * {
+        font-size: 12px;
+        font-family: 'Merriweather', serif;
+    }
+
+    .logo-img {
+        width: 160px;
+    }
+
+}
+
+@media (max-width: 1026px) {
+    .right-auth {
+        position: absolute;
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    .left-menu {
+        position: absolute;
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    .menu-toggle {
+        display: block;
+        text-align: left;
+        margin-top: -7px;
+
+    }
+
+    .cart {
+        display: block;
+        text-align: right;
+        right: 10px;
+        margin-top: 14px;
+        cursor: pointer;
+    }
+
+    .logo-img {
+        width: 200px;
+    }
+
+    .right-menu__item {
+        display: block;
+        text-align: center;
+        padding: 14px 35px;
+    }
+
+    .left-menu__item {
+        display: block;
+        text-align: center;
+        padding: 14px 35px;
+    }
 
 }
 
 /* md <= Large (lg) */
-@media (max-width : 992px) {
+@media (max-width: 992px) {
+    .left-menu {
+        position: absolute;
+        visibility: hidden;
+        opacity: 0;
 
+    }
+
+    .left-menu__item {
+        display: block;
+        text-align: center;
+        padding: 14px 35px;
+    }
 }
 
 /* sm <= Medium (md) */
-@media (max-width : 768px) {
+@media (max-width: 768px) {
+    .cart {
+        right: 10px;
+        top: -2px;
 
+    }
 }
 
 /* xs <= Small (sm) */
-@media (max-width : 576px) {
+@media (max-width: 576px) {
 
 }
 
@@ -29,31 +101,31 @@
 /* === MOBILE FIRST === */
 
 /* Custom (xs) */
-@media (min-width : 0) {
+@media (min-width: 0) {
 
 }
 
 /* Small (sm) */
-@media (min-width : 576px) {
+@media (min-width: 576px) {
 
 }
 
 /* Medium (md) */
-@media (min-width : 768px) {
+@media (min-width: 768px) {
 
 }
 
 /* Large (lg) */
-@media (min-width : 992px) {
+@media (min-width: 992px) {
 
 }
 
 /* Extra large (xl) */
-@media (min-width : 1200px) {
+@media (min-width: 1200px) {
 
 }
 
 /* Extra extra large (xxl) */
-@media (min-width : 1400px) {
+@media (min-width: 1400px) {
 
 }
