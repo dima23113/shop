@@ -201,3 +201,11 @@ a:active {
     background-color: white;
     z-index: 4444;
 }
+
+.products-list li {
+    list-style: none;
+    display: inline-block;
+}
+.product-list {
+    padding: 0;
+}
