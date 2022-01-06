@@ -109,6 +109,10 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+media/
+brand/
+shop/migrations/
+
 
 # Spyder project settings
 .spyderproject

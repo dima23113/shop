@@ -209,3 +209,7 @@ a:active {
 .product-list {
     padding: 0;
 }
+
+.paginator-list {
+    text-align: center;
+}

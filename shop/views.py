@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.core.paginator import Paginator
 from django.views.generic import ListView, View
 from .models import *
 
@@ -40,8 +41,11 @@ class ProductListByBrand(View):
     def get(self, request, *args, **kwargs):
         brand = Brand.objects.get(slug=kwargs['slug'])
         products = Product.objects.filter(brand=brand, available=True)
+        paginator = Paginator(products, 2)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
         context = {
-            'products': products,
+            'products': page_obj,
             'brand': brand
         }
         return render(request, 'shop/product/product_by_brand.html', context=context)
