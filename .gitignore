@@ -112,6 +112,8 @@ venv.bak/
 media/
 brand/
 shop/migrations/
+media/product/
+media/product_sizes_info
 
 
 # Spyder project settings
