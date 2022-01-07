@@ -16,7 +16,6 @@
 }
 
 
-
 /* SLIDER */
 
 .home-slider {
@@ -206,10 +205,46 @@ a:active {
     list-style: none;
     display: inline-block;
 }
+
 .product-list {
     padding: 0;
 }
 
 .paginator-list {
     text-align: center;
+}
+
+.paginator-current-link {
+    text-decoration: underline;
+    font-size: 25px;
+    color: black;
+}
+
+.paginator-link {
+    font-size: 25px;
+    text-decoration: none;
+    color: black;
+}
+
+.paginator-link:visited {
+    color: black; /* Цвет посещенных ссылок */
+}
+
+.paginator-link:active {
+    color: black; /* Цвет активных ссылок */
+}
+
+.paginator-current-link:visited {
+    color: black; /* Цвет посещенных ссылок */
+}
+
+.paginator-current-link:active {
+    color: black; /* Цвет активных ссылок */
+}
+
+.paginator-list:active {
+    color: black; /* Цвет посещенных ссылок */
+}
+.paginator-list:visited {
+    color: black; /* Цвет посещенных ссылок */
 }
