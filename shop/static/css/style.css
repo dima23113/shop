@@ -248,3 +248,10 @@ a:active {
 .paginator-list:visited {
     color: black; /* Цвет посещенных ссылок */
 }
+
+
+img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
