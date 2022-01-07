@@ -1,5 +1,5 @@
 {% extends 'shop/base.html' %}
-
+{% load thumbnail %}
 
 {% block title %}{{ brand.name }}-Ноябрь Скейтшоп{% endblock %}
 
@@ -9,8 +9,8 @@
     <div class="content-items">
         <div class="container-fluid">
             <div class="row">
-                <div class="sidebar col-md-3 col-sm-3 col-lg-3"></div>
-                <div class="products col-md-9 col-sm-9 col-lg-9">
+                <div class="sidebar col-md-1 col-sm-1 col-lg-1"></div>
+                <div class="products col-md-11 col-sm-11 col-lg-11">
                     <h1>{{ brand.name }}</h1>
                     <div class="about">{{ brand.description }}<br></div>
                     <div class="logo-brand"><img alt="brand-logo" src="{{ brand.image.url }}"></div>
@@ -21,10 +21,12 @@
                                     {% for i in products %}
                                         <li class="product">
                                             <div class="col-item">
-                                                {% for l in i.product_img.all %}
+                                                {% thumbnail i.image "300x340" crop="20%" as im %}
                                                     <a class="col-item-a" href="#"><img alt="item-photo"
-                                                                                        src="{{ l.img.url }}"></a>
-                                                {% endfor %}
+                                                                                        src="{{ im.url }}"
+                                                                                        width="{{ im.width }}"
+                                                                                        height="{{ im.height }}"></a>
+                                                {% endthumbnail %}
                                                 <div class="col-item-about">
                                                     <div class="col-item__title">
                                                         <p>{{ i.brand }}</p>

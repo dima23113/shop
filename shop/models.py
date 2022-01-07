@@ -67,7 +67,7 @@ class Product(models.Model):
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, verbose_name='Название бренда')
     name = models.CharField(max_length=256, verbose_name='Название товара')
     slug = models.SlugField(max_length=256, verbose_name='Слаг товара')
-    image_sizes = models.ImageField(upload_to='product_sizes_info/', blank=True, verbose_name='Изображения товара')
+    image_sizes = models.ImageField(upload_to='product_sizes_info/', blank=True, verbose_name='Размерная сетка товара')
     description = models.TextField(blank=True, verbose_name='Описание товара')
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Цена товара')
     available = models.BooleanField(default=True, verbose_name='Доступность товара')
@@ -78,6 +78,7 @@ class Product(models.Model):
     mark = models.CharField(max_length=256, verbose_name='Марка', blank=True)
     gender = models.CharField(max_length=256, verbose_name='Пол')
     compound = models.CharField(max_length=256, verbose_name='Состав', blank=True)
+    image = models.ImageField(blank=True, null=True, upload_to='main_image', verbose_name='Главное изображение')
 
     class Meta:
 
