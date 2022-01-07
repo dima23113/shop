@@ -11,9 +11,17 @@
             <div class="row">
                 <div class="sidebar col-md-1 col-sm-1 col-lg-1"></div>
                 <div class="products col-md-11 col-sm-11 col-lg-11">
-                    <h1>{{ brand.name }}</h1>
-                    <div class="about">{{ brand.description }}<br></div>
-                    <div class="logo-brand"><img alt="brand-logo" src="{{ brand.image.url }}"></div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="brand-name col-md-6 col-sm-6 col-lg-6">
+                                <div class="brand-name-name"><h1>{{ brand.name }}</h1></div>
+                                <div class="about">{{ brand.description }}<br></div>
+                            </div>
+                            {% thumbnail brand.image "504x385" crop="100%" as im %}
+                                <div class="logo-brand col-md-6 col-sm-6 col-lg-6"><img alt="brand-logo" src="{{ im.url }}"></div>
+                            {% endthumbnail %}
+                        </div>
+                    </div>
                     <div class="container-fluid">
                         <div class="row">
                             <div class="product-list col-md-12 col-sm-12 col-lg-12">

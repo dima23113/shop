@@ -206,8 +206,14 @@ a:active {
     display: inline-block;
 }
 
+
 .product-list {
     padding: 0;
+    text-align: left;
+}
+.products-list {
+    padding: 0;
+    text-align: left;
 }
 
 .paginator-list {
@@ -250,8 +256,23 @@ a:active {
 }
 
 
-img {
-  display: block;
-  height: auto;
-  max-width: 100%;
+
+.products {
+
+}
+.logo-brand {
+    text-align: left;
+    display: inline-block;
+}
+
+.brand-name {
+    text-align: center;
+    display: inline-block;
+}
+
+.about {
+    text-align: left;
+}
+.brand-name-name {
+    text-align: left;
 }
