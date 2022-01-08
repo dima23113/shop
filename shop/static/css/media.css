@@ -95,6 +95,14 @@
 /* xs <= Small (sm) */
 @media (max-width: 576px) {
 
+    .products-list li {
+        flex-basis: 45%;
+        padding-right: 10px;
+        text-align: center;
+    }
+    .product-list *{
+        text-align: center;
+    }
 }
 
 

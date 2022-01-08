@@ -45,7 +45,7 @@ class Brand(models.Model):
     name = models.CharField(max_length=256, verbose_name='Название бренда')
     slug = models.SlugField(max_length=256, verbose_name='Слаг бренда')
     image = models.ImageField(blank=True, upload_to='brand/', verbose_name='Лого бренда')
-    description = models.CharField(max_length=256, verbose_name='Описание бренда')
+    description = models.TextField(verbose_name='Описание бренда')
 
     class Meta:
 

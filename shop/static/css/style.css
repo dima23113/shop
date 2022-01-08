@@ -276,3 +276,31 @@ a:active {
 .brand-name-name {
     text-align: left;
 }
+
+.logo-brand img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.col-item-a img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.col-item {
+    position: relative;
+    overflow: hidden;
+    margin: 0 0 20px 0;
+    padding: 0 0 58% 0;
+}
+
+.products-list {
+    display: flex;
+    flex-flow: row wrap;
+}
+.products-list li {
+    flex-basis: 20%;
+    padding-right: 5px;
+}
