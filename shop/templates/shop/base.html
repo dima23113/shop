@@ -19,15 +19,11 @@
             <div class="products col-md-5 col-sm-3 col-lg-5 menu-container">
                 <i class="menu-toggle"></i>
                 <ul class="left-menu">
-                    <li class="left-menu__item"><a href="#">Одежда</a></li>
-                    <li class="left-menu__item"><a href="#">Обувь</a></li>
-                    <li class="left-menu__item"><a href="#">Скейт</a></li>
+                    <li class="left-menu__item"><a href="{% url 'shop:product_list_by_category' 'odezhda' %}">Одежда</a></li>
+                    <li class="left-menu__item"><a href="{% url 'shop:product_list_by_category' 'obuv' %}">Обувь</a></li>
+                    <li class="left-menu__item"><a href="{% url 'shop:product_list_by_category' 'skate' %}">Скейт</a></li>
                     <li class="left-menu__item"><a href="{% url 'shop:brand_list' %}">Бренды</a></li>
                     <li class="left-menu__item"><a href="#">Sale</a></li>
-
-                    <!-- for i in categories
-                         <li class="left-menu__item"><a href=" shop:product_list_by_category' i.slug ">i.name </a></li>
-                     -->
                 </ul>
             </div>
             <div class="logo col-md-2 col-sm-4 col-lg-2">

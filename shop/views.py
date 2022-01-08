@@ -29,7 +29,7 @@ class BrandList(View):
 class ProductListByCategory(View):
 
     def get(self, request, *args, **kwargs):
-        products = Product.objects.filter(category__slug=kwargs['category'], available=True)
+        products = Product.objects.filter(category__slug=kwargs['slug'], available=True)
         context = {
             'products': products
         }
