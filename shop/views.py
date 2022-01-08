@@ -65,8 +65,12 @@ class ProductDetail(View):
 
     def get(self, request, *args, **kwargs):
         product = Product.objects.get(slug=kwargs['slug'])
+        spec = ['Характеристики:']
+        var = product.specifications.split('\n')
+        spec.append(var)
         context = {
-            'product': product
+            'product': product,
+            'spec': spec
         }
         return render(request, 'shop/product/product_detail.html', context=context)
 

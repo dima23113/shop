@@ -70,6 +70,7 @@ class Product(models.Model):
     slug = models.SlugField(max_length=256, verbose_name='Слаг товара')
     image_sizes = models.ImageField(upload_to='product_sizes_info/', blank=True, verbose_name='Размерная сетка товара')
     description = models.TextField(blank=True, verbose_name='Описание товара')
+    specifications = models.TextField(blank=True, null=True, verbose_name='Характеристики товара')
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Цена товара')
     available = models.BooleanField(default=True, verbose_name='Доступность товара')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Дата добавления')

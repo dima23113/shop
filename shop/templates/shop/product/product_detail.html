@@ -1,8 +1,45 @@
 {% extends 'shop/base.html' %}
-
+{% load thumbnail %}
 {% block title %}{{ product.name }}-Ноябрь Скейтшоп{% endblock %}
 
 {% block content %}
-
-
+    <div class="product-detail">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="images col-md-8 col-sm-8 col-lg-8">
+                    {% for i in product.product_img.all %}
+                        {% thumbnail i.img "535x605" crop="20%" as im %}
+                        <img src="{{ im.url }}" alt="{{ product.name }}">
+                        {% endthumbnail %}
+                    {% endfor %}
+                </div>
+                <div class="info col-md-4 col-sm-4 col-lg-4">
+                    <a class="brand-link" title="{{ product.brand.name }}">{{ product.brand.name }}</a>
+                    <span itemprop="name">{{ product.name }}</span>
+                    <span itemprop="price" class="product-price">{{ product.price }}</span>
+                    <div class="radio-selector">
+                        {% for i in product.product_sizer.all %}
+                            <label class="radio-toggle" data-sort="{{ i.name }}">
+                                <input class="radios__option" type="radio" value="{{ i.name }}" checked="">
+                                <span>{{ i.name }}</span>
+                            </label>
+                        {% endfor %}
+                    </div>
+                    <div class="detail-ship">
+                        <a class="detail" href="#">Детали</a>
+                        <a class="ship" href="#">Доставка</a>
+                    </div>
+                    <div class="product-info">
+                        <p><span>{{ product.description|linebreaksbr }}</span></p>
+                        {{ spec|unordered_list }}
+                        <p>{{ product.gender }}</p>
+                        <p>{{ product.type_of }}</p>
+                        {% if product.mark %}<p>{{ product.type_of }}</p>{% endif %}
+                        {% if product.compound %}<p>{{ product.compound }}</p>{% endif %}
+                        <p>{{ product.article }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
