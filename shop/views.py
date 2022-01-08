@@ -7,13 +7,8 @@ from .models import *
 class IndexView(View):
 
     def get(self, request, *args, **kwargs):
-        categories = Category.objects.all()
-        brand = Brand.objects.all()
-        context = {
-            'brand': brand,
-            'categories': categories,
-        }
-        return render(request, 'shop/base.html', context=context)
+
+        return render(request, 'shop/base.html')
 
 
 class BrandList(View):
@@ -29,9 +24,14 @@ class BrandList(View):
 class ProductListByCategory(View):
 
     def get(self, request, *args, **kwargs):
-        products = Product.objects.filter(category__slug=kwargs['slug'], available=True)
+        category = Category.objects.get(slug=kwargs['slug'])
+        products = Product.objects.filter(category=category, available=True)
+        paginator = Paginator(products, 5)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
         context = {
-            'products': products
+            'products': page_obj,
+            'category': category
         }
         return render(request, 'shop/product/product_list.html', context=context)
 
@@ -59,4 +59,14 @@ class ProductListBySubcategory(View):
             'products': products
         }
         return render(request, 'shop/product/product_list.html', context=context)
+
+
+class ProductDetail(View):
+
+    def get(self, request, *args, **kwargs):
+        product = Product.objects.get(slug=kwargs['slug'])
+        context = {
+            'product': product
+        }
+        return render(request, 'shop/product/product_detail.html', context=context)
 

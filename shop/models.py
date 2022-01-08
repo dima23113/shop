@@ -6,6 +6,7 @@ class Category(models.Model):
 
     name = models.CharField(max_length=256, db_index=True, verbose_name='Название категории')
     slug = models.SlugField(max_length=256, unique=True, verbose_name='Слаг категории')
+    line_num = models.IntegerField(blank=True, null=True, verbose_name='Порядок категорий в меню сайта')
 
     class Meta:
 
@@ -91,7 +92,7 @@ class Product(models.Model):
         return f'{self.category.name} - {self.name}'
 
     def get_absolute_url(self):
-        return reverse('shop:product_detail', args=[self.id, self.slug])
+        return reverse('shop:product_detail', kwargs={'slug': self.slug})
 
 
 class ImgProduct(models.Model):

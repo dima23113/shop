@@ -1,10 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'shop/base.html' %}
+{% load thumbnail %}
+{% block title %}{{ category.name }}{% endblock %}
 
-</body>
-</html>
+{% block content %}
+<div class="content-items">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="sidebar col-md-1 col-sm-1 col-lg-1"></div>
+            <div class="product-list col-md-11 col-sm-11 col-lg-11">
+                <ul class="products-list">
+                    {% for i in products %}
+                        <li class="product">
+                            <div class="col-item">
+                                {% thumbnail i.image "300x340" crop="20%" as im %}
+                                    <a class="col-item-a" href="{% url 'shop:product_detail' i.slug %}"><img alt="image"
+                                                                        src="{{ im.url }}"
+                                                                        width="{{ im.width }}"
+                                                                        height="{{ im.height }}"></a>
+                                {% endthumbnail %}
+                                <div class="col-item-about">
+                                    <div class="col-item__title">
+                                        <p>{{ i.brand }}</p>
+                                        <p>{{ i.name }}</p>
+                                    </div>
+                                    <div class="price">{{ i.price }}</div>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
