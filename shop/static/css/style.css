@@ -304,3 +304,36 @@ a:active {
     flex-basis: 20%;
     padding-right: 5px;
 }
+
+li {
+    list-style: none;
+}
+
+.product-info ul li {
+    list-style: initial;
+}
+
+.info-table li a{
+    list-style: none;
+    text-decoration: none;
+    color: black;
+
+}
+
+.detail-ship {
+    text-decoration: underline;
+}
+.detail-ship a{
+    margin-right: 15px;
+}
+.product-info p {
+    text-align: justify;
+}
+
+.info-table li {
+    margin-bottom: 10px;
+}
+
+.images img {
+    margin-bottom: 5px;
+}
