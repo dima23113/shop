@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
 
 * {
     font-size: 22px;
@@ -405,4 +407,30 @@ li {
     background-color: white;
     border-bottom: 0;
     padding-bottom: 0;
+}
+
+.brand-link {
+    letter-spacing: 10px;
+}
+
+.name {
+    letter-spacing: 10px;
+}
+
+
+.product-price {
+    letter-spacing: 5px;
+}
+
+
+.radio-selector *{
+    font-family: 'Raleway', sans-serif;
+}
+
+.detail-ship *{
+    font-family: 'Raleway', sans-serif;
+}
+
+.product-info *{
+    font-family: 'Raleway', sans-serif;
 }
