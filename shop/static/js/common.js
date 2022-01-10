@@ -17,11 +17,20 @@ document.addEventListener('DOMContentLoaded', function () {
         $('.ship').removeClass('ship_active');
         $('.detail').removeClass('detail_none');
     })
+
+    $('.img-product').click(function (){
+        if ($('.img-product').attr('class') == 'img-product img-product_active'){
+            $('.img-product').removeClass('img-product_active');
+        }
+        else{
+
+        $('.img-product').toggleClass('img-product_active');
+        }
+    })
     $('.ship').click(function () {
         if ($('.ship-a').attr('class') == 'ship-a ship-a_active') {
 
-        }
-        else {
+        } else {
             $('.ship-a').toggleClass('ship-a_active');
             $('.info-a').toggleClass('info-a_active');
             $('.ship').toggleClass('ship_active');

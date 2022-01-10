@@ -66,8 +66,10 @@ class ProductDetail(View):
     def get(self, request, *args, **kwargs):
         product = Product.objects.get(slug=kwargs['slug'])
         spec = ['Характеристики:']
-        var = product.specifications.split('\n')
-        spec.append(var)
+        if product.specifications:
+            var = product.specifications.split('\n')
+            spec.append(var)
+
         context = {
             'product': product,
             'spec': spec
