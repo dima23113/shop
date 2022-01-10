@@ -3,66 +3,69 @@
 {% block title %}{{ product.name }}-Ноябрь Скейтшоп{% endblock %}
 
 {% block content %}
-    <div class="product-detail">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="images col-md-8 col-sm-8 col-lg-8">
-                    <div class="img-product">
-                        {% for i in product.product_img.all %}
-                            {% thumbnail i.img "535x605" crop="100%" as im %}
-                                <img src="{{ im.url }}" alt="{{ product.name }}">
-                            {% endthumbnail %}
-                        {% endfor %}
-                    </div>
-                    <div class="roll-swipe">
-                        <div class="swiper mySwiper">
-                            <div class="swiper-wrapper">
-                                {% for i in product.product_img.all %}
-                                    {% thumbnail i.img "535x605" crop="20%" as im %}
-                                        <div class="swiper-slide"><img src="{{ im.url }}" alt="{{ product.name }}">
-                                        </div>
-                                    {% endthumbnail %}
-                                {% endfor %}
+    <div class="content">
+        <div class="product-detail">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="images col-md-8 col-sm-8 col-lg-8">
+                        <div class="img-product">
+                            {% for i in product.product_img.all %}
+                                {% thumbnail i.img "535x605" crop="100%" as im %}
+                                    <img src="{{ im.url }}" alt="{{ product.name }}">
+                                {% endthumbnail %}
+                            {% endfor %}
+                        </div>
+                        <div class="roll-swipe">
+                            <div class="swiper mySwiper">
+                                <div class="swiper-wrapper">
+                                    {% for i in product.product_img.all %}
+                                        {% thumbnail i.img "535x605" crop="20%" as im %}
+                                            <div class="swiper-slide"><img src="{{ im.url }}" alt="{{ product.name }}">
+                                            </div>
+                                        {% endthumbnail %}
+                                    {% endfor %}
+                                </div>
+                                <div class="swiper-button-next"></div>
+                                <div class="swiper-button-prev"></div>
+                                <div class="swiper-pagination"></div>
                             </div>
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-button-prev"></div>
-                            <div class="swiper-pagination"></div>
                         </div>
                     </div>
-                </div>
-                <div class="info col-md-4 col-sm-4 col-lg-4">
-                    <ul class="info-table">
-                        <li><a class="brand-link" title="{{ product.brand.name|upper }}"
-                               href="{% url 'shop:product_list_by_brand' product.brand.slug %}">{{ product.brand.name|upper }}</a>
-                        </li>
-                        <li><span itemprop="name">{{ product.name }}</span></li>
-                        <li><span itemprop="price" class="product-price">{{ product.price }} руб.</span></li>
-                        <li>
-                            <div class="radio-selector">
-                                {% for i in product.product_sizer.all %}
-                                    <label class="radio-toggle" data-sort="{{ i.name }}">
-                                        <input class="radios__option" type="radio" value="{{ i.name }}" checked="">
-                                        <span>{{ i.name }}</span>
-                                    </label>
-                                {% endfor %}
+                    <div class="info col-md-4 col-sm-4 col-lg-4">
+                        <ul class="info-table">
+                            <li><a class="brand-link" title="{{ product.brand.name|upper }}"
+                                   href="{% url 'shop:product_list_by_brand' product.brand.slug %}">{{ product.brand.name|upper }}</a>
+                            </li>
+                            <li><span itemprop="name">{{ product.name }}</span></li>
+                            <li><span itemprop="price" class="product-price">{{ product.price }} руб.</span></li>
+                            <li>
+                                <div class="radio-selector">
+                                    {% for i in product.product_sizer.all %}
+                                        <label class="radio-toggle" data-sort="{{ i.name }}">
+                                            <input class="radios__option" type="radio" value="{{ i.name }}" checked="">
+                                            <span>{{ i.name }}</span>
+                                        </label>
+                                    {% endfor %}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="detail-ship">
+                                    <a class="detail" href="#">Детали</a>
+                                    <a class="ship" href="#">Доставка</a>
+                                </div>
+                            </li>
+                            <br>
+                            <div class="product-info">
+                                <p><span>{{ product.description|linebreaksbr }}</span></p>
+                                {{ spec|unordered_list }}
+                                <p>Артикул: {{ product.article }}</p>
                             </div>
-                        </li>
-                        <li>
-                            <div class="detail-ship">
-                                <a class="detail" href="#">Детали</a>
-                                <a class="ship" href="#">Доставка</a>
-                            </div>
-                        </li>
-                        <br>
-                        <div class="product-info">
-                            <p><span>{{ product.description|linebreaksbr }}</span></p>
-                            {{ spec|unordered_list }}
-                            <p>Артикул: {{ product.article }}</p>
-                        </div>
-                    </ul>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 {% endblock %}

@@ -396,3 +396,13 @@ li {
 .roll-swipe {
     display: none;
 }
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    overflow: hidden;
+    background-color: white;
+    border-bottom: 0;
+    padding-bottom: 0;
+}
