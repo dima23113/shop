@@ -337,7 +337,7 @@ li {
 
 }
 
-.detail-ship {
+.detail-ship .detail {
     text-decoration: underline;
 }
 
@@ -394,6 +394,13 @@ li {
     margin-left: auto;
     margin-right: auto;
 }
+.swiper-button-next, .swiper-button-prev {
+    color: black;
+}
+
+.swiper-pagination {
+    color: black;
+}
 
 .roll-swipe {
     display: none;
@@ -433,4 +440,39 @@ li {
 
 .product-info *{
     font-family: 'Raleway', sans-serif;
+}
+
+.radios__option {
+    cursor: pointer;
+}
+
+.choose_size_wrapper *{
+    font-family: 'Raleway', sans-serif;
+    display: inline-block;
+    padding-right: 5px;
+}
+
+.choose_size {
+    cursor: pointer;
+}
+
+.ship-a {
+    display: none;
+}
+
+.ship-a_active {
+    display: contents;
+}
+
+.info-a_active {
+    display: none;
+}
+
+
+.detail-ship .detail_none {
+    text-decoration: none;
+}
+
+.detail-ship .ship_active {
+    text-decoration: underline;
 }

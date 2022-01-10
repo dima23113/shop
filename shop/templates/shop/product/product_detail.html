@@ -39,26 +39,43 @@
                             <li><span class="name" itemprop="name">{{ product.name }}</span></li>
                             <li><span itemprop="price" class="product-price">{{ product.price }} руб.</span></li>
                             <li>
-                                <div class="radio-selector">
-                                    {% for i in product.product_sizer.all %}
-                                        <label class="radio-toggle" data-sort="{{ i.name }}">
-                                            <input class="radios__option" type="radio" value="{{ i.name }}" checked="">
-                                            <span>{{ i.name }}</span>
-                                        </label>
-                                    {% endfor %}
+                                <div class="choose_size_wrapper">
+                                    <div class="choose_size_label"><label>Размер:</label></div>
+                                    <div class="choose_size_columns">
+                                        {% for i in product.product_sizer.all %}
+                                            <div class="choose_size_column">
+                                                <span class="choose_size"
+                                                      data-size="{{ i.name }} data-sku={{ i.name }}">{{ i.name }}</span>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
                                 </div>
                             </li>
                             <li>
                                 <div class="detail-ship">
-                                    <a class="detail" href="#">Детали</a>
-                                    <a class="ship" href="#">Доставка</a>
+                                    <a class="detail" id="detail" href="#">Детали</a>
+                                    <a class="ship" id="ship" href="#">Доставка</a>
                                 </div>
                             </li>
                             <br>
-                            <div class="product-info">
-                                <p><span>{{ product.description|linebreaksbr }}</span></p>
-                                {{ spec|unordered_list }}
-                                <p>Артикул: {{ product.article }}</p>
+                            <div class="product-info" id="info_ship">
+                                <div class="info-a">
+                                    <p><span>{{ product.description|linebreaksbr }}</span></p>
+                                    {{ spec|unordered_list }}
+                                    <p>Артикул: {{ product.article }}</p>
+                                </div>
+                                <div class="ship-a" id="ship-a">
+                                    <p>Москва: самовывоз из магазина Ноябрь по адресу раз два 25/3.</p>
+                                    <p>Московская область&nbsp;и Санкт-Петербург: доставка осуществляется курьерской
+                                        службой
+                                        Dalli.</p>
+                                    <div class="rte">
+                                        <p>Стоимость доставки: рассчитывается автоматически на сайте курьерской службы
+                                            https://dalli-service.com/<br><br>Сроки доставки: 1-3 дня с момента
+                                            подтверждения заказа. Заказ подтверждается после звонка от нашего
+                                            сотрудника.</p>
+                                    </div>
+                                </div>
                             </div>
                         </ul>
                     </div>

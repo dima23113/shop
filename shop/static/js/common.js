@@ -11,6 +11,24 @@ document.addEventListener('DOMContentLoaded', function () {
         toggleMenu();
     })
 
+    $('.detail').click(function () {
+        $('.info-a').removeClass('info-a_active');
+        $('.ship-a').removeClass('ship-a_active');
+        $('.ship').removeClass('ship_active');
+        $('.detail').removeClass('detail_none');
+    })
+    $('.ship').click(function () {
+        if ($('.ship-a').attr('class') == 'ship-a ship-a_active') {
+
+        }
+        else {
+            $('.ship-a').toggleClass('ship-a_active');
+            $('.info-a').toggleClass('info-a_active');
+            $('.ship').toggleClass('ship_active');
+            $('.detail').toggleClass('detail_none');
+        }
+    })
+
     function closeMenu() {
         $('.menu-toggle').removeClass('menu-toggle_active');
         $('.left-menu').removeClass('left-menu_active');
@@ -48,29 +66,33 @@ $('document').ready(function () {
     }
 })
 
-window.onscroll = function() {myFunction()};
+
+window.onscroll = function () {
+    myFunction()
+};
 
 var navbar = document.getElementById("navbar");
 var sticky = navbar.offsetTop;
 
 function myFunction() {
-  if (window.pageYOffset >= sticky) {
-    navbar.classList.add("sticky")
-  } else {
-    navbar.classList.remove("sticky");
-  }
+    if (window.pageYOffset >= sticky) {
+        navbar.classList.add("sticky")
+    } else {
+        navbar.classList.remove("sticky");
+    }
 }
 
 var swiper = new Swiper(".mySwiper", {
-        slidesPerView: 1,
-        spaceBetween: 30,
-        loop: true,
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-        },
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
-      });
+    slidesPerView: 1,
+    spaceBetween: 30,
+    loop: true,
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+    },
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+    },
+});
+
