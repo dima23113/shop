@@ -211,6 +211,7 @@ a:active {
     padding: 0;
     text-align: left;
 }
+
 .products-list {
     padding: 0;
     text-align: left;
@@ -251,15 +252,16 @@ a:active {
 .paginator-list:active {
     color: black; /* Цвет посещенных ссылок */
 }
+
 .paginator-list:visited {
     color: black; /* Цвет посещенных ссылок */
 }
 
 
-
 .products {
 
 }
+
 .logo-brand {
     text-align: left;
     display: inline-block;
@@ -273,6 +275,7 @@ a:active {
 .about {
     text-align: left;
 }
+
 .brand-name-name {
     text-align: left;
 }
@@ -283,10 +286,20 @@ a:active {
     object-fit: cover;
 }
 
-.col-item-a img{
-    width: 100%;
-    height: 100%;
+.img-product {
+    display: inline;
+}
+
+.img-product img {
+    max-height: 100%;
+    max-width: 49%;
     object-fit: cover;
+}
+
+.col-item-a img {
+    width: 100%; /* Ширина изображений */
+    height: 100%; /* Высота изображении */
+    object-fit: cover; /* Вписываем фотографию в область */
 }
 
 .col-item {
@@ -296,10 +309,12 @@ a:active {
     padding: 0 0 58% 0;
 }
 
+
 .products-list {
     display: flex;
     flex-flow: row wrap;
 }
+
 .products-list li {
     flex-basis: 20%;
     padding-right: 5px;
@@ -313,7 +328,7 @@ li {
     list-style: initial;
 }
 
-.info-table li a{
+.info-table li a {
     list-style: none;
     text-decoration: none;
     color: black;
@@ -323,9 +338,11 @@ li {
 .detail-ship {
     text-decoration: underline;
 }
-.detail-ship a{
+
+.detail-ship a {
     margin-right: 15px;
 }
+
 .product-info p {
     text-align: justify;
 }
@@ -336,4 +353,46 @@ li {
 
 .images img {
     margin-bottom: 5px;
+}
+
+
+.swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.swiper {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.roll-swipe {
+    display: none;
 }

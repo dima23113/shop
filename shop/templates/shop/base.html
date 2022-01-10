@@ -10,6 +10,7 @@
     <link rel=stylesheet href="{% static 'css/media.css' %}">
     <link rel="stylesheet" href="{% static '/js/libs/bootstrap/css/bootstrap-reboot.min.css' %}">
     <link rel="stylesheet" href="{% static '/js/libs/bootstrap/css/bootstrap-grid.min.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 </head>
 <body>
 
@@ -20,7 +21,8 @@
                 <i class="menu-toggle"></i>
                 <ul class="left-menu">
                     {% for i in categories %}
-                        <li class="left-menu__item"><a href="{% url 'shop:product_list_by_category' i.slug %}">{{ i.name }}</a></li>
+                        <li class="left-menu__item"><a
+                                href="{% url 'shop:product_list_by_category' i.slug %}">{{ i.name }}</a></li>
                     {% endfor %}
                     <li class="left-menu__item"><a href="{% url 'shop:brand_list' %}">Бренды</a></li>
                     <li class="left-menu__item"><a href="#">Sale</a></li>
@@ -50,6 +52,5 @@
 {% endblock content %}
 <script src="{% static 'js/libs/jquery/jquery-3.6.0.min.js' %}"></script>
 <script src="{% static 'js/common.js' %}"></script>
-
 </body>
 </html>

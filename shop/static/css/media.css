@@ -90,6 +90,14 @@
         top: -2px;
 
     }
+
+    .img-product {
+        display: none;
+    }
+
+    .roll-swipe {
+        display: contents;
+    }
 }
 
 /* xs <= Small (sm) */
@@ -100,7 +108,8 @@
         padding-right: 10px;
         text-align: center;
     }
-    .product-list *{
+
+    .product-list * {
         text-align: center;
     }
 }
