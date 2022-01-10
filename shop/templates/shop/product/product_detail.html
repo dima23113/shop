@@ -1,7 +1,7 @@
 {% extends 'shop/base.html' %}
 {% load thumbnail %}
 {% block title %}{{ product.name }}-Ноябрь Скейтшоп{% endblock %}
-
+{% load static %}
 {% block content %}
     <div class="content">
         <div class="product-detail">
@@ -11,7 +11,8 @@
                         <div class="img-product" id="img-product">
                             {% for i in product.product_img.all %}
                                 {% thumbnail i.img "535x605" crop="100%" as im %}
-                                    <img src="{{ im.url }}" alt="{{ product.name }}">
+                                    <a href="{{ im.url }}" data-lightbox="test"><img src="{{ im.url }}"
+                                                                                     alt="{{ product.name }}"></a>
                                 {% endthumbnail %}
                             {% endfor %}
                         </div>
@@ -83,6 +84,16 @@
             </div>
         </div>
     </div>
-    <script src="https://unpkg.com/js-image-zoom/js-image-zoom.js"></script>
-
+    <script src="{% static 'js/libs/zoom/dist/js/lightbox-plus-jquery.js' %}"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        lightbox.option({
+            'wrapAround': true,
+            'resizeDuration': 200,
+            'maxWidth': 605,
+            'maxHeight': 535,
+            'fitImagesInViewport': false,
+            'alwaysShowNavOnTouchDevices': true
+        })
+    </script>
 {% endblock %}

@@ -18,15 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
         $('.detail').removeClass('detail_none');
     })
 
-    $('.img-product').click(function (){
-        if ($('.img-product').attr('class') == 'img-product img-product_active'){
-            $('.img-product').removeClass('img-product_active');
-        }
-        else{
 
-        $('.img-product').toggleClass('img-product_active');
-        }
-    })
     $('.ship').click(function () {
         if ($('.ship-a').attr('class') == 'ship-a ship-a_active') {
 
@@ -90,6 +82,7 @@ function myFunction() {
         navbar.classList.remove("sticky");
     }
 }
+
 
 var swiper = new Swiper(".mySwiper", {
     slidesPerView: 1,
