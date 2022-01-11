@@ -1,7 +1,5 @@
 {% extends 'shop/base.html' %}
-
 {% block title %}Бренды{% endblock %}
-
 
 {% block content %}
     <div class="content">
@@ -9,12 +7,20 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="brand_list_name col-md-5 col-sm-3 col-lg-5 menu-container">
-                        <h1>Brandlist</h1>
+                        <h1>Бренды</h1>
                     </div>
                     <div class="brand-list logo col-md-2 col-sm-4 col-lg-2">
-                        {% for i in brand %}
-                            <a href="{% url 'shop:product_list_by_brand' i.slug %}">{{ i.name }}</a>
-                        {% endfor %}
+                        {% regroup brand by symbol as brand_list %}
+                        <div class="list-brand">
+                            {% for symbol in brand_list %}
+                                <div class="symbol">
+                                    <h2>{{ symbol.grouper }}</h2>
+                                    {% for sl in symbol.list %}
+                                        <a href="{% url 'shop:product_list_by_brand' sl.slug %}">{{ sl.name|upper }}</a>
+                                    {% endfor %}
+                                </div>
+                            {% endfor %}
+                        </div>
                     </div>
                     <div class="brand-logo col-md-5 col-sm-3 col-lg-5 menu-container"></div>
                 </div>

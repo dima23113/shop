@@ -14,9 +14,18 @@ class IndexView(View):
 class BrandList(View):
 
     def get(self, request, *args, **kwargs):
+        lst = []
         brand = Brand.objects.all()
+        for i in brand:
+            s = {
+                'symbol': i.name[0].upper(),
+                'name': i.name,
+                'slug': i.slug,
+                'img': i.image.url
+            }
+            lst.append(s)
         context = {
-            'brand': brand
+            'brand': lst,
         }
         return render(request, 'shop/product/brand_list.html', context=context)
 
