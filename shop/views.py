@@ -7,7 +7,6 @@ from .models import *
 class IndexView(View):
 
     def get(self, request, *args, **kwargs):
-
         return render(request, 'shop/base.html')
 
 
@@ -21,7 +20,7 @@ class BrandList(View):
                 'symbol': i.name[0].upper(),
                 'name': i.name,
                 'slug': i.slug,
-                'img': i.image.url
+                'images': i.image.url
             }
             lst.append(s)
         context = {
@@ -85,4 +84,3 @@ class ProductDetail(View):
             'recommendation': recommendation
         }
         return render(request, 'shop/product/product_detail.html', context=context)
-
