@@ -81,6 +81,10 @@
         text-align: center;
         padding: 14px 35px;
     }
+
+    .footer * {
+        font-size: 11px;
+    }
 }
 
 /* sm <= Medium (md) */
@@ -98,6 +102,9 @@
     .roll-swipe {
         display: contents;
     }
+    .footer * {
+        font-size: 8px;
+    }
 }
 
 /* xs <= Small (sm) */
@@ -111,6 +118,15 @@
 
     .product-list * {
         text-align: center;
+    }
+    .social ul {
+        float: left;
+    }
+    .work ul {
+        float: left;
+    }
+    .footer * {
+        font-size: 10px;
     }
 }
 

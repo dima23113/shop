@@ -395,6 +395,7 @@ li {
     margin-left: auto;
     margin-right: auto;
 }
+
 .swiper-button-next, .swiper-button-prev {
     color: black;
 }
@@ -431,15 +432,15 @@ li {
 }
 
 
-.radio-selector *{
+.radio-selector * {
     font-family: 'Raleway', sans-serif;
 }
 
-.detail-ship *{
+.detail-ship * {
     font-family: 'Raleway', sans-serif;
 }
 
-.product-info *{
+.product-info * {
     font-family: 'Raleway', sans-serif;
 }
 
@@ -447,7 +448,7 @@ li {
     cursor: pointer;
 }
 
-.choose_size_wrapper *{
+.choose_size_wrapper * {
     font-family: 'Raleway', sans-serif;
     display: inline-block;
     padding-right: 5px;
@@ -480,7 +481,7 @@ li {
 
 .img-product_active {
     position: fixed;
-    top:0;
+    top: 0;
     width: 600%;
     height: 1000%;
     background-color: white;
@@ -488,6 +489,7 @@ li {
     cursor: pointer;
     display: inline-block;
 }
+
 .img-product_active img {
     text-align: center;
     max-width: 100%;
@@ -498,3 +500,106 @@ li {
     cursor: pointer;
 }
 
+.footer {
+    background-color: #afb1b1;
+    color: #afb1b1;
+}
+
+.footer * {
+    color: black;
+}
+
+.work * {
+    text-decoration: none;
+}
+
+.work ul li a {
+    color: black;
+}
+
+.social * {
+    text-decoration: none;
+}
+
+.social ul li a {
+    color: black;
+}
+
+.work ul {
+    list-style: none;
+    display: flex;
+}
+
+.work ul {
+    padding-left: 0;
+    max-height: 6px;
+}
+
+.work ul li {
+    padding-right: 20px;
+}
+
+.social ul {
+    list-style: none;
+    display: inline-flex;
+    float: right;
+    max-height: 11px;
+}
+
+.social ul li {
+    padding-right: 20px;
+}
+
+.footer {
+    max-height: 95px;
+    flex: 0 0 auto;
+}
+
+.address {
+    max-height: 30px;
+}
+
+.work-social {
+    max-height: 45px;
+}
+
+.work, .social {
+    max-height: 40px;
+}
+
+.work ul li p {
+    max-height: 5px;
+}
+
+.work ul li a {
+    max-height: 5px;
+    display: inline-block;
+}
+
+.social ul li a {
+    max-height: 5px;
+    display: inline-block;
+}
+
+.footer * {
+    font-family: 'Raleway', sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+.wrapper {
+  position: relative;
+  min-height: 100%;
+}
+.content {
+  padding-bottom: 90px;
+}
+.footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 80px;
+}

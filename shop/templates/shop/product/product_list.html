@@ -3,52 +3,55 @@
 {% block title %}{{ category.name }}{% endblock %}
 
 {% block content %}
-<div class="content-items">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="sidebar col-md-1 col-sm-1 col-lg-1"></div>
-            <div class="product-list col-md-11 col-sm-11 col-lg-11">
-                <ul class="products-list">
-                    {% for i in products %}
-                        <li class="product">
-                            <div class="col-item">
-                                {% thumbnail i.image "300x340" crop="20%" as im %}
-                                    <a class="col-item-a" href="{% url 'shop:product_detail' i.slug %}"><img alt="image"
-                                                                        src="{{ im.url }}"
-                                                                        width="{{ im.width }}"
-                                                                        height="{{ im.height }}"></a>
-                                {% endthumbnail %}
-                                <div class="col-item-about">
-                                    <div class="col-item__title">
-                                        <p>{{ i.brand }}</p>
-                                        <p>{{ i.name }}</p>
+    <div class="content">
+        <div class="content-items">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="sidebar col-md-1 col-sm-1 col-lg-1"></div>
+                    <div class="product-list col-md-11 col-sm-11 col-lg-11">
+                        <ul class="products-list">
+                            {% for i in products %}
+                                <li class="product">
+                                    <div class="col-item">
+                                        {% thumbnail i.image "300x340" crop="20%" as im %}
+                                            <a class="col-item-a" href="{% url 'shop:product_detail' i.slug %}"><img
+                                                    alt="image"
+                                                    src="{{ im.url }}"
+                                                    width="{{ im.width }}"
+                                                    height="{{ im.height }}"></a>
+                                        {% endthumbnail %}
+                                        <div class="col-item-about">
+                                            <div class="col-item__title">
+                                                <p>{{ i.brand }}</p>
+                                                <p>{{ i.name }}</p>
+                                            </div>
+                                            <div class="price">{{ i.price }}</div>
+                                        </div>
                                     </div>
-                                    <div class="price">{{ i.price }}</div>
-                                </div>
-                            </div>
-                        </li>
-                    {% endfor %}
-                </ul>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-<div class="paginator">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-3"></div>
-                <div class="paginator-list col-md-6 col-sm-6 col-lg-6">
-                    {% if products.has_other_pages %}
-                        {% for i in products.paginator.page_range %}
-                            {% if products.number == i %}
-                                <a class="paginator-current-link" href="?page={{ i }}">{{ i }}</a>
-                            {% else %}
-                                <a class="paginator-link" href="?page={{ i }}">{{ i }}</a>
-                            {% endif %}
-                        {% endfor %}
-                    {% endif %}
+        <div class="paginator">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="paginator-list col-md-6 col-sm-6 col-lg-6">
+                        {% if products.has_other_pages %}
+                            {% for i in products.paginator.page_range %}
+                                {% if products.number == i %}
+                                    <a class="paginator-current-link" href="?page={{ i }}">{{ i }}</a>
+                                {% else %}
+                                    <a class="paginator-link" href="?page={{ i }}">{{ i }}</a>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-md-3"></div>
                 </div>
-                <div class="col-md-3"></div>
             </div>
         </div>
     </div>
