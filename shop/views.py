@@ -69,10 +69,11 @@ class ProductDetail(View):
         if product.specifications:
             var = product.specifications.split('\n')
             spec.append(var)
-
+        recommendation = Product.objects.all()[:6]
         context = {
             'product': product,
-            'spec': spec
+            'spec': spec,
+            'recommendation': recommendation
         }
         return render(request, 'shop/product/product_detail.html', context=context)
 

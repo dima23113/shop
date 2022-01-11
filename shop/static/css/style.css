@@ -318,9 +318,10 @@ a:active {
 }
 
 .products-list li {
-    flex-basis: 20%;
+    flex-basis: 16.6%;
     padding-right: 5px;
 }
+
 
 li {
     list-style: none;
@@ -496,3 +497,4 @@ li {
 .img-product {
     cursor: pointer;
 }
+
