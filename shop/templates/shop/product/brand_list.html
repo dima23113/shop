@@ -6,11 +6,11 @@
         <div class="brand-view">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="brand_list_name col-md-5 col-sm-3 col-lg-5 menu-container">
+                    <div class="brand_list_name col-md-5 col-sm-5 col-lg-5 menu-container">
                         <h1>Бренды:</h1>
                     </div>
-                    <div class="brand-list logo col-md-2 col-sm-4 col-lg-2">
-                        {% regroup brand by symbol as brand_list %}
+                    <div class="brand-list logo col-md-2 col-sm-2 col-lg-2">
+                        {% regroup brand_cl by symbol as brand_list %}
                         <div class="list-brand">
                             {% for symbol in brand_list %}
                                 <div class="symbol">
@@ -22,7 +22,20 @@
                             {% endfor %}
                         </div>
                     </div>
-                    <div class="brand-logo col-md-5 col-sm-3 col-lg-5 menu-container"></div>
+                    <div class="brand-list logo col-md-2 col-sm-2 col-lg-2">
+                        {% regroup brand_cl_1 by symbol as brand_list %}
+                        <div class="list-brand">
+                            {% for symbol in brand_list %}
+                                <div class="symbol">
+                                    <h2>{{ symbol.grouper }}</h2>
+                                    {% for sl in symbol.list %}
+                                        <a href="{% url 'shop:product_list_by_brand' sl.slug %}">{{ sl.name|upper }}</a>
+                                    {% endfor %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="brand-logo col-md-3 col-sm-3 col-lg-3 menu-container"></div>
                 </div>
             </div>
         </div>

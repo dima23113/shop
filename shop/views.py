@@ -14,17 +14,23 @@ class BrandList(View):
 
     def get(self, request, *args, **kwargs):
         lst = []
+        lst1 = []
         brand = Brand.objects.all()
         for i in brand:
             s = {
                 'symbol': i.name[0].upper(),
                 'name': i.name,
-                'slug': i.slug,
-                'images': i.image.url
+                'slug': i.slug
             }
+            if i.image:
+                s['img'] = i.image.url
             lst.append(s)
+        print(len(lst)//2)
+        lst1 = lst[(len(lst)//2)+1:]
+        lst = lst[:(len(lst)//2)+1]
         context = {
-            'brand': lst,
+            'brand_cl': lst,
+            'brand_cl_1': lst1
         }
         return render(request, 'shop/product/brand_list.html', context=context)
 
