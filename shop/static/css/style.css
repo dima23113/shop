@@ -637,3 +637,7 @@ body {
 .img-hidden:hover span{
 visibility: visible;
 }
+
+.brand-list div a{
+    color: black;
+}
