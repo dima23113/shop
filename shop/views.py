@@ -23,7 +23,7 @@ class BrandList(View):
                 'slug': i.slug
             }
             if i.image:
-                s['img'] = i.image.url
+                s['img'] = i
             lst.append(s)
         print(len(lst)//2)
         lst1 = lst[(len(lst)//2)+1:]

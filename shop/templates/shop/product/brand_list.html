@@ -1,5 +1,6 @@
 {% extends 'shop/base.html' %}
 {% block title %}Бренды{% endblock %}
+{% load thumbnail %}
 
 {% block content %}
     <div class="content">
@@ -16,7 +17,9 @@
                                 <div class="symbol">
                                     <h2>{{ symbol.grouper }}</h2>
                                     {% for sl in symbol.list %}
-                                        <a href="{% url 'shop:product_list_by_brand' sl.slug %}">{{ sl.name|upper }}</a>
+                                        {% thumbnail sl.img.image "230x230" crop="20%" as im %}
+                                        <a class="img-hidden" href="{% url 'shop:product_list_by_brand' sl.slug %}">{{ sl.name|upper }}<span><img class="alignore" src="{{ im.url }}"></span></a>
+                                        {% endthumbnail %}
                                     {% endfor %}
                                 </div>
                             {% endfor %}
@@ -29,7 +32,9 @@
                                 <div class="symbol">
                                     <h2>{{ symbol.grouper }}</h2>
                                     {% for sl in symbol.list %}
-                                        <a href="{% url 'shop:product_list_by_brand' sl.slug %}">{{ sl.name|upper }}</a>
+                                        {% thumbnail sl.img.image "230x230" crop="20%" as im %}
+                                        <a class="img-hidden" href="{% url 'shop:product_list_by_brand' sl.slug %}">{{ sl.name|upper }}<span><img class="alignore" src="{{ im.url }}"></span></a>
+                                        {% endthumbnail %}
                                     {% endfor %}
                                 </div>
                             {% endfor %}
