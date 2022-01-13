@@ -690,3 +690,20 @@ body {
 .info-table {
     padding-left: 0;
 }
+
+.btn {
+    text-decoration: none;
+    max-height: 28px;
+}
+
+.login {
+    text-align: center;
+    padding-top: 20%;
+}
+
+.login * {
+    text-align: center;
+}
+
+
+
