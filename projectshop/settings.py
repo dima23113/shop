@@ -63,6 +63,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'projectshop.urls'
 
+AUTH_USER_MODEL = 'account.CustomUser'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
