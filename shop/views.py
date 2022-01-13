@@ -14,7 +14,6 @@ class BrandList(View):
 
     def get(self, request, *args, **kwargs):
         lst = []
-        lst1 = []
         brand = Brand.objects.all()
         for i in brand:
             s = {
@@ -25,7 +24,6 @@ class BrandList(View):
             if i.image:
                 s['img'] = i
             lst.append(s)
-        print(len(lst)//2)
         lst1 = lst[(len(lst)//2)+1:]
         lst = lst[:(len(lst)//2)+1]
         context = {

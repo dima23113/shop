@@ -83,36 +83,36 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="recommendation">
-        <div class="container-fluid">
-            <div class="row">
-                <h2>
-                    <span>Рекомендуем</span>
-                </h2>
-                <div class="recommendations col-md-12 col-sm-12 col-lg-12">
-                    <ul class="products-list">
-                        {% for i in recommendation %}
-                            <li class="product">
-                                <div class="col-item">
-                                    {% thumbnail i.image "319x344" crop="20%" as im %}
-                                        <a class="col-item-a" href="{% url 'shop:product_detail' i.slug %}"><img
-                                                alt="image"
-                                                src="{{ im.url }}"
-                                                width="{{ im.width }}"
-                                                height="{{ im.height }}"></a>
-                                    {% endthumbnail %}
-                                    <div class="col-item-about">
-                                        <div class="col-item__title">
-                                            <p>{{ i.brand }}</p>
-                                            <p>{{ i.name }}</p>
+        <div class="recommendation">
+            <div class="container-fluid">
+                <div class="row">
+                    <h2>
+                        <span>Рекомендуем</span>
+                    </h2>
+                    <div class="recommendations col-md-12 col-sm-12 col-lg-12">
+                        <ul class="products-list">
+                            {% for i in recommendation %}
+                                <li class="product">
+                                    <div class="col-item">
+                                        {% thumbnail i.image "319x344" crop="20%" as im %}
+                                            <a class="col-item-a" href="{% url 'shop:product_detail' i.slug %}"><img
+                                                    alt="image"
+                                                    src="{{ im.url }}"
+                                                    width="{{ im.width }}"
+                                                    height="{{ im.height }}"></a>
+                                        {% endthumbnail %}
+                                        <div class="col-item-about">
+                                            <div class="col-item__title">
+                                                <p>{{ i.brand }}</p>
+                                                <p>{{ i.name }}</p>
+                                            </div>
+                                            <div class="price">{{ i.price }}</div>
                                         </div>
-                                        <div class="price">{{ i.price }}</div>
                                     </div>
-                                </div>
-                            </li>
-                        {% endfor %}
-                    </ul>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
