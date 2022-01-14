@@ -3,12 +3,14 @@ from django.views.generic.base import View
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.urls import reverse_lazy
 from .models import CustomUser
 from .forms import LoginForm, PasswordChangeForm
 
 
-class UserLogin(View):
+class UserLoginView(View):
 
     def get(self, request, *args, **kwargs):
 
@@ -36,7 +38,7 @@ class UserLogin(View):
                 return redirect('account:login')
 
 
-class UserLogout(View):
+class UserLogoutView(View):
 
     def get(self, request, *args, **kwargs):
         logout(request)
@@ -65,3 +67,14 @@ class PasswordChangeView(View):
             else:
                 messages.error(request, 'Пароли не совпадают')
                 return redirect('account:password_change')
+
+
+class ProfileView(View):
+
+    def get(self, request, *args, **kwargs):
+        user = CustomUser.objects.get(email=request.user)
+        context = {
+            'user': user
+        }
+
+        return render(request, 'account/user_profile.html', context=context)
