@@ -3,7 +3,13 @@ from django.views.generic.base import View
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password
 from django.contrib import messages
-
+from django.http import HttpResponse
+from django.contrib.auth.forms import PasswordResetForm
+from django.utils.http import urlsafe_base64_encode
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.encoding import force_bytes
+from django.template.loader import render_to_string
+from django.core.mail import send_mail, BadHeaderError
 from .models import CustomUser
 from .forms import LoginForm, PasswordChangeForm, UserRegisterForm
 
@@ -106,4 +112,38 @@ class UserRegisterView(View):
                 login(request, user)
                 messages.add_message(request, messages.INFO,
                                      'Вам на почту отправлено письмо с подтвержением регистрациии!')
+                return redirect('shop:index')
+
+
+class PasswordResetView(View):
+
+    def get(self, request, *args, **kwargs):
+        form = PasswordResetForm()
+        return render(request, 'account/password_reset.html', context={'form': form})
+
+    def post(self, request, *args, **kwargs):
+        form = PasswordResetForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            user = CustomUser.objects.filter(email=cd['email']).exists()
+            if user:
+                user = CustomUser.objects.get(email=cd['email'])
+                subject = 'Сброс пароля'
+                email_template_name = 'account/password_resset_email.html'
+                c = {
+                    'email': user.email,
+                    'domain': '127.0.0.1:8000',
+                    'site_name': 'Website',
+                    'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                    'user': user,
+                    'token': default_token_generator.make_token(user),
+                    'protocol': 'http',
+                }
+                email = render_to_string(email_template_name, c)
+                try:
+                    send_mail(subject, email, 'admin@example.com', [user.email], fail_silently=False)
+                except BadHeaderError:
+                    return HttpResponse('Неверный заголовок')
+                messages.add_message(request, messages.INFO,
+                                     'Вам на почту отправлено письмо с подтвержением сброса пароля')
                 return redirect('shop:index')
