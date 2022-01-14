@@ -3,6 +3,7 @@ from django.views.generic.base import View
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
+from django.contrib import messages
 from .models import *
 from .forms import LoginForm
 
@@ -14,7 +15,7 @@ class UserLogin(View):
         if request.user.is_authenticated:
             return redirect('shop:index')
         else:
-            form = LoginForm(request.POST)
+            form = LoginForm()
             return render(request, 'account/login.html', {'form': form})
 
     def post(self, request, *args, **kwargs):
@@ -28,7 +29,8 @@ class UserLogin(View):
                     login(request, user)
                     return redirect('shop:index')
                 else:
-                    return HttpResponse('Аккаунт заблокирован')
+                    messages.error(request, 'Аккаунт заблокирован')
+                    return redirect('account:login')
             else:
-                return HttpResponse('Неверный логин или пароль')
-
+                messages.error(request, 'Неверный логин или пароль')
+                return redirect('account:login')
