@@ -1,13 +1,11 @@
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
-from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.urls import reverse_lazy
+
 from .models import CustomUser
-from .forms import LoginForm, PasswordChangeForm
+from .forms import LoginForm, PasswordChangeForm, UserRegisterForm
 
 
 class UserLoginView(View):
@@ -29,6 +27,8 @@ class UserLoginView(View):
             if user is not None:
                 if user.is_active:
                     login(request, user)
+                    messages.add_message(request, messages.INFO,
+                                         'Успешно!')
                     return redirect('shop:index')
                 else:
                     messages.error(request, 'Аккаунт заблокирован')
@@ -78,3 +78,32 @@ class ProfileView(View):
         }
 
         return render(request, 'account/user_profile.html', context=context)
+
+
+class UserRegisterView(View):
+
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('shop:index')
+        else:
+            form = UserRegisterForm()
+            return render(request, 'account/register.html', context={'form': form})
+
+    def post(self, request, *args, **kwargs):
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            if cd['password'] != cd['confirm_password']:
+                messages.error(request, 'Пароли не совпадают!')
+                return redirect('account:register')
+            elif CustomUser.objects.filter(email=cd['email']).exists():
+                messages.error(request, 'Пользователь с таким email существует!')
+                return redirect('account:register')
+            else:
+                user = CustomUser.objects.create_user(email=cd['email'], password=cd['password'])
+                user.is_active = False
+                user.save()
+                login(request, user)
+                messages.add_message(request, messages.INFO,
+                                     'Вам на почту отправлено письмо с подтвержением регистрациии!')
+                return redirect('shop:index')

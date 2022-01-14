@@ -1,0 +1,35 @@
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            <p>{{ message }}</p>
+        </div>
+    {% endfor %}
+{% endif %}
+
+<style>
+    .alert {
+        padding: 0;
+        background-color: #afb1b1;
+        color: black;
+    }
+
+    .closebtn {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .closebtn:hover {
+        color: black;
+    }
+    .alert p{
+        text-align: center;
+    }
+
+</style>

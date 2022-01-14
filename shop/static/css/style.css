@@ -705,5 +705,59 @@ body {
     text-align: center;
 }
 
+.customer-login * {
+    display: inline-block;
+    padding-left: 0;
+    padding-top: 15px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    margin: 2px 0;
+    width: 100%;
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+}
 
+.block-a {
+    padding: 0;
+
+}
+
+.block-a * {
+    text-align: left;
+}
+
+.block-a input {
+    border: 1px solid;
+}
+
+.block-submit input {
+    text-decoration: none;
+    background-color: white;
+    border: 1px solid;
+}
+.block-submit {
+    padding-right: 0;
+}
+
+.block-a h1{
+    text-transform: uppercase;
+}
+
+.block-link {
+    display: inline-flex;
+    padding: 0;
+}
+
+.block-link-a-left {
+    text-align: left;
+    color: black;
+    text-decoration: underline;
+    float: left;
+}
+
+.block-link-a-right {
+    text-align: right;
+    color: black;
+    text-decoration: underline;
+}
 

@@ -1,6 +1,6 @@
 {% extends 'shop/base.html' %}
 
-{% block title %}Смена пароля-Ноябрь{% endblock %}
+{% block title %}Регистрация-Ноябрь{% endblock %}
 
 {% block content %}
     <div class="content">
@@ -9,10 +9,10 @@
                 <div class="col-md-4 col-sm-4 col-lg-4"></div>
                 <div class="auth col-md-3 col-sm-3 col-lg-3">
                     {% include 'account/messages.html' %}
-                    <form class="login" method="post" action="{% url 'account:password_change' %}">
+                    <form class="login" method="post" action="{% url 'account:register' %}">
                         {{ form.as_p }}
                         {% csrf_token %}
-                        <p><input type="submit" value="Login"></p>
+                        <p><input type="submit" value="register"></p>
                     </form>
                 </div>
                 <div class="col-md-5 col-sm-5 col-lg-5"></div>
