@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
-from django.http import HttpResponse
 from django.shortcuts import render
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.hashers import make_password
 from django.contrib import messages
-from .models import *
-from .forms import LoginForm
+from .models import CustomUser
+from .forms import LoginForm, PasswordChangeForm
 
 
 class UserLogin(View):
@@ -34,3 +34,34 @@ class UserLogin(View):
             else:
                 messages.error(request, 'Неверный логин или пароль')
                 return redirect('account:login')
+
+
+class UserLogout(View):
+
+    def get(self, request, *args, **kwargs):
+        logout(request)
+        return redirect('shop:index')
+
+
+class PasswordChangeView(View):
+
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            form = PasswordChangeForm()
+            return render(request, 'account/password_change.html', {'form': form})
+        else:
+            return redirect('account:login')
+
+    def post(self, request, *args, **kwargs):
+        form = PasswordChangeForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            user = CustomUser.objects.get(email=request.user)
+            if cd['new_password'] == cd['confirm_password']:
+                user.password = make_password(cd['new_password'])
+                user.save()
+                login(request, user)
+                return redirect('shop:index')
+            else:
+                messages.error(request, 'Пароли не совпадают')
+                return redirect('account:password_change')

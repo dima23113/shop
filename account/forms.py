@@ -19,3 +19,9 @@ class LoginForm(forms.Form):
     email = forms.EmailField(label='Email', required=True, error_messages={'required': ''})
     password = forms.CharField(widget=forms.PasswordInput, label='Пароль', required=True,
                                error_messages={'required': ''})
+
+
+class PasswordChangeForm(forms.Form):
+    new_password = forms.CharField(label='Новый пароль', widget=forms.PasswordInput, error_messages={'required': ''})
+    confirm_password = forms.CharField(label='Подтверждение пароля', widget=forms.PasswordInput,
+                                       error_messages={'required': ''})
