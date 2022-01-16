@@ -3,13 +3,11 @@ from django.urls import reverse
 
 
 class Category(models.Model):
-
     name = models.CharField(max_length=256, db_index=True, verbose_name='Название категории')
     slug = models.SlugField(max_length=256, unique=True, verbose_name='Слаг категории')
     line_num = models.IntegerField(blank=True, null=True, verbose_name='Порядок категорий в меню сайта')
 
     class Meta:
-
         ordering = ('name',)
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
@@ -22,14 +20,12 @@ class Category(models.Model):
 
 
 class Subcategory(models.Model):
-
     name = models.CharField(max_length=256, verbose_name='Подкатегория')
-    slug = models.SlugField(max_length=256, verbose_name='Слог подкатегории')
+    slug = models.SlugField(max_length=256, verbose_name='Слаг подкатегории')
     category = models.ForeignKey(Category, related_name='subcategories',
                                  on_delete=models.CASCADE, verbose_name='Категория')
 
     class Meta:
-
         ordering = ('name',)
         verbose_name = 'Подкатегория'
         verbose_name_plural = 'Подкатегории'
@@ -41,15 +37,31 @@ class Subcategory(models.Model):
         return reverse('shop:product_list_by_subcategory', args=[self.slug])
 
 
-class Brand(models.Model):
+class SubcategoryType(models.Model):
+    name = models.CharField(max_length=256, verbose_name='Тип подкатегории')
+    slug = models.SlugField(max_length=256, verbose_name='Слаг типа подкатегории')
+    subcategory = models.ForeignKey(Subcategory, related_name='subcategory_type', on_delete=models.CASCADE,
+                                    verbose_name='Подкатегория')
 
+    class Meta:
+        ordering = ('name',)
+        verbose_name = 'Тип подкатегории'
+        verbose_name_plural = 'Тип подкатегории'
+
+    def __str__(self):
+        return f'{self.subcategory.name} - {self.name}'
+
+    def get_absolute_url(self):
+        return reverse('shop:product_list_by_subcategory_type', args=[self.slug])
+
+
+class Brand(models.Model):
     name = models.CharField(max_length=256, verbose_name='Название бренда')
     slug = models.SlugField(max_length=256, verbose_name='Слаг бренда')
     image = models.ImageField(blank=True, upload_to='brand/', verbose_name='Лого бренда')
     description = models.TextField(verbose_name='Описание бренда')
 
     class Meta:
-
         ordering = ('name',)
         verbose_name = 'Бренд'
         verbose_name_plural = 'Бренды'
@@ -62,9 +74,10 @@ class Brand(models.Model):
 
 
 class Product(models.Model):
-
     category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE, verbose_name='Категория')
     subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE, verbose_name='Подкатегория')
+    subcategory_type = models.ForeignKey(SubcategoryType, on_delete=models.CASCADE, verbose_name='Тип подкатегории',
+                                         blank=True, null=True)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, verbose_name='Название бренда')
     name = models.CharField(max_length=256, verbose_name='Название товара')
     slug = models.SlugField(max_length=256, verbose_name='Слаг товара')
@@ -83,7 +96,6 @@ class Product(models.Model):
     image = models.ImageField(blank=True, null=True, upload_to='main_image', verbose_name='Главное изображение')
 
     class Meta:
-
         ordering = ('name',)
         index_together = (('id', 'slug'),)
         verbose_name = 'Товар'
@@ -97,7 +109,6 @@ class Product(models.Model):
 
 
 class ImgProduct(models.Model):
-
     img = models.ImageField(verbose_name='Изображения товара', upload_to='product/')
     product = models.ForeignKey(Product, verbose_name='Товар', related_name='product_img', on_delete=models.CASCADE)
 
@@ -110,12 +121,10 @@ class ImgProduct(models.Model):
 
 
 class ProductSize(models.Model):
-
     name = models.CharField(max_length=256, verbose_name='Размер товара')
     qty = models.IntegerField(verbose_name='Количество')
     product = models.ForeignKey(Product, verbose_name='Товар', related_name='product_sizer', on_delete=models.CASCADE)
 
     class Meta:
-
         verbose_name = 'Размер товара'
         verbose_name_plural = 'Размеры товара'
