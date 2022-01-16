@@ -12,6 +12,7 @@ from django.template.loader import render_to_string
 from django.core.mail import send_mail, BadHeaderError
 from .models import CustomUser
 from .forms import LoginForm, PasswordChangeForm, UserRegisterForm
+from django_email_verification import send_email
 
 
 class UserLoginView(View):
@@ -40,7 +41,7 @@ class UserLoginView(View):
                     messages.error(request, 'Аккаунт заблокирован')
                     return redirect('account:login')
             else:
-                messages.error(request, 'Неверный логин или пароль')
+                messages.error(request, 'Неверный логин/пароль или аккаунт не активирован!')
                 return redirect('account:login')
 
 
@@ -108,8 +109,7 @@ class UserRegisterView(View):
             else:
                 user = CustomUser.objects.create_user(email=cd['email'], password=cd['password'])
                 user.is_active = False
-                user.save()
-                login(request, user)
+                send_email(user)
                 messages.add_message(request, messages.INFO,
                                      'Вам на почту отправлено письмо с подтвержением регистрациии!')
                 return redirect('shop:index')

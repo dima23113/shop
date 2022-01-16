@@ -12,7 +12,7 @@
                     <div class="customer-login">
                         <form class="login-form" method="post" action="{% url 'account:register' %}">
                             <div class="block-a">
-                                <h1>Регистрация</h1>
+                                <h1 style="text-align: center">Регистрация</h1>
                             </div>
                             <div class="block-a">
                                 <label class="label-form">
@@ -34,11 +34,10 @@
                             </div>
                             {% csrf_token %}
                             <div class="block-submit">
-                                <input type="submit" value="Войти">
+                                <input type="submit" value="Зарегистрироваться">
                             </div>
                             <div class="block-link">
-                                <a href="#" class="block-link-a-left">Забыли пароль?</a>
-                                <a href="{% url 'account:login' %}" class="block-link-a-right">Авторизация</a>
+                                <a href="{% url 'account:login' %}" style="text-align: left" class="block-link-a-right">Авторизация</a>
                             </div>
                         </form>
                     </div>
