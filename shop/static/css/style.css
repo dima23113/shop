@@ -761,3 +761,22 @@ body {
     text-decoration: underline;
 }
 
+
+.left-menu .sub-menu {
+    display: none;
+    position: absolute;
+    top: 90px;
+    left: 40px;
+    z-index: 10;
+    width: 150px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.sub-menu.sub-menu-sub {
+    display: inline-block;
+    position: absolute;
+}
+.left-menu > li:hover .sub-menu{
+    display: inline-flex;
+}
