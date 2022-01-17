@@ -22,14 +22,14 @@
                 <i class="menu-toggle"></i>
                 <ul class="left-menu">
                     {% for i in categories %}
-                        <li class="left-menu__item"><a
+                        <li class="left-menu__item"><a style="text-decoration: none;"
                                 href="{% url 'shop:product_list_by_category' i.slug %}">{{ i.name }}</a>
-                            <ul class="sub-menu"style="padding-top: 75px;">
+                            <ul class="sub-menu" style="padding-top: 75px;">
                                 {% for l in i.subcategories.all %}
-                                    <li><a href="#">{{ l.name }}</a>
-                                        <ul class="sub-menu-sub" style="padding-left: 0rem;padding-top: 75px;">
+                                    <li class="sub-menu-li"><a href="#">{{ l.name }}</a>
+                                        <ul class="sub-menu-sub" style="padding-left: 0rem;padding-top: 0; margin-top: 80px">
                                             {% for c in l.subcategory_type.all %}
-                                                <li><a href="#">{{ c.name }}</a></li>
+                                                <li class="sub-menu-sub-li" style="text-decoration: none;"><a href="#">{{ c.name }}</a></li>
                                             {% endfor %}
                                         </ul>
                                     </li>
