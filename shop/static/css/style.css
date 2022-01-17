@@ -735,11 +735,12 @@ body {
     background-color: white;
     border: 1px solid;
 }
+
 .block-submit {
     padding-right: 0;
 }
 
-.block-a h1{
+.block-a h1 {
     text-transform: uppercase;
 }
 
@@ -765,18 +766,46 @@ body {
 .left-menu .sub-menu {
     display: none;
     position: absolute;
-    top: 90px;
-    left: 40px;
-    z-index: 10;
-    width: 150px;
+    top: 37px;
+    left: 0;
+    z-index: 0;
+    width: -1px;
     margin: 0;
     padding: 0;
     list-style: none;
 }
-.sub-menu.sub-menu-sub {
-    display: inline-block;
+
+.sub-menu-sub {
+    top: 37px;
     position: absolute;
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+
+
 }
-.left-menu > li:hover .sub-menu{
+
+.left-menu > li:hover .sub-menu {
     display: inline-flex;
+}
+
+.sub-menu li {
+    display: block;
+    padding-right: 250px;
+}
+
+.left-menu__item {
+    position: relative;
+}
+
+.sub-menu.sub-menu-sub ul {
+  padding-left: 0;
+}
+
+.sub-menu *{
+    text-align: left;
+}
+
+.sub-menu ul, a{
+    text-decoration: none;
 }

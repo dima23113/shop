@@ -24,14 +24,15 @@
                     {% for i in categories %}
                         <li class="left-menu__item"><a
                                 href="{% url 'shop:product_list_by_category' i.slug %}">{{ i.name }}</a>
-                            <ul class="sub-menu">
+                            <ul class="sub-menu"style="padding-top: 75px;">
                                 {% for l in i.subcategories.all %}
-                                    <li><a href="#">{{ l.name }}</a></li>
-                                    <ul class="sub-menu-sub">
-                                    {% for c in l.subcategory_type.all %}
-                                        <li><a href="#">{{ c.name }}</a></li>
-                                    {% endfor %}
-                                    </ul>
+                                    <li><a href="#">{{ l.name }}</a>
+                                        <ul class="sub-menu-sub" style="padding-left: 0rem;padding-top: 75px;">
+                                            {% for c in l.subcategory_type.all %}
+                                                <li><a href="#">{{ c.name }}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
                                 {% endfor %}
                             </ul>
                         </li>
@@ -50,6 +51,7 @@
                 <ul class="right-auth">
                     <li class="right-menu__item"><a href="#">Блог</a></li>
                     <li class="right-menu__item"><a href="
+
                             {% if user.is_authenticated %}{% url 'account:profile' %}{% else %}{% url 'account:login' %}{% endif %}">Профиль</a>
                     </li>
                     <li class="right-menu__item"><a href="#">Поиск</a></li>
