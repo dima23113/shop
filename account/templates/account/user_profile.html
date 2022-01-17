@@ -3,17 +3,35 @@
 {% block title %}Профиль-Ноябрь{% endblock %}
 
 {% block content %}
-<div class="content">
-<div class="profile">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-3 col-sm-3 col-lg-3"></div>
-            <div class="profile-info col-md-6 col-sm-6 col-lg-6">
-                <h1>{{ user.email }}</h1>
+    <div class="content">
+        <div class="profile">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3 col-sm-3 col-lg-3"></div>
+                    <div class="page-title col-md-6 col-sm-6 col-lg-6">
+                        <h1>ЛИЧНЫЙ КАБИНЕТ</h1>
+                        <div class="separator"></div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-lg-3"></div>
+                </div>
+
             </div>
-            <div class="col-md-3 col-sm-3 col-lg-3"></div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3 col-sm-3 col-lg-3"></div>
+                    <div class="account-menu col-md-6 col-sm-6 col-lg-6">
+                        <ul class="account-menu-lst">
+                            <li>Профиль</li>
+                            <li>Адреса</li>
+                            <li>История заказов</li>
+                            <li>Мои обращения</li>
+                            <li>Избранное</li>
+                            <li>Мои комплекты</li>
+                            <li>Предзаказы</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-lg-3"></div>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-</div>
 {% endblock content %}

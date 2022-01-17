@@ -830,3 +830,18 @@ body {
     border: 1px solid;
     width: 100%;
 }
+
+.separator {
+    border: 2px solid;
+}
+.page-title  h1 {
+    text-align: center;
+}
+.account-menu-lst {
+    padding: 0;
+    width: 100%;
+}
+.account-menu-lst li {
+    display: inline-flex;
+    font-size: 18px;
+}
