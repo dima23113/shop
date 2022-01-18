@@ -881,3 +881,8 @@ body {
 .account-menu:hover *{
     color: black;
 }
+
+.account-info {
+    text-align: left;
+    padding: 0;
+}
