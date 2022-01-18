@@ -886,3 +886,34 @@ body {
     text-align: left;
     padding: 0;
 }
+
+.user-info {
+    margin-left: -32px;
+}
+
+.user-edit-block br {
+    margin-bottom: 15px;
+}
+
+.user-edit-block  *{
+    text-decoration: none;
+    font-family: 'Raleway', sans-serif;
+}
+
+
+.user-edit-block {
+    font-family: 'Raleway', sans-serif;
+}
+
+.user-edit-block a {
+    color: #107ba3;;
+}
+
+.user-edit-block a:hover {
+    color: #107ba3;
+    text-decoration: underline;
+}
+
+.link-profile{
+    border-bottom: 2px solid;
+}
