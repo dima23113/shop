@@ -44,3 +44,6 @@ class UserChangeBioForm(forms.Form):
 class UserChangePhoneForm(forms.Form):
     phone = forms.CharField(label='Номер телефона', required=True, error_messages={'required': ''})
 
+
+class UserEmailMailingForm(forms.Form):
+    mailing_yes = forms.BooleanField(label="Получать?", required=False, error_messages={'required': ''})

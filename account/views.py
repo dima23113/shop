@@ -11,7 +11,8 @@ from django.utils.encoding import force_bytes
 from django.template.loader import render_to_string
 from django.core.mail import send_mail, BadHeaderError
 from .models import CustomUser
-from .forms import LoginForm, PasswordChangeForm, UserRegisterForm, UserChangeBioForm, UserChangePhoneForm
+from .forms import LoginForm, PasswordChangeForm, UserRegisterForm, UserChangeBioForm, UserChangePhoneForm, \
+    UserEmailMailingForm
 from django_email_verification import send_email
 
 
@@ -82,10 +83,14 @@ class ProfileView(View):
         user = CustomUser.objects.get(email=request.user)
         form_bio = UserChangeBioForm()
         form_phone = UserChangePhoneForm()
+        form_password = PasswordChangeForm()
+        form_mailing = UserEmailMailingForm()
         context = {
             'user': user,
             'form_bio': form_bio,
-            'form_phone': form_phone
+            'form_phone': form_phone,
+            'form_password': form_password,
+            'form_mailing': form_mailing
         }
 
         return render(request, 'account/user_profile.html', context=context)
@@ -106,6 +111,29 @@ class ProfileView(View):
             cd = form_phone.cleaned_data
             user.phone = cd['phone']
             user.save()
+            return redirect('account:profile')
+
+        form_password = PasswordChangeForm(request.POST)
+        if form_password.is_valid():
+            cd = form_password.cleaned_data
+            if cd['new_password'] == cd['confirm_password']:
+                user.password = make_password(cd['new_password'])
+                user.save()
+                login(request, user)
+                return redirect('account:profile')
+            else:
+                messages.error(request, 'Пароли не совпадают')
+                return redirect('account:profile')
+
+        form_mailing = UserEmailMailingForm(request.POST)
+        if form_mailing.is_valid():
+            cd = form_mailing.cleaned_data
+            if cd['mailing_yes']:
+                user.email_mailing = True
+                user.save()
+            else:
+                user.email_mailing = False
+                user.save()
             return redirect('account:profile')
 
 

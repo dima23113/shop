@@ -112,6 +112,46 @@
                                                 <input type="submit" value="Сохранить">
                                             </div>
                                         </form>
+                                        <form class="login-form password-change-form" method="post"
+                                              action="{% url 'account:profile' %}"
+                                              style="padding-top: 0; margin-top: 0">
+                                            <div class="block-a">
+                                                <h1 style="text-align: center; font-size: 25px;padding-top: 0px;margin-top: 0px; ">
+                                                    Смена пароля</h1>
+                                            </div>
+                                            <div class="block-a">
+                                                <label class="label-form">
+                                                    {{ form_password.new_password.label }}
+                                                </label>
+                                                <input type="password" name="password" required="" id="id_password">
+                                            </div>
+                                            <div class="block-a">
+                                                <label class="label-form">
+                                                    {{ form_password.confirm_password.label }}
+                                                </label>
+                                                <input type="password" name="password" required="" id="id_password">
+                                            </div>
+                                            {% csrf_token %}
+                                            <div class="block-submit">
+                                                <input type="submit" value="Сохранить">
+                                            </div>
+                                        </form>
+                                        <form class="login-form mailing-form" method="post"
+                                              action="{% url 'account:profile' %}"
+                                              style="padding-top: 0; margin-top: 0">
+                                            <div class="block-a">
+                                                <h1 style="text-align: center; font-size: 25px;padding-top: 0px;margin-top: 0px; ">
+                                                    Рассылка предложений</h1>
+                                            </div>
+                                            <div class="block-a">
+                                                <label style="text-align: center">{{ form_mailing.mailing_yes.label }}</label>
+                                                <input type="checkbox" name="mailing_yes" id="id_mailing_yes" checked>
+                                            </div>
+                                            {% csrf_token %}
+                                            <div class="block-submit">
+                                                <input type="submit" value="Сохранить">
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

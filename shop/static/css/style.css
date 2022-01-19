@@ -931,3 +931,11 @@ body {
 .phone-form {
     display: none;
 }
+
+.password-change-form {
+    display: none;
+}
+
+.mailing-form {
+    display: none;
+}
