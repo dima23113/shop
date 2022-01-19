@@ -887,9 +887,7 @@ body {
     padding: 0;
 }
 
-.user-info {
-    margin-left: -32px;
-}
+
 
 .user-edit-block br {
     margin-bottom: 15px;
@@ -916,4 +914,20 @@ body {
 
 .link-profile{
     border-bottom: 2px solid;
+}
+
+.account-info {
+    padding-top: 25px;
+}
+
+.user-info *{
+    font-family: 'Raleway', sans-serif;
+}
+
+.bio-form {
+    display: none;
+}
+
+.phone-form {
+    display: none;
 }

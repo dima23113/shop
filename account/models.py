@@ -7,6 +7,7 @@ from.managers import CustomUserManager
 class CustomUser(AbstractUser):
     username = None
     email = models.EmailField(_('email address'), unique=True)
+    Surname = models.CharField(max_length=256, verbose_name='Отчество', null=True, blank=True)
     phone = models.CharField(max_length=256, verbose_name='Телефон', blank=True, null=True)
     birthday = models.DateField(null=True, blank=True, verbose_name='Дата рождения')
     zip_code = models.CharField(max_length=6, verbose_name='Индекс', null=True, blank=True)

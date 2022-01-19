@@ -11,7 +11,7 @@ from django.utils.encoding import force_bytes
 from django.template.loader import render_to_string
 from django.core.mail import send_mail, BadHeaderError
 from .models import CustomUser
-from .forms import LoginForm, PasswordChangeForm, UserRegisterForm
+from .forms import LoginForm, PasswordChangeForm, UserRegisterForm, UserChangeBioForm, UserChangePhoneForm
 from django_email_verification import send_email
 
 
@@ -80,11 +80,33 @@ class ProfileView(View):
 
     def get(self, request, *args, **kwargs):
         user = CustomUser.objects.get(email=request.user)
+        form_bio = UserChangeBioForm()
+        form_phone = UserChangePhoneForm()
         context = {
-            'user': user
+            'user': user,
+            'form_bio': form_bio,
+            'form_phone': form_phone
         }
 
         return render(request, 'account/user_profile.html', context=context)
+
+    def post(self, request, *args, **kwargs):
+        user = CustomUser.objects.get(email=request.user)
+        form_bio = UserChangeBioForm(request.POST)
+        if form_bio.is_valid():
+            cd = form_bio.cleaned_data
+            user.first_name = cd['first_name']
+            user.last_name = cd['last_name']
+            user.surname = cd['surname']
+            user.save()
+            return redirect('account:profile')
+
+        form_phone = UserChangePhoneForm(request.POST)
+        if form_phone.is_valid():
+            cd = form_phone.cleaned_data
+            user.phone = cd['phone']
+            user.save()
+            return redirect('account:profile')
 
 
 class UserRegisterView(View):
@@ -129,7 +151,7 @@ class PasswordResetView(View):
             if user:
                 user = CustomUser.objects.get(email=cd['email'])
                 subject = 'Сброс пароля'
-                email_template_name = 'account/password_resset_email.html'
+                email_template_name = 'account/password_reset_email.html'
                 c = {
                     'email': user.email,
                     'domain': '127.0.0.1:8000',

@@ -33,3 +33,14 @@ class UserRegisterForm(forms.Form):
                                error_messages={'required': ''})
     confirm_password = forms.CharField(label='Подтверждение пароля', widget=forms.PasswordInput,
                                        error_messages={'required': ''})
+
+
+class UserChangeBioForm(forms.Form):
+    first_name = forms.CharField(label='Имя', required=True, error_messages={'required': ''})
+    last_name = forms.CharField(label='Фамилия', required=True, error_messages={'required': ''})
+    surname = forms.CharField(label='Отчество', required=False, error_messages={'required': ''})
+
+
+class UserChangePhoneForm(forms.Form):
+    phone = forms.CharField(label='Номер телефона', required=True, error_messages={'required': ''})
+
