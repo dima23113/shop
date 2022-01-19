@@ -47,3 +47,14 @@ class UserChangePhoneForm(forms.Form):
 
 class UserEmailMailingForm(forms.Form):
     mailing_yes = forms.BooleanField(label="Получать?", required=False, error_messages={'required': ''})
+
+
+class EmailChangeForm(forms.Form):
+    email = forms.EmailField(label='E-Mail', required=True, error_messages={'required': ''})
+
+
+class AddressChangeForm(forms.Form):
+    zip_code = forms.CharField(label='Индекс', required=False, error_messages={'required': ''})
+    country = forms.CharField(label='Страна', required=False, error_messages={'required': ''})
+    city = forms.CharField(label='Город', required=False, error_messages={'required': ''})
+    address = forms.CharField(label='Адрес', required=False, error_messages={'required': ''})

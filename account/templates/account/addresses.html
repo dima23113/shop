@@ -1,0 +1,61 @@
+{% extends 'account/user_profile.html' %}
+
+{% block title %}Адрес-Ноябрь{% endblock %}
+
+{% block info %}
+    <div class="customer-login">
+        <form class="form" method="post"
+              action="{% url 'account:address' %}"
+              style="padding-top: 0; margin-top: 0">
+            <div class="block-a">
+                <h1 style="text-align: center; font-size: 25px;padding-top: 0px;margin-top: 0px; ">
+                    Адрес доставки</h1>
+            </div>
+            <div class="block-a">
+                <label class="label-form">
+                    {{ form.country.label }}
+                </label>
+                <input type="text" name="country" required=""
+                       id="id_country" value="{{ user.country }}"
+                       style="text-align: center">
+            </div>
+            <div class="block-a">
+                <label class="label-form">
+                    {{ form.city.label }}
+                </label>
+                <input type="text" name="city" required=""
+                       id="id_city"
+                       value="{{ user.city }}" style="text-align: center">
+            </div>
+            <div class="block-a">
+                <label class="label-form">
+                    {{ form.address.label }}
+                </label>
+                <input type="text" name="address" required="" id="id_address"
+                       value="{{ user.address }}" style="text-align: center">
+            </div>
+            <div class="block-a">
+                <label class="label-form">
+                    {{ form.zip_code.label }}
+                </label>
+                <input type="text" name="zip_code" required="" id="id_zip_code"
+                       value="{{ user.zip_code }}" style="text-align: center">
+            </div>
+            {% csrf_token %}
+            <div class="block-submit">
+                <input type="submit" value="Сохранить">
+            </div>
+        </form>
+    </div>
+
+    <style>
+        .link-profile {
+            border-bottom: none;
+        }
+
+        .link-address {
+            border-bottom: 2px solid;
+        }
+
+    </style>
+{% endblock %}

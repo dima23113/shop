@@ -12,7 +12,7 @@ from django.template.loader import render_to_string
 from django.core.mail import send_mail, BadHeaderError
 from .models import CustomUser
 from .forms import LoginForm, PasswordChangeForm, UserRegisterForm, UserChangeBioForm, UserChangePhoneForm, \
-    UserEmailMailingForm
+    UserEmailMailingForm, EmailChangeForm, AddressChangeForm
 from django_email_verification import send_email
 
 
@@ -53,30 +53,6 @@ class UserLogoutView(View):
         return redirect('shop:index')
 
 
-class PasswordChangeView(View):
-
-    def get(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            form = PasswordChangeForm()
-            return render(request, 'account/password_change.html', {'form': form})
-        else:
-            return redirect('account:login')
-
-    def post(self, request, *args, **kwargs):
-        form = PasswordChangeForm(request.POST)
-        if form.is_valid():
-            cd = form.cleaned_data
-            user = CustomUser.objects.get(email=request.user)
-            if cd['new_password'] == cd['confirm_password']:
-                user.password = make_password(cd['new_password'])
-                user.save()
-                login(request, user)
-                return redirect('shop:index')
-            else:
-                messages.error(request, 'Пароли не совпадают')
-                return redirect('account:password_change')
-
-
 class ProfileView(View):
 
     def get(self, request, *args, **kwargs):
@@ -85,14 +61,15 @@ class ProfileView(View):
         form_phone = UserChangePhoneForm()
         form_password = PasswordChangeForm()
         form_mailing = UserEmailMailingForm()
+        form_email = EmailChangeForm()
         context = {
             'user': user,
             'form_bio': form_bio,
             'form_phone': form_phone,
             'form_password': form_password,
-            'form_mailing': form_mailing
+            'form_mailing': form_mailing,
+            'form_email': form_email
         }
-
         return render(request, 'account/user_profile.html', context=context)
 
     def post(self, request, *args, **kwargs):
@@ -135,6 +112,21 @@ class ProfileView(View):
                 user.email_mailing = False
                 user.save()
             return redirect('account:profile')
+
+        form_email = EmailChangeForm(request.POST)
+        if form_email.is_valid():
+            cd = form_email
+            email_ = CustomUser.objects.filter(email=cd['email']).exists()
+            if email_:
+                messages.add_message(request, messages.INFO,
+                                     'E-mail уже занят!')
+                return redirect('account:profile')
+            else:
+                user.email = cd['email']
+                login(request, user)
+                messages.add_message(request, messages.INFO,
+                                     'E-mail изменен!')
+                return redirect('account:profile')
 
 
 class UserRegisterView(View):
@@ -197,3 +189,27 @@ class PasswordResetView(View):
                 messages.add_message(request, messages.INFO,
                                      'Вам на почту отправлено письмо с подтвержением сброса пароля')
                 return redirect('shop:index')
+
+
+class AddressesProfileView(View):
+
+    def get(self, request, *args, **kwargs):
+        form = AddressChangeForm()
+        context = {
+            'form': form
+        }
+        return render(request, 'account/addresses.html', context=context)
+
+    def post(self, request, *args, **kwargs):
+        form = AddressChangeForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            user = CustomUser.objects.get(email=request.user)
+            user.city = cd['city']
+            user.country = cd['country']
+            user.zip_code = cd['zip_code']
+            user.address = cd['address']
+            user.save()
+            messages.add_message(request, messages.INFO,
+                                 'Адрес сохранен!')
+            return redirect('account:profile')

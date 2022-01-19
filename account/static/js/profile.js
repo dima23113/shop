@@ -37,11 +37,21 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     })
 
+    $('.email').click(function () {
+        if ($('.email-form').attr('class') == 'email-form form_active') {
+            $('.email-form').removeClass('form_active');
+        } else {
+            closeForm()
+            $('.email-form').addClass('form_active');
+        }
+    })
+
     function closeForm() {
         $('.phone-form').removeClass('form_active');
         $('.bio-form').removeClass('form_active');
         $('.password-change-form').removeClass('form_active');
         $('.mailing-form').removeClass('form_active');
+        $('.email-form').removeClass('form_active');
     }
 
 });
