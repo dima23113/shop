@@ -1,5 +1,5 @@
 {% extends 'shop/base.html' %}
-
+{% load static %}
 {% block title %}Профиль-Ноябрь{% endblock %}
 
 {% block content %}
@@ -43,12 +43,12 @@
                                 <duv class="user-info col-md-4 col-sm-4 col-lg-4">
                                     <p><b>{{ user.get_full_name }}</b></p>
                                     <div class="user-edit-block">
-                                        <a href="#">{{ user.phone }}</a><br>
-                                        <a href="#">{{ user.email }}</a><br>
-                                        <a href="#">{{ user.birthday }}</a><br>
-                                        <a href="#">Редактировать личные данные</a><br>
-                                        <a href="#">Изменить пароль</a><br>
-                                        <a href="#">Управление подпиской</a><br>
+                                        <a class="phone" href="#">{{ user.phone }}</a><br>
+                                        <a class="email" href="#">{{ user.email }}</a><br>
+                                        <a class="birthday" href="#">{{ user.birthday }}</a><br>
+                                        <a class="bio" href="#">Редактировать личные данные</a><br>
+                                        <a class="password" href="#">Изменить пароль</a><br>
+                                        <a class="mailing" href="#">Управление подпиской</a><br>
                                     </div>
                                 </duv>
                                 <div class="user-info col-md-4 col-sm-4 col-lg-4">
@@ -58,7 +58,7 @@
                                 </div>
                                 <div class="user-info col-md-4 col-sm-4 col-lg-4">
                                     <div class="customer-login">
-                                        <form class="login-form bio-form" method="post"
+                                        <form class="bio-form" method="post"
                                               action="{% url 'account:profile' %}"
                                               style="padding-top: 0; margin-top: 0">
                                             <div class="block-a">
@@ -92,7 +92,7 @@
                                                 <input type="submit" value="Сохранить">
                                             </div>
                                         </form>
-                                        <form class="login-form phone-form" method="post"
+                                        <form class="phone-form" method="post"
                                               action="{% url 'account:profile' %}"
                                               style="padding-top: 0; margin-top: 0">
                                             <div class="block-a">
@@ -100,7 +100,7 @@
                                                     Изменить телефон</h1>
                                             </div>
                                             <div class="block-a">
-                                                <label class="label-form">
+                                                <label class="label-form" >
                                                     {{ form_phone.phone.label }}
                                                 </label>
                                                 <input type="phone" name="phone" required=""
@@ -112,7 +112,7 @@
                                                 <input type="submit" value="Сохранить">
                                             </div>
                                         </form>
-                                        <form class="login-form password-change-form" method="post"
+                                        <form class="password-change-form" method="post"
                                               action="{% url 'account:profile' %}"
                                               style="padding-top: 0; margin-top: 0">
                                             <div class="block-a">
@@ -136,7 +136,7 @@
                                                 <input type="submit" value="Сохранить">
                                             </div>
                                         </form>
-                                        <form class="login-form mailing-form" method="post"
+                                        <form class="mailing-form" method="post"
                                               action="{% url 'account:profile' %}"
                                               style="padding-top: 0; margin-top: 0">
                                             <div class="block-a">
@@ -162,4 +162,5 @@
             </div>
         </div>
     </div>
+    <script src="{% static 'js/profile.js' %}"></script>
 {% endblock content %}

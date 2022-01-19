@@ -939,3 +939,7 @@ body {
 .mailing-form {
     display: none;
 }
+
+.form_active {
+    display: contents;
+}
