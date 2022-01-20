@@ -1,6 +1,5 @@
 {% extends 'shop/base.html' %}
 {% load thumbnail %}
-
 {% block title %}{{ brand.name }}-Ноябрь Скейтшоп{% endblock %}
 
 
@@ -41,7 +40,7 @@
                                                     {% endthumbnail %}
                                                     <div class="col-item-about">
                                                         <div class="col-item__title">
-                                                            <p>{{ i.brand }}</p>
+                                                            <p>{{ i.brand.name }}</p>
                                                             <p>{{ i.name }}</p>
                                                         </div>
                                                         <div class="price">{{ i.price }}</div>
