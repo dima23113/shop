@@ -81,6 +81,8 @@ class ProfileView(View):
             user.last_name = cd['last_name']
             user.surname = cd['surname']
             user.save()
+            messages.add_message(request, messages.INFO,
+                                 'Личная информация изменена!')
             return redirect('account:profile')
 
         form_phone = UserChangePhoneForm(request.POST)
@@ -88,6 +90,8 @@ class ProfileView(View):
             cd = form_phone.cleaned_data
             user.phone = cd['phone']
             user.save()
+            messages.add_message(request, messages.INFO,
+                                 'Номер телефона изменен!')
             return redirect('account:profile')
 
         form_password = PasswordChangeForm(request.POST)
@@ -108,9 +112,13 @@ class ProfileView(View):
             if cd['mailing_yes']:
                 user.email_mailing = True
                 user.save()
+                messages.add_message(request, messages.INFO,
+                                     'Подписка активирована!')
             else:
                 user.email_mailing = False
                 user.save()
+                messages.add_message(request, messages.INFO,
+                                     'Подписка отключена!')
             return redirect('account:profile')
 
         form_email = EmailChangeForm(request.POST)
@@ -185,7 +193,7 @@ class PasswordResetView(View):
                 try:
                     send_mail(subject, email, 'admin@example.com', [user.email], fail_silently=False)
                 except BadHeaderError:
-                    return HttpResponse('Неверный заголовок')
+                    return redirect('shop:index')
                 messages.add_message(request, messages.INFO,
                                      'Вам на почту отправлено письмо с подтвержением сброса пароля')
                 return redirect('shop:index')
