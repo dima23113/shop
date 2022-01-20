@@ -1,5 +1,6 @@
 {% extends 'shop/base.html' %}
 {% load thumbnail %}
+{% load cache %}
 {% block title %}{{ product.name }}-Ноябрь Скейтшоп{% endblock %}
 {% load static %}
 {% block content %}
@@ -83,6 +84,7 @@
                 </div>
             </div>
         </div>
+    {% cache 500 recommendations %}
         <div class="recommendation">
             <div class="container-fluid">
                 <div class="row">
@@ -116,6 +118,7 @@
                 </div>
             </div>
         </div>
+    {% endcache %}
     </div>
     <script src="{% static 'js/libs/zoom/dist/js/lightbox-plus-jquery.js' %}"></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>

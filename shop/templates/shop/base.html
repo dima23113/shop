@@ -1,5 +1,6 @@
 {% load static %}
 {% load thumbnail %}
+{% load cache %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -16,6 +17,7 @@
 </head>
 <body>
 
+{% cache 500 navbar %}
 <div class="navbar" id="navbar">
     <div class="container-fluid">
         <div class="row">
@@ -34,7 +36,7 @@
                                                 <li class="sub-menu-sub-li" style="text-decoration: none;"><a
                                                         href="#">{{ c.name }}</a></li>
                                             {% endfor %}
-                                            {% for d in cat_img %}
+                                            {% for d in category_img %}
                                                 {% if d.category.name == i.name %}
                                                     {% if d.subcategory.name == l.name %}
                                                         {% thumbnail d.image "200x250" crop="100%" as im %}
@@ -81,6 +83,7 @@
         </div>
     </div>
 </div>
+{% endcache %}
 <br>
 <br>
 <br>

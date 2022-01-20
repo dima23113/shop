@@ -2,9 +2,12 @@ from .models import *
 
 
 def category(request):
-    cat_img = []
-    for i in Category.objects.all().order_by('id'):
-        for c in i.subcategories.all():
-            for d in c.subcategory_products.all()[:1]:
-                cat_img.append(d)
-    return {'categories': Category.objects.all().order_by('id'), 'cat_img': cat_img}
+    tst = {}
+    for d in Product.objects.all().select_related('subcategory').select_related('category'):
+        if d.subcategory in tst.keys():
+            pass
+        else:
+            tst[d.subcategory] = d
+    category_img = [v for v in tst.values()]
+
+    return {'categories': Category.objects.all().order_by('id'), 'category_img': category_img}

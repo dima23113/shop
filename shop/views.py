@@ -24,8 +24,8 @@ class BrandList(View):
             if i.image:
                 s['img'] = i
             lst.append(s)
-        lst1 = lst[(len(lst)//2)+1:]
-        lst = lst[:(len(lst)//2)+1]
+        lst1 = lst[(len(lst) // 2) + 1:]
+        lst = lst[:(len(lst) // 2) + 1]
         context = {
             'brand_cl': lst,
             'brand_cl_1': lst1
@@ -52,7 +52,9 @@ class ProductListByBrand(View):
 
     def get(self, request, *args, **kwargs):
         brand = Brand.objects.get(slug=kwargs['slug'])
-        products = Product.objects.filter(brand=brand, available=True)
+        products = Product.objects.filter(brand=brand, available=True).values('image', 'brand',
+                                                                              'slug', 'name',
+                                                                              'price')
         paginator = Paginator(products, 5)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
@@ -76,12 +78,12 @@ class ProductListBySubcategory(View):
 class ProductDetail(View):
 
     def get(self, request, *args, **kwargs):
-        product = Product.objects.get(slug=kwargs['slug'])
+        product = Product.objects.filter(slug=kwargs['slug']).first()
         spec = ['Характеристики:']
         if product.specifications:
             var = product.specifications.split('\n')
             spec.append(var)
-        recommendation = Product.objects.all()[:6]
+        recommendation = Product.objects.all()[:6].select_related('brand')
         context = {
             'product': product,
             'spec': spec,
