@@ -777,11 +777,11 @@ body {
 }
 
 .sub-menu-sub {
-    top: 37px;
+    top: 30px;
     position: absolute;
     display: flex;
     flex-direction: column;
-    padding-top: 10px;
+    padding-top: 5px;
     text-decoration: none;
 
 
@@ -823,12 +823,6 @@ body {
 
 .sub-menu .sub-menu-sub:hover li {
     border-bottom: none;
-}
-
-
-.sub-menu * {
-    border: 1px solid;
-    width: 100%;
 }
 
 .profile {
@@ -948,3 +942,15 @@ body {
     display: contents;
 }
 
+.img-info {
+    all: unset;
+}
+
+.sub-menu-sub-li p{
+    font-size: 18px;
+    font-family: 'Raleway', sans-serif;
+}
+
+.sub-menu {
+    border: 1px solid;
+}

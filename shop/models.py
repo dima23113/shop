@@ -75,7 +75,8 @@ class Brand(models.Model):
 
 class Product(models.Model):
     category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE, verbose_name='Категория')
-    subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE, verbose_name='Подкатегория')
+    subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE, verbose_name='Подкатегория',
+                                    related_name='subcategory_products')
     subcategory_type = models.ForeignKey(SubcategoryType, on_delete=models.CASCADE, verbose_name='Тип подкатегории',
                                          blank=True, null=True)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, verbose_name='Название бренда')
