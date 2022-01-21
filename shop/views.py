@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
 from django.views.generic import ListView, View
+from cart.forms import CartAddProductForm
 from .models import *
 
 
@@ -84,9 +85,11 @@ class ProductDetail(View):
             var = product.specifications.split('\n')
             spec.append(var)
         recommendation = Product.objects.all()[:6].select_related('brand')
+        form = CartAddProductForm()
         context = {
             'product': product,
             'spec': spec,
-            'recommendation': recommendation
+            'recommendation': recommendation,
+            'cart_add': form
         }
         return render(request, 'shop/product/product_detail.html', context=context)

@@ -1,6 +1,6 @@
 from decimal import Decimal
 from django.conf import settings
-from shop.models import Product
+from shop.models import Product, ProductSize
 
 
 class Cart(object):
@@ -15,15 +15,23 @@ class Cart(object):
             cart = self.session[settings.CART_SESSION_ID] = {}
         self.cart = cart
 
-    def add(self, product, qty=1, update_qty=False):
+    def add(self, product, qty=1, size=None, update_qty=False):
         product_id = str(product.id)
+        s = ProductSize.objects.get(product=product, name=size)
         if product_id not in self.cart:
             self.cart[product_id] = {
                 'qty': 0,
-                'price': str(product.price)
+                'price': str(product.price),
+                'size':  size
             }
+
+            s.qty = s.qty - 1
+            s.save()
         if update_qty:
-            self.cart[product_id]['qty'] = qty
+            if s.qty <= 0:
+                pass
+            else:
+                self.cart[product_id]['qty'] = qty
         else:
             self.cart[product_id]['qty'] += qty
 
@@ -35,8 +43,12 @@ class Cart(object):
         self.session.modified = True
 
     def remove(self, product):
+
         product_id = str(product.id)
         if product_id in self.cart:
+            s = ProductSize.objects.get(product_id=product_id, name=self.cart[product_id]['size'])
+            s.qty += self.cart[product_id]['qty']
+            s.save()
             del self.cart[product_id]
             self.save()
 

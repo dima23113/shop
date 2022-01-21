@@ -45,12 +45,30 @@
                                     <div class="choose_size_label"><label>Размер:</label></div>
                                     <div class="choose_size_columns">
                                         {% for i in product.product_sizer.all %}
+                                            {% if i %}
                                             <div class="choose_size_column">
-                                                <span class="choose_size"
-                                                      data-size="{{ i.name }} data-sku={{ i.name }}">{{ i.name }}</span>
+                                                {% if i.qty <= 0 %}{% else %}<a class="{{ i.name }}" id="size" href="#">{{ i.name }}</a>{% endif %}
                                             </div>
+                                            {% else %}
+                                            <div class="choose_size_column">
+                                                <p>Товар закончился</p>
+                                            </div>
+                                            {% endif %}
                                         {% endfor %}
                                     </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="customer-login">
+                                    <form class="login-form" method="post" action="{% url 'cart:cart_add' product.slug %}" style="padding-top: 0px;margin-top: 0px;">
+                                        <div class="block-a">
+                                            <input class="size" type="size" name="size" required="" id="id_size" hidden>
+                                        </div>
+                                        {% csrf_token %}
+                                        <div class="block-submit">
+                                            <input type="submit" value="В козрину">
+                                        </div>
+                                    </form>
                                 </div>
                             </li>
                             <li>
@@ -84,41 +102,41 @@
                 </div>
             </div>
         </div>
-    {% cache 500 recommendations %}
-        <div class="recommendation">
-            <div class="container-fluid">
-                <div class="row">
-                    <h2>
-                        <span>Рекомендуем</span>
-                    </h2>
-                    <div class="recommendations col-md-12 col-sm-12 col-lg-12">
-                        <ul class="products-list">
-                            {% for i in recommendation %}
-                                <li class="product">
-                                    <div class="col-item">
-                                        {% thumbnail i.image "319x344" crop="20%" as im %}
-                                            <a class="col-item-a" href="{% url 'shop:product_detail' i.slug %}"><img
-                                                    alt="image"
-                                                    src="{{ im.url }}"
-                                                    width="{{ im.width }}"
-                                                    height="{{ im.height }}"></a>
-                                        {% endthumbnail %}
-                                        <div class="col-item-about">
-                                            <div class="col-item__title">
-                                                <p>{{ i.brand }}</p>
-                                                <p>{{ i.name }}</p>
+        {% cache 500 recommendations %}
+            <div class="recommendation">
+                <div class="container-fluid">
+                    <div class="row">
+                        <h2>
+                            <span>Рекомендуем</span>
+                        </h2>
+                        <div class="recommendations col-md-12 col-sm-12 col-lg-12">
+                            <ul class="products-list">
+                                {% for i in recommendation %}
+                                    <li class="product">
+                                        <div class="col-item">
+                                            {% thumbnail i.image "319x344" crop="20%" as im %}
+                                                <a class="col-item-a" href="{% url 'shop:product_detail' i.slug %}"><img
+                                                        alt="image"
+                                                        src="{{ im.url }}"
+                                                        width="{{ im.width }}"
+                                                        height="{{ im.height }}"></a>
+                                            {% endthumbnail %}
+                                            <div class="col-item-about">
+                                                <div class="col-item__title">
+                                                    <p>{{ i.brand }}</p>
+                                                    <p>{{ i.name }}</p>
+                                                </div>
+                                                <div class="price">{{ i.price }}</div>
                                             </div>
-                                            <div class="price">{{ i.price }}</div>
                                         </div>
-                                    </div>
-                                </li>
-                            {% endfor %}
-                        </ul>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    {% endcache %}
+        {% endcache %}
     </div>
     <script src="{% static 'js/libs/zoom/dist/js/lightbox-plus-jquery.js' %}"></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
