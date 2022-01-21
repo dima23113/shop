@@ -62,7 +62,7 @@
                                 <div class="customer-login">
                                     <form class="login-form" method="post" action="{% url 'cart:cart_add' product.slug %}" style="padding-top: 0px;margin-top: 0px;">
                                         <div class="block-a">
-                                            <input class="size" type="size" name="size" required="" id="id_size" hidden>
+                                            <input class="size" value="" type="size" name="size" required="" id="id_size" hidden>
                                         </div>
                                         {% csrf_token %}
                                         <div class="block-submit">
@@ -150,4 +150,5 @@
             'alwaysShowNavOnTouchDevices': true
         })
     </script>
+    <script src="{% static 'js/add_cart.js' %}"></script>
 {% endblock %}
