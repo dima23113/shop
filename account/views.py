@@ -3,7 +3,6 @@ from django.views.generic.base import View
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password
 from django.contrib import messages
-from django.http import HttpResponse
 from django.contrib.auth.forms import PasswordResetForm
 from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
@@ -14,6 +13,7 @@ from .models import CustomUser
 from .forms import LoginForm, PasswordChangeForm, UserRegisterForm, UserChangeBioForm, UserChangePhoneForm, \
     UserEmailMailingForm, EmailChangeForm, AddressChangeForm
 from django_email_verification import send_email
+from cart.cart import Cart
 
 
 class UserLoginView(View):
@@ -27,7 +27,7 @@ class UserLoginView(View):
             return render(request, 'account/login.html', {'form': form})
 
     def post(self, request, *args, **kwargs):
-
+        session_old = request.session
         form = LoginForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
@@ -35,6 +35,7 @@ class UserLoginView(View):
             if user is not None:
                 if user.is_active:
                     login(request, user)
+                    Cart(request, new_session=session_old)
                     messages.add_message(request, messages.INFO,
                                          'Успешно!')
                     return redirect('shop:index')

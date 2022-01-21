@@ -72,7 +72,7 @@
                             {% if user.is_authenticated %}{% url 'account:profile' %}{% else %}{% url 'account:login' %}{% endif %}">Профиль</a>
                     </li>
                     <li class="right-menu__item"><a href="#">Поиск</a></li>
-                    <li class="right-menu__item"><a href="#">Корзина <span>[]</span></a></li>
+                    <li class="right-menu__item"><a href="{% url 'cart:cart_detail' %}">Корзина <span>[]</span></a></li>
                 </ul>
             </div>
         </div>
