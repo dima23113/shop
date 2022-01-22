@@ -1,10 +1,66 @@
 {% extends 'shop/base.html' %}
-
+{% load thumbnail %}
 {% block title %}Корзина-Ноябрь{% endblock %}
 
 
 {% block content %}
 
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2 col-sm-2 col-lg-2"></div>
+                <div class="col-md-8 col-sm-8 col-lg-8">
+                    <div class="separator" style="margin-top: 65px"></div>
+                </div>
+                <div class="col-md-2 col-sm-2 col-lg-2"></div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2 col-sm-2 col-lg-2"></div>
+                <div class="cart-wrapper col-md-8 col-sm-8 col-lg-8">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="cart-col col-md-8 col-sm-8 col-lg-8">
+                                <h1>КОРЗИНА</h1>
+                                <a href="#">Очистить корзину</a>
+                                <div class="cart-side">
+                                    <div class="items-wrapper">
+                                        {% for item in cart %}
+                                            {% with product=item.product %}
+                                                <div class="items-wrapper__product">
+                                                    <a class="remove-btn"></a>
+                                                    <div class="product__image">
+                                                        <a class="img" href="{{ product.get_absolute_url }}">
+                                                            <img src="{{ product.image.url }}">
+                                                        </a>
+                                                    </div>
+                                                    <div class="product__descr">
+                                                        <div class="title">
+                                                            <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+                                                        </div>
+                                                        <div>{{ item.size }}</div>
+                                                        <div>{{ product.article }}</div>
+                                                        <div class="cart_row">
+                                                            <div class="#">ко-во</div>
+                                                            <div class="price">Цена</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endwith %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="buy col-md-4 col-sm-4 col-lg-4">
+                                hellp
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-2 col-lg-2"></div>
+            </div>
+        </div>
+    </div>
 
-
-{% endblock%}
+{% endblock %}
