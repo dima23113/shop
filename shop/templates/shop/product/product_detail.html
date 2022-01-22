@@ -44,25 +44,25 @@
                                 <div class="choose_size_wrapper">
                                     <div class="choose_size_label"><label>Размер:</label></div>
                                     <div class="choose_size_columns">
-                                        {% for i in product.product_sizer.all %}
-                                            {% if i %}
-                                            <div class="choose_size_column">
-                                                {% if i.qty <= 0 %}{% else %}<a class="{{ i.name }}" id="size" href="#">{{ i.name }}</a>{% endif %}
-                                            </div>
-                                            {% else %}
-                                            <div class="choose_size_column">
-                                                <p>Товар закончился</p>
-                                            </div>
-                                            {% endif %}
-                                        {% endfor %}
+                                        <div class="choose_size_column">
+                                            {% for i in product.product_sizer.all %}
+                                                {% if i %}
+                                                    {% if i.qty <= 0 %}{% else %}
+                                                        <a class="size" id="{{ i.name }}" href="#" data-mydata={{ i.name }}>{{ i.name }}</a>
+                                                    {% endif %}
+                                                {% else %} <p>Товар закончился</p>{% endif %}{% endfor %}
+                                        </div>
                                     </div>
                                 </div>
                             </li>
                             <li>
                                 <div class="customer-login">
-                                    <form class="login-form" method="post" action="{% url 'cart:cart_add' product.slug %}" style="padding-top: 0px;margin-top: 0px;">
+                                    <form class="login-form" method="post"
+                                          action="{% url 'cart:cart_add' product.slug %}"
+                                          style="padding-top: 0px;margin-top: 0px;">
                                         <div class="block-a">
-                                            <input class="size" value="" type="size" name="size" required="" id="id_size" hidden>
+                                            <input class="size" value="" type="text" name="size" required=""
+                                                   id="id_size" hidden>
                                         </div>
                                         {% csrf_token %}
                                         <div class="block-submit">
