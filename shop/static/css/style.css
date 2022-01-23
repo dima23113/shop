@@ -867,12 +867,12 @@ body {
     font-size: 0;
 }
 
-.account-menu *{
+.account-menu * {
     text-decoration: none;
     color: black;
 }
 
-.account-menu:hover *{
+.account-menu:hover * {
     color: black;
 }
 
@@ -882,12 +882,11 @@ body {
 }
 
 
-
 .user-edit-block br {
     margin-bottom: 15px;
 }
 
-.user-edit-block  *{
+.user-edit-block * {
     text-decoration: none;
     font-family: 'Raleway', sans-serif;
 }
@@ -906,7 +905,7 @@ body {
     text-decoration: underline;
 }
 
-.link-profile{
+.link-profile {
     border-bottom: 2px solid;
 }
 
@@ -914,7 +913,7 @@ body {
     padding-top: 25px;
 }
 
-.user-info *{
+.user-info * {
     font-family: 'Raleway', sans-serif;
 }
 
@@ -946,7 +945,7 @@ body {
     all: unset;
 }
 
-.sub-menu-sub-li p{
+.sub-menu-sub-li p {
     font-size: 18px;
     font-family: 'Raleway', sans-serif;
 }
@@ -958,3 +957,59 @@ body {
 .about {
     font-family: 'Raleway', sans-serif;
 }
+
+.cart-clear {
+    width: 100%;
+    text-align: right;
+    height: 34px;
+
+}
+
+.cart-clear p {
+    float: left;
+}
+
+
+.cart-side {
+    border: 1px solid;
+    padding: 20px;
+}
+
+.items-wrapper__product:not(:last-child) {
+    border-bottom: 1px solid
+}
+
+.items-wrapper__product {
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+    display: flex;
+}
+
+
+.product__descr {
+    flex-basis: 84%;
+    padding-left: 16px;
+}
+
+.cart-side *{
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+}
+.items-wrapper__product a:hover {
+    color: black;
+    text-decoration: underline;
+}
+
+.items-wrapper__product *{
+    text-decoration: none;
+}
+
+.cart-clear a:hover {
+    color: black;
+    text-decoration: underline;
+}
+
+.cart-clear *{
+    text-decoration: none;
+}
+
