@@ -28,7 +28,6 @@ class UserLoginView(View):
 
     def post(self, request, *args, **kwargs):
         session_old = request.session
-        print(session_old)
         form = LoginForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
@@ -37,7 +36,6 @@ class UserLoginView(View):
                 if user.is_active:
                     login(request, user)
                     Cart(request, new_session=session_old)
-                    session_new = request.session
                     messages.add_message(request, messages.INFO,
                                          'Успешно!')
                     return redirect('shop:index')
