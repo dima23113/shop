@@ -47,11 +47,12 @@
                                                         <div>Размер:{{ item.size }}</div>
                                                         <div>Артикул:{{ product.article }}</div>
                                                         <div class="cart_row">
-                                                            <div class="#">ко-во</div>
+                                                            <a class="sizes" id="{{ product.id }}" data-id="{{ product.id }}" href="#"
+                                                               data-mydata={{ item.size }}>Ко-во</a>
                                                             <div class="price">Цена</div>
                                                         </div>
                                                     </div>
-                                                <a class="remove-btn" href="#"><img
+                                                    <a class="remove-btn" href="#"><img
                                                             src="{% static 'img/close-icon.png' %}"></a>
                                                 </div>
                                             {% endwith %}
@@ -69,5 +70,33 @@
             </div>
         </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
 
+    $(document).ready(function () {
+        $(".sizes").click(function () {
+            var Size = $(this).data("mydata");
+            var id = $(this).data('id');
+            console.log(Size)
+            console.log(id)
+
+            $.ajax({
+                data: {'product_id': id, 'size': Size},
+                url: "{% url 'cart:check_qty' %}",
+                success: function (response) {
+                    console.log(response)
+                },
+                error: function (response) {
+                    console.log(response.responseJSON.errors)
+                }
+
+            })
+
+            //var preview = document.getElementById("id_size"); //getElementById instead of querySelectorAll
+            //preview.setAttribute("value", buttonData);
+        });
+    });
+});
+    </script>
 {% endblock %}

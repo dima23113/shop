@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import View
-from shop.models import Product
+from django.http import JsonResponse
+from shop.models import Product, ProductSize
 from .cart import Cart
 from .forms import CartUpdateProductForm, CartAddProductForm
 
@@ -43,3 +44,17 @@ class CartUpdateView(View):
             cd = form.cleaned_data
             cart.add(product=product, qty=cd['qty'], update_qty=cd['update'])
         return redirect('cart:cart_detail')
+
+
+class CheckQtyProductView(View):
+
+    def get(self, request, *args, **kwargs):
+        product_id = request.GET.get('product_id', None)
+        size = request.GET.get('size', None)
+        s = ProductSize.objects.filter(product__id=product_id, name=size).select_related('product')[0]
+        response = {
+            'product_id': product_id,
+            'size': size,
+            'qty': s.qty
+        }
+        return JsonResponse(response)
