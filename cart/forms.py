@@ -5,7 +5,7 @@ PRODUCT_QTY_CHOICES = [(i, str(i)) for i in range(1, 21)]
 
 class CartUpdateProductForm(forms.Form):
 
-    qty = forms.IntegerField(required=False, initial=False)
+    qty = forms.CharField(required=False, initial=False)
     update = forms.BooleanField(required=False, initial=False, widget=forms.HiddenInput)
 
 

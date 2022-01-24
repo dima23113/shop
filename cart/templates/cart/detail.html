@@ -48,29 +48,16 @@
                                                         <div>Артикул:{{ product.article }}</div>
                                                         <div class="cart_row">
                                                             <div class="ui-btn-collections">
-                                                                <div class="ui-btn --minus"><p class="sizes"
-                                                                                               id="{{ product.id }}"
-                                                                                               data-id="{{ product.id }}"
-                                                                                               data-mydata="{{ item.size }}"
-                                                                                               data-now="{{ item.qty }}"
-                                                                                               data-class="{{ product.name }}">
-                                                                    -</p>
-                                                                </div>
-                                                                <input type="text" value="{{ item.qty }}"
-                                                                       class="{{ product.name }}" data-max="">
-                                                                <div class="ui-btn --plus"><p class="sizes"
-                                                                                              id="{{ product.id }}"
-                                                                                              data-id="{{ product.id }}"
-                                                                                              data-mydata="{{ item.size }}"
-                                                                                              data-maxqty=""
-                                                                                              data-now="{{ item.qty }}"
-                                                                                              data-class_pr="{{ product.name }}">
-                                                                    +</p></div>
+                                                                <div class="ui-btn --minus"><p class="sizes">-</p></div>
+                                                                <input type="text" value="{{ item.qty }}">
+                                                                <div class="ui-btn --plus"><p>+</p></div>
                                                             </div>
                                                             <div class="price">Цена</div>
                                                         </div>
                                                     </div>
-                                                    <a class="remove-btn" href="#"><img
+                                                    <a class="remove-btn" id="{{ product.id }}"
+                                                       data-product="{{ product.id }}"
+                                                       href="#"><img
                                                             src="{% static 'img/close-icon.png' %}"></a>
                                                 </div>
                                             {% endwith %}
@@ -88,5 +75,29 @@
             </div>
         </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{% static 'js/product_qty.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            $(document).ready(function () {
+                $(".remove-btn").click(function () {
+                    var product_id = $(this).data('product')
+                    console.log(product_id)
+                    $.ajax({
+                        data: {'product_id': product_id, 'csrfmiddlewaretoken': csrftoken},
+                        url: "{% url 'cart:cart_remove' %}",
+                        method: 'post',
+                        success: function (response) {
+                            var els = document.getElementById(response['id'])
+                            els.parentNode.parentNode.removeChild(els.parentNode);
+                        },
+                        error: function (response) {
+                            console.log(response.responseJSON.errors)
+                        }
+                    });
+
+                });
+            });
+        })
+    </script>
+
 {% endblock %}
