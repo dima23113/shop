@@ -1013,3 +1013,26 @@ body {
     text-decoration: none;
 }
 
+.ui-btn-collections {
+    display: inline-flex;
+}
+.ui-btn-collections *{
+    width: 23px;
+    height: 23px;
+    line-height: 23px;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    font-size: 14px;
+}
+
+.ui-btn {
+    width: 25px;
+    height: 25px;
+    position: relative;
+    text-align: center;
+    line-height: 22px;
+    background: #f2fbfe;
+    cursor: pointer;
+    font-size: 22px;
+}
