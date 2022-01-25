@@ -48,9 +48,13 @@
                                                         <div>Артикул:{{ product.article }}</div>
                                                         <div class="cart_row">
                                                             <div class="ui-btn-collections">
-                                                                <div class="ui-btn --minus"><p class="sizes">-</p></div>
-                                                                <input type="text" value="{{ item.qty }}">
-                                                                <div class="ui-btn --plus"><p>+</p></div>
+                                                                <div class="ui-btn --minus"><p id="minus" class="sign"
+                                                                                               data-name="{{ product.name }}">-</p></div>
+                                                                <input type="text" class="{{ product.name }}"
+                                                                       id="intLimitTextBox" value="{{ item.qty }}"
+                                                                       data-qty="{{ item.qty }}" readonly>
+                                                                <div class="ui-btn --plus"><p class="sign" id="plus"
+                                                                                              data-name="{{ product.name }}">+</p></div>
                                                             </div>
                                                             <div class="price">Цена</div>
                                                         </div>
@@ -76,28 +80,5 @@
         </div>
     </div>
     <script src="{% static 'js/product_qty.js' %}"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            $(document).ready(function () {
-                $(".remove-btn").click(function () {
-                    var product_id = $(this).data('product')
-                    console.log(product_id)
-                    $.ajax({
-                        data: {'product_id': product_id, 'csrfmiddlewaretoken': csrftoken},
-                        url: "{% url 'cart:cart_remove' %}",
-                        method: 'post',
-                        success: function (response) {
-                            var els = document.getElementById(response['id'])
-                            els.parentNode.parentNode.removeChild(els.parentNode);
-                        },
-                        error: function (response) {
-                            console.log(response.responseJSON.errors)
-                        }
-                    });
-
-                });
-            });
-        })
-    </script>
 
 {% endblock %}
