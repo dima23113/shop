@@ -1037,3 +1037,6 @@ body {
     font-size: 22px;
 }
 
+.items-wrapper__product:last-child {
+    border-bottom: 1px solid
+}

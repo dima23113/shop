@@ -44,28 +44,33 @@
                                                             <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
                                                         </div>
 
-                                                        <div>Размер:{{ item.size }}</div>
-                                                        <div>Артикул:{{ product.article }}</div>
+                                                        <div>Размер: {{ item.size }}</div>
+                                                        <div>Артикул: {{ product.article }}</div>
                                                         <div class="cart_row">
                                                             <div class="ui-btn-collections">
                                                                 <div class="ui-btn --minus"><p id="minus" class="sign"
-                                                                                               data-name="{{ product.name }}" data-id="{{ product.id }}">-</p></div>
+                                                                                               data-name="{{ product.name }}" data-id="{{ product.id }}" style="font-size: 25px;">-</p></div>
                                                                 <input type="text" class="{{ product.name }}"
                                                                        id="intLimitTextBox" value="{{ item.qty }}"
                                                                        data-qty="{{ item.qty }}" name="product-qty"  data-size="{{ item.size }}" data-max_qty="" readonly>
                                                                 <div class="ui-btn --plus"><p class="sign" id="plus"
-                                                                                              data-name="{{ product.name }}" data-id="{{ product.id }}">+</p></div>
+                                                                                              data-name="{{ product.name }}" data-id="{{ product.id }}"  style="font-size: 25px;">+</p></div>
                                                             </div>
-                                                            <div class="price">Цена</div>
+                                                            <div class="price">Цена: {{ item.price }} руб.</div>
                                                         </div>
                                                     </div>
                                                     <a class="remove-btn" id="{{ product.id }}"
                                                        data-product="{{ product.id }}" name="remove"
-                                                       href="#" ><img
-                                                            src="{% static 'img/close-icon.png' %}"></a>
+                                                       href="#" ><img src="{% static 'img/close-icon.png' %}"></a>
                                                 </div>
                                             {% endwith %}
                                         {% endfor %}
+                                    </div>
+
+                                    <div>
+                                        <p>Стомость товаров: {{ cart.get_total_price }} руб.</p>
+                                        <p>Стомость товаров со скидкой: {{ cart.get_total_price }} руб.</p>
+                                        <p>Итого: {{ cart.get_total_price }} руб.</p>
                                     </div>
                                 </div>
                             </div>
