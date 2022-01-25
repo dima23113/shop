@@ -95,3 +95,12 @@ class QtyProductSizeView(View):
                 return JsonResponse({'status': 'true', 'message': 'Текущее ко-во больше доступного или не может быть 0'}, status=200)
         else:
             return JsonResponse({'status': 'false', 'message': 'Ко-во товара или максимальное ко-во незадано!'}, status=404)
+
+
+class CartPriceView(View):
+
+    def get(self, request, *args, **kwargs):
+        cart = Cart(request)
+        response = {'price': cart.get_total_price()}
+        print(response['price'])
+        return JsonResponse(response)

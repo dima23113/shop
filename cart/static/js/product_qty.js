@@ -14,6 +14,22 @@ function getCookie(name) {
     return cookieValue;
 }
 
+function updatePrice() {
+    setTimeout(function () {
+        $.ajax({
+            url: 'price/',
+            success: function (response) {
+                console.log(response['price'])
+                r = document.getElementsByClassName('price')
+                for (var i = 0; i < r.length; i++) {
+                    r[i].setAttribute('value', response['price'])
+
+                }
+            }
+        })
+    }, 100)
+}
+
 const csrftoken = getCookie('csrftoken');
 
 
@@ -51,6 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         textinp.setAttribute('data-qty', tmp)
                         console.log(textinp)
                         updateQty(id, tmp, textinp.getAttribute('data-max_qty'))
+                        updatePrice()
 
                     } else {
                         console.log('Превышен лимит товара')
@@ -64,15 +81,15 @@ document.addEventListener('DOMContentLoaded', function () {
                         textinp.setAttribute('value', tmp)
                         textinp.setAttribute('data-qty', tmp)
                         updateQty(id, tmp, textinp.getAttribute('data-max_qty'))
+                        updatePrice()
                     }
                 }
-
             }
         )
     })
 
     function updateQty(product, qty, max_qty) {
-        $.ajax ({
+        $.ajax({
             data: {'product': product, 'qty': qty, 'max_qty': max_qty, 'csrfmiddlewaretoken': csrftoken},
             url: 'qty/',
             method: 'post',
@@ -97,6 +114,7 @@ document.addEventListener('DOMContentLoaded', function () {
             a.click()
         })
     }
+
 
     function maxQty() {
         a = document.getElementsByName('product-qty')
