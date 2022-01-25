@@ -23,7 +23,6 @@ function updatePrice() {
                 r = document.getElementsByClassName('price')
                 for (var i = 0; i < r.length; i++) {
                     r[i].setAttribute('value', response['price'])
-
                 }
             }
         })
