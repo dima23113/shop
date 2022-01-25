@@ -42,18 +42,28 @@ document.addEventListener('DOMContentLoaded', function () {
                 var product = $(this).data('name')
                 var sign = $(this).html()
                 var textinp = document.getElementsByClassName(product)[0]
+                var id = $(this).data('id')
                 console.log(textinp.value)
                 if (sign === '+') {
-                    tmp = Number(textinp.value) + 1
-                    textinp.setAttribute('value', tmp)
-                    textinp.setAttribute('data-qty', tmp)
-                    console.log(textinp)
+                    if (Number(textinp.getAttribute('data-max_qty')) > textinp.value) {
+                        tmp = Number(textinp.value) + 1
+                        textinp.setAttribute('value', tmp)
+                        textinp.setAttribute('data-qty', tmp)
+                        console.log(textinp)
+                        updateQty(id, tmp, textinp.getAttribute('data-max_qty'))
+
+                    } else {
+                        console.log('Превышен лимит товара')
+                        console.log(Number(textinp.getAttribute('data-max_qty')))
+                    }
+
                 } else {
-                    if (textinp.value === '0') {
+                    if (textinp.value === '1') {
                     } else {
                         tmp = Number(textinp.value) - 1
                         textinp.setAttribute('value', tmp)
                         textinp.setAttribute('data-qty', tmp)
+                        updateQty(id, tmp, textinp.getAttribute('data-max_qty'))
                     }
                 }
 
@@ -61,9 +71,56 @@ document.addEventListener('DOMContentLoaded', function () {
         )
     })
 
-    function maxQty() {
-        a = document.getElementsByClassName('')
+    function updateQty(product, qty, max_qty) {
+        $.ajax ({
+            data: {'product': product, 'qty': qty, 'max_qty': max_qty, 'csrfmiddlewaretoken': csrftoken},
+            url: 'qty/',
+            method: 'post',
+            success: function (response) {
+                console.log(response)
+            },
+            error: function (response) {
+                console.log(response)
+            }
+        })
     }
+
+    $(document).ready(function () {
+        $(".remove-all").click(function () {
+            removeAll()
+        });
+    });
+
+    function removeAll() {
+        r = document.getElementsByName('remove')
+        r.forEach(a => {
+            a.click()
+        })
+    }
+
+    function maxQty() {
+        a = document.getElementsByName('product-qty')
+        a.forEach(a => {
+                var product = a.className
+                var size = a.getAttribute('data-size')
+                $.ajax({
+                    data: {'product': product, 'size': size},
+                    url: 'qty/',
+                    success: function (response) {
+                        console.log(response)
+                        product_ = response['product']
+                        maxqty = response['max_qty']
+                        a.setAttribute('data-max_qty', maxqty)
+                    },
+                    error: function (response) {
+                        console.log(response)
+                    }
+                })
+            }
+        )
+    }
+
+    maxQty()
 
 });
 

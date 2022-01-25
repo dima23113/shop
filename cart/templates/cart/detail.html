@@ -25,7 +25,7 @@
                             <div class="cart-col col-md-8 col-sm-8 col-lg-8">
                                 <div class="cart-clear">
                                     <p>КОРЗИНА</p>
-                                    <a href="#">Очистить корзину</a>
+                                    <a class="remove-all" href="#">Очистить корзину</a>
                                 </div>
                                 <div class="cart-side">
                                     <div class="items-wrapper">
@@ -49,19 +49,19 @@
                                                         <div class="cart_row">
                                                             <div class="ui-btn-collections">
                                                                 <div class="ui-btn --minus"><p id="minus" class="sign"
-                                                                                               data-name="{{ product.name }}">-</p></div>
+                                                                                               data-name="{{ product.name }}" data-id="{{ product.id }}">-</p></div>
                                                                 <input type="text" class="{{ product.name }}"
                                                                        id="intLimitTextBox" value="{{ item.qty }}"
-                                                                       data-qty="{{ item.qty }}" readonly>
+                                                                       data-qty="{{ item.qty }}" name="product-qty"  data-size="{{ item.size }}" data-max_qty="" readonly>
                                                                 <div class="ui-btn --plus"><p class="sign" id="plus"
-                                                                                              data-name="{{ product.name }}">+</p></div>
+                                                                                              data-name="{{ product.name }}" data-id="{{ product.id }}">+</p></div>
                                                             </div>
                                                             <div class="price">Цена</div>
                                                         </div>
                                                     </div>
                                                     <a class="remove-btn" id="{{ product.id }}"
-                                                       data-product="{{ product.id }}"
-                                                       href="#"><img
+                                                       data-product="{{ product.id }}" name="remove"
+                                                       href="#" ><img
                                                             src="{% static 'img/close-icon.png' %}"></a>
                                                 </div>
                                             {% endwith %}

@@ -1,9 +1,10 @@
 from decimal import Decimal
 from django.conf import settings
-from shop.models import Product
+from shop.models import Product, ProductSize
 from datetime import datetime
 
 # сделать возможность добавлять одинаковый товар, но с разными размерами. ключ будет product_id + размер. Добавить методы проверки ко-ва размеров в jsonresponse
+
 
 class Cart(object):
 
@@ -30,7 +31,10 @@ class Cart(object):
         if update_qty:
             self.cart[product_id]['qty'] = qty
         else:
-            self.cart[product_id]['qty'] += qty
+            if self.cart[product_id]['qty'] < ProductSize.objects.get(product=product, name=size).qty:
+                self.cart[product_id]['qty'] += qty
+            else:
+                pass
         print(f'товар добавлен {datetime.now()}')
         self.save()
         print(f'сохранен {datetime.now()}')
