@@ -49,19 +49,27 @@
                                                         <div class="cart_row">
                                                             <div class="ui-btn-collections">
                                                                 <div class="ui-btn --minus"><p id="minus" class="sign"
-                                                                                               data-name="{{ product.name }}" data-id="{{ product.id }}" style="font-size: 25px;">-</p></div>
+                                                                                               data-name="{{ product.name }}"
+                                                                                               data-id="{{ product.id }}"
+                                                                                               style="font-size: 25px;">
+                                                                    -</p></div>
                                                                 <input type="text" class="{{ product.name }}"
                                                                        id="intLimitTextBox" value="{{ item.qty }}"
-                                                                       data-qty="{{ item.qty }}" name="product-qty"  data-size="{{ item.size }}" data-max_qty="" readonly>
+                                                                       data-qty="{{ item.qty }}" name="product-qty"
+                                                                       data-size="{{ item.size }}" data-max_qty=""
+                                                                       readonly>
                                                                 <div class="ui-btn --plus"><p class="sign" id="plus"
-                                                                                              data-name="{{ product.name }}" data-id="{{ product.id }}"  style="font-size: 25px;">+</p></div>
+                                                                                              data-name="{{ product.name }}"
+                                                                                              data-id="{{ product.id }}"
+                                                                                              style="font-size: 25px;">
+                                                                    +</p></div>
                                                             </div>
                                                             <div class="price">Цена: {{ item.price }} руб.</div>
                                                         </div>
                                                     </div>
                                                     <a class="remove-btn" id="{{ product.id }}"
                                                        data-product="{{ product.id }}" name="remove"
-                                                       href="#" ><img src="{% static 'img/close-icon.png' %}"></a>
+                                                       href="#"><img src="{% static 'img/close-icon.png' %}"></a>
                                                 </div>
                                             {% endwith %}
                                         {% endfor %}
@@ -69,13 +77,48 @@
 
                                     <div>
                                         <p class="price_">Стомость товаров: {{ cart.get_total_price }} руб.</p>
-                                        <p class="price_">Стомость товаров со скидкой: {{ cart.get_total_price }} руб.</p>
+                                        <p class="price_">Стомость товаров со скидкой: {{ cart.get_total_price }}
+                                            руб.</p>
                                         <p class="price_">Итого: {{ cart.get_total_price }} руб.</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="buy col-md-4 col-sm-4 col-lg-4">
-                                hellp
+                                <div class="cart-col">
+                                    <p style="margin-bottom: 0rem;">Оформление заказа</p>
+                                    {% if not user.is_authenticated %}
+                                        <div class="cart-side">
+                                            <div class="log">
+                                                <a class="log-in" href="{% url 'account:login' %}">Войти</a>
+                                                <a class="reg"
+                                                   href="{% url 'account:register' %}">Зарегистрироваться</a>
+                                            </div>
+                                        </div>
+                                    {% else %}
+                                        <div class="cart-side">
+                                            <div class="done">
+                                                <div class="profile-info">
+                                                    <a href="{% url 'account:profile' %}">Изменить</a>
+                                                    <h3>1. Контакты</h3>
+                                                    <p>{{ user.first_name }}&nbsp{{ user.last_name }}, {{ user.phone }}, {{ user.email }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="cart-side">
+                                            <div class="ship">
+                                                <h3>2. Доставка</h3>
+                                                <p>Укажите тип доставки:</p>
+                                            </div>
+                                        </div>
+                                        <div class="cart-side">
+                                            <div class="payment">
+                                                <h3>2. Оплата</h3>
+                                                <p>Укажите тип оплаты:</p>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+
+                                </div>
                             </div>
                         </div>
                     </div>

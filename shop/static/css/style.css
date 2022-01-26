@@ -1040,3 +1040,25 @@ body {
 .items-wrapper__product:last-child {
     border-bottom: 1px solid
 }
+
+
+.log {
+    display: inline-flex;
+    width: 100%;
+
+}
+
+.log *{
+    font-size: 16px;
+    flex-basis: 50%;
+}
+
+.reg {
+    float: left;
+    text-align: right;
+}
+
+.log-in {
+    float: right;
+}
+

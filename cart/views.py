@@ -18,15 +18,6 @@ class CartAddView(View):
         return redirect('cart:cart_detail')
 
 
-"""class CartRemoveView(View):
-
-    def get(self, request, *args, **kwargs):
-        cart = Cart(request)
-        product = get_object_or_404(Product, id=kwargs['product_id'])
-        cart.remove(product)
-        return redirect('cart:cart_detail')"""
-
-
 class CartRemoveProductView(View):
 
     def post(self, request, *args, **kwargs):
