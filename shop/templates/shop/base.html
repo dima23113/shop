@@ -73,6 +73,7 @@
 
 
 
+
                                 {% if user.is_authenticated %}{% url 'account:profile' %}{% else %}{% url 'account:login' %}{% endif %}">Профиль</a>
                         </li>
                         <li class="right-menu__item"><a href="#">Поиск</a></li>
@@ -90,7 +91,6 @@
 <div class="wrapper">
     {% block content %}
         {% include 'account/messages.html' %}
-        <script>cartQty()</script>
     {% endblock content %}
     {% cache 86400 footer %}
         <div class="footer">
@@ -126,6 +126,21 @@
         </div>
     {% endcache %}
 </div>
+<script>
+    function updateQtyCart() {
+        setTimeout(function () {
+            $.ajax({
+                url: '/cart/cart-qty/',
+                success: function (response) {
+                    console.log(response['cart_qty'])
+                    r = document.getElementById('cart_qty')
+                    r.textContent = '[' + response['cart_qty'] + ']'
+                }
+            })
+        }, 100)
+    }
+    updateQtyCart()
+</script>
 <script src="{% static 'js/libs/jquery/jquery-3.6.0.min.js' %}"></script>
 <script src="{% static 'js/common.js' %}"></script>
 </body>

@@ -58,6 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 success: function (response) {
                     var els = document.getElementById(response['id'])
                     els.parentNode.parentNode.removeChild(els.parentNode);
+                    updateQtyCart()
                 },
                 error: function (response) {
                     console.log(response.responseJSON.errors)
@@ -126,6 +127,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     console.log(response)
                     var els = document.getElementsByClassName('items-wrapper')[0]
                     els.remove()
+                    updateQtyCart()
                 },
                 error: function (response) {
                     console.log(response.responseJSON.errors)
@@ -133,14 +135,6 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     });
-
-    function removeAll() {
-        r = document.getElementsByName('remove')
-        r.forEach(a => {
-            a.click()
-        })
-    }
-
 
     function maxQty() {
         a = document.getElementsByName('product-qty')
