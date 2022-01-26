@@ -103,7 +103,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
     $(document).ready(function () {
         $(".remove-all").click(function () {
-            removeAll()
+            $.ajax({
+                data: {'remove_all': true , 'csrfmiddlewaretoken': csrftoken},
+                url: "remove/",
+                method: 'post',
+                success: function (response) {
+                    console.log(response)
+                    var els = document.getElementsByClassName('items-wrapper')[0]
+                    els.remove()
+                },
+                error: function (response) {
+                    console.log(response.responseJSON.errors)
+                }
+            });
         });
     });
 

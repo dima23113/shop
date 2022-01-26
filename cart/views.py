@@ -30,11 +30,16 @@ class CartAddView(View):
 class CartRemoveProductView(View):
 
     def post(self, request, *args, **kwargs):
-        product_id = request.POST.get('product_id')
+        remove_all = request.POST.get('remove_all', None)
+        product_id = request.POST.get('product_id', None)
         cart = Cart(request)
-        product = get_object_or_404(Product, id=product_id)
-        cart.remove(product)
-        return JsonResponse({'id': product.id})
+        if remove_all:
+            cart.clear()
+            return JsonResponse({'status': 'true', 'message': 'Корзина удалена'}, status=200)
+        else:
+            product = get_object_or_404(Product, id=product_id)
+            cart.remove(product)
+            return JsonResponse({'id': product.id})
 
 
 class CartDetailView(View):
