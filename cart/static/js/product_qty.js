@@ -20,11 +20,12 @@ function updatePrice() {
             url: 'price/',
             success: function (response) {
                 console.log(response['price'])
-                r = document.getElementsByClassName('price')
-                for (var i = 0; i < r.length; i++) {
-                    r[i].setAttribute('value', response['price'])
+                r = document.getElementsByClassName('price_')
+                
+                for (var i = 0; i < r.length; i++){
+                    r[i].innerHTML = 'Итого: '+ response['price']
                 }
-            }
+                    }
         })
     }, 100)
 }
@@ -104,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function () {
     $(document).ready(function () {
         $(".remove-all").click(function () {
             $.ajax({
-                data: {'remove_all': true , 'csrfmiddlewaretoken': csrftoken},
+                data: {'remove_all': true, 'csrfmiddlewaretoken': csrftoken},
                 url: "remove/",
                 method: 'post',
                 success: function (response) {
