@@ -21,13 +21,26 @@ function updatePrice() {
             success: function (response) {
                 console.log(response['price'])
                 r = document.getElementsByClassName('price_')
-                
-                for (var i = 0; i < r.length; i++){
-                    r[i].innerHTML = 'Итого: '+ response['price']
+                for (var i = 0; i < r.length; i++) {
+                    r[i].innerHTML = 'Итого: ' + response['price']
                 }
-                    }
+            }
         })
     }, 100)
+}
+
+
+function updateQtyCart() {
+    setTimeout(function () {
+        $.ajax({
+            url: 'cart-qty/',
+            success: function (response) {
+                console.log(response['cart_qty'])
+                r = document.getElementById('cart_qty')
+                r.textContent = '[' + response['cart_qty'] + ']'
+            }
+        })
+    }, 200)
 }
 
 const csrftoken = getCookie('csrftoken');
@@ -68,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         console.log(textinp)
                         updateQty(id, tmp, textinp.getAttribute('data-max_qty'))
                         updatePrice()
-
+                        updateQtyCart()
                     } else {
                         console.log('Превышен лимит товара')
                         console.log(Number(textinp.getAttribute('data-max_qty')))
@@ -82,6 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         textinp.setAttribute('data-qty', tmp)
                         updateQty(id, tmp, textinp.getAttribute('data-max_qty'))
                         updatePrice()
+                        updateQtyCart()
                     }
                 }
             }

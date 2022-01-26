@@ -109,3 +109,13 @@ class CartPriceView(View):
         response = {'price': cart.get_total_price()}
         print(response['price'])
         return JsonResponse(response)
+
+
+class UpdateQtyCartView(View):
+
+    def get(self, request, *args, **kwargs):
+        cart = Cart(request)
+        response = {'cart_qty': len(cart)}
+        print(response['cart_qty'])
+        return JsonResponse(response)
+

@@ -18,66 +18,71 @@
 <body>
 
 {% cache 86400 navbar %}
-<div class="navbar" id="navbar">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="products col-md-5 col-sm-3 col-lg-5 menu-container">
-                <i class="menu-toggle"></i>
-                <ul class="left-menu">
-                    {% for i in categories %}
-                        <li class="left-menu__item"><a style="text-decoration: none;"
-                                                       href="{% url 'shop:product_list_by_category' i.slug %}">{{ i.name }}</a>
-                            <ul class="sub-menu" style="padding-top: 16px;top: 62px;padding-left: 30px;">
-                                {% for l in i.subcategories.all %}
-                                    <li class="sub-menu-li"><a href="#">{{ l.name }}</a>
-                                        <ul class="sub-menu-sub "
-                                            style="padding-left: 0rem;padding-top: 0; margin-top: 80px">
-                                            {% for c in l.subcategory_type.all %}
-                                                <li class="sub-menu-sub-li" style="text-decoration: none;"><a
-                                                        href="#">{{ c.name }}</a></li>
-                                            {% endfor %}
-                                            {% for d in category_img %}
-                                                {% if d.category.name == i.name %}
-                                                    {% if d.subcategory.name == l.name %}
-                                                        {% thumbnail d.image "200x250" crop="100%" as im %}
-                                                            <li class="sub-menu-sub-li"><a
-                                                                    href="{% url 'shop:product_detail' d.slug %}"><img
-                                                                    class="img-info"
-                                                                    src="{{ im.url }}"></a>
-                                                            </li>
-                                                        {% endthumbnail %}
+    <div class="navbar" id="navbar">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="products col-md-5 col-sm-3 col-lg-5 menu-container">
+                    <i class="menu-toggle"></i>
+                    <ul class="left-menu">
+                        {% for i in categories %}
+                            <li class="left-menu__item"><a style="text-decoration: none;"
+                                                           href="{% url 'shop:product_list_by_category' i.slug %}">{{ i.name }}</a>
+                                <ul class="sub-menu" style="padding-top: 16px;top: 62px;padding-left: 30px;">
+                                    {% for l in i.subcategories.all %}
+                                        <li class="sub-menu-li"><a href="#">{{ l.name }}</a>
+                                            <ul class="sub-menu-sub "
+                                                style="padding-left: 0rem;padding-top: 0; margin-top: 80px">
+                                                {% for c in l.subcategory_type.all %}
+                                                    <li class="sub-menu-sub-li" style="text-decoration: none;"><a
+                                                            href="#">{{ c.name }}</a></li>
+                                                {% endfor %}
+                                                {% for d in category_img %}
+                                                    {% if d.category.name == i.name %}
+                                                        {% if d.subcategory.name == l.name %}
+                                                            {% thumbnail d.image "200x250" crop="100%" as im %}
+                                                                <li class="sub-menu-sub-li"><a
+                                                                        href="{% url 'shop:product_detail' d.slug %}"><img
+                                                                        class="img-info"
+                                                                        src="{{ im.url }}"></a>
+                                                                </li>
+                                                            {% endthumbnail %}
+                                                        {% endif %}
                                                     {% endif %}
-                                                {% endif %}
-                                            {% endfor %}
-                                        </ul>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </li>
-                    {% endfor %}
-                    <li class="left-menu__item"><a href="{% url 'shop:brand_list' %}">Бренды</a></li>
-                    <li class="left-menu__item"><a href="#">Sale</a></li>
-                </ul>
-            </div>
-            <div class="logo col-md-2 col-sm-4 col-lg-2">
-                <a href="{% url 'shop:index' %}"><img class="logo-img" src=" {% static 'img/logo.png' %}" alt="logo">
-                </a>
-                <a class="cart" href="#"></a>
-            </div>
-            <div class="auth col-md-5 col-sm-3 col-lg-5 menu-container">
+                                                {% endfor %}
+                                            </ul>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        {% endfor %}
+                        <li class="left-menu__item"><a href="{% url 'shop:brand_list' %}">Бренды</a></li>
+                        <li class="left-menu__item"><a href="#">Sale</a></li>
+                    </ul>
+                </div>
+                <div class="logo col-md-2 col-sm-4 col-lg-2">
+                    <a href="{% url 'shop:index' %}"><img class="logo-img" src=" {% static 'img/logo.png' %}"
+                                                          alt="logo">
+                    </a>
+                    <a class="cart" href="#"></a>
+                </div>
+                <div class="auth col-md-5 col-sm-3 col-lg-5 menu-container">
 
-                <ul class="right-auth">
-                    <li class="right-menu__item"><a href="#">Блог</a></li>
-                    <li class="right-menu__item"><a href="
-                            {% if user.is_authenticated %}{% url 'account:profile' %}{% else %}{% url 'account:login' %}{% endif %}">Профиль</a>
-                    </li>
-                    <li class="right-menu__item"><a href="#">Поиск</a></li>
-                    <li class="right-menu__item"><a href="{% url 'cart:cart_detail' %}">Корзина <span>[]</span></a></li>
-                </ul>
+                    <ul class="right-auth">
+                        <li class="right-menu__item"><a href="#">Блог</a></li>
+                        <li class="right-menu__item"><a href="
+
+
+
+                                {% if user.is_authenticated %}{% url 'account:profile' %}{% else %}{% url 'account:login' %}{% endif %}">Профиль</a>
+                        </li>
+                        <li class="right-menu__item"><a href="#">Поиск</a></li>
+                        <li class="right-menu__item"><a href="{% url 'cart:cart_detail' %}">Корзина <span id="cart_qty">[]</span></a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-</div>
 {% endcache %}
 <br>
 <br>
@@ -85,40 +90,41 @@
 <div class="wrapper">
     {% block content %}
         {% include 'account/messages.html' %}
+        <script>cartQty()</script>
     {% endblock content %}
-{% cache 86400 footer %}
-    <div class="footer">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="address col-md-12 col-sm-12 col-lg-12">
-                    <p>Кронштадт, Посадская, 21/4</p>
-                </div>
-            </div>
-        </div>
-        <div class="work-social">
+    {% cache 86400 footer %}
+        <div class="footer">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="work col-md-6 col-sm-6 col-lg-6">
-                        <ul>
-                            <li><p>Пн—Чт 11:00—21:00</p></li>
-                            <li><p>Пт—Вс 11:00—22:00</p></li>
-                            <li><a href="tel:89967773480">8 996 777 34 80</a></li>
-                        </ul>
+                    <div class="address col-md-12 col-sm-12 col-lg-12">
+                        <p>Кронштадт, Посадская, 21/4</p>
                     </div>
-                    <div class="social col-md-6 col-sm-6 col-lg-6">
-                        <ul>
-                            <li><a href="#">Facebook</a></li>
-                            <li><a href="#">Instagram</a></li>
-                            <li><a href="#">VK</a></li>
-                            <li><a href="#">Магазин</a></li>
-                            <li><a href="#">Помощь</a></li>
-                        </ul>
+                </div>
+            </div>
+            <div class="work-social">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="work col-md-6 col-sm-6 col-lg-6">
+                            <ul>
+                                <li><p>Пн—Чт 11:00—21:00</p></li>
+                                <li><p>Пт—Вс 11:00—22:00</p></li>
+                                <li><a href="tel:89967773480">8 996 777 34 80</a></li>
+                            </ul>
+                        </div>
+                        <div class="social col-md-6 col-sm-6 col-lg-6">
+                            <ul>
+                                <li><a href="#">Facebook</a></li>
+                                <li><a href="#">Instagram</a></li>
+                                <li><a href="#">VK</a></li>
+                                <li><a href="#">Магазин</a></li>
+                                <li><a href="#">Помощь</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-{% endcache %}
+    {% endcache %}
 </div>
 <script src="{% static 'js/libs/jquery/jquery-3.6.0.min.js' %}"></script>
 <script src="{% static 'js/common.js' %}"></script>

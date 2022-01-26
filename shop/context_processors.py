@@ -1,4 +1,5 @@
 from .models import *
+from cart.cart import Cart
 
 
 def category(request):
@@ -12,4 +13,5 @@ def category(request):
             tst[d.subcategory] = d
     category_img = [v for v in tst.values()]
 
-    return {'categories': Category.objects.all().order_by('id').only('slug', 'name'), 'category_img': category_img}
+    return {'categories': Category.objects.all().order_by('id').only('slug', 'name'), 'category_img': category_img,
+            'cart_qty': Cart(request)}
