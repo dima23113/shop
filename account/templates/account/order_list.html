@@ -1,0 +1,46 @@
+{% extends 'account/user_profile.html' %}
+
+{% block title %}Адрес-Ноябрь{% endblock %}
+
+{% block info %}
+    <div class="col-md-1 col-sm-1 col-lg-1"></div>
+    <div class="orders-info col-md-10 col-sm-10 col-lg-10">
+        <table class="table_order_list">
+            <tr>
+                <th>№</th>
+                <th>Дата</th>
+                <th>Адрес</th>
+                <th>Доставка</th>
+                <th>Сумма</th>
+                <th>Статус</th>
+            </tr>
+            {% for order in orders %}
+                <tr>
+                    <td class="txt_gray">
+                        <a href="#">№{{ order.id }}</a>
+                        <br>
+                        <span class="faded_txt_gray">{{ order.pay_type }}</span>
+                    </td>
+                    <td>{{ order.created|date:'Y-m-d P' }}</td>
+                    <td>{{ order.address }}</td>
+                    <td>{{ order.ship_type }}</td>
+                    <td>{{ order.get_total_cost }}</td>
+                    <td>{{ order.status }}</td>
+                </tr>
+                <tr style="border-top: 1px solid #f9f9f9;">
+                    <td colspan="6" style="padding:0 0 5px 0;"></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="col-md-1 col-sm-1 col-lg-1"></div>
+    <style>
+        .link-profile {
+            border-bottom: none;
+        }
+
+        .link-order-history {
+            border-bottom: 2px solid;
+        }
+    </style>
+{% endblock %}

@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from shop.models import Product, ProductSize
 from .cart import Cart
 from .forms import CartUpdateProductForm, CartAddProductForm
+from orders.forms import CreateOrderForm
 
 
 class CartAddView(View):
@@ -38,9 +39,8 @@ class CartDetailView(View):
     def get(self, request, *args, **kwargs):
         cart = Cart(request)
         form = CartUpdateProductForm()
-        for item in cart:
-            item['update_qty_form'] = CartUpdateProductForm(initial={'qty': item['qty'], 'update': True})
-        return render(request, 'cart/detail.html', {'cart': cart, 'form': form})
+        order_form = CreateOrderForm()
+        return render(request, 'cart/detail.html', {'cart': cart, 'form': form, 'order_form': order_form})
 
 
 class CartUpdateView(View):

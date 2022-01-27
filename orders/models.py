@@ -29,6 +29,8 @@ class Order(models.Model):
     paid = models.BooleanField(default=False, verbose_name='Статус оплаты')
     customer = models.ForeignKey(CustomUser, on_delete=models.CASCADE, verbose_name='Покупатель', related_name='order')
     pay_type = models.CharField(choices=pay, verbose_name='Тип оплаты', default=online, max_length=50)
+    phone = models.CharField(max_length=20, verbose_name='Телефон', null=True, blank=True)
+    status = models.CharField(max_length=256, verbose_name='Статус заказа', null=True, blank=True)
 
     class Meta:
         ordering = ('-created',)

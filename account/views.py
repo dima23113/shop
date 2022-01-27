@@ -14,6 +14,7 @@ from .forms import LoginForm, PasswordChangeForm, UserRegisterForm, UserChangeBi
     UserEmailMailingForm, EmailChangeForm, AddressChangeForm
 from django_email_verification import send_email
 from cart.cart import Cart
+from orders.models import Order
 
 
 class UserLoginView(View):
@@ -225,3 +226,10 @@ class AddressesProfileView(View):
             messages.add_message(request, messages.INFO,
                                  'Адрес сохранен!')
             return redirect('account:profile')
+
+
+class OrderListView(View):
+
+    def get(self, request, *args, **kwargs):
+        orders = Order.objects.all().only('id', 'created', 'address', 'ship_type', 'status')
+        return render(request, 'account/order_list.html', {'orders': orders})

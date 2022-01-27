@@ -82,6 +82,7 @@
                                 </div>
                             </div>
                             <div class="buy col-md-4 col-sm-4 col-lg-4">
+
                                 <div class="cart-col">
                                     <p style="margin-bottom: 0rem;">Оформление заказа</p>
                                     {% if not user.is_authenticated %}
@@ -93,6 +94,7 @@
                                             </div>
                                         </div>
                                     {% else %}
+                                        <form method="post" action="{% url 'orders:order_create' %}">
                                         <div class="cart-side">
                                             <div class="done">
                                                 <div class="profile-info">
@@ -103,19 +105,31 @@
                                             </div>
                                         </div>
                                         <div class="cart-side">
-                                            <div class="ship">
+                                            <div class="ship-info">
                                                 <h3>2. Доставка</h3>
                                                 <p>Укажите тип доставки:</p>
+                                                <select name="ship_type" id="id_ship_type">
+                                                    <option value="Доставка">Доставка</option>
+                                                    <option value="Самовывоз" selected="">Самовывоз</option>
+                                                </select>
                                             </div>
                                         </div>
+                                        {% csrf_token %}
                                         <div class="cart-side">
                                             <div class="payment">
                                                 <h3>3. Оплата</h3>
                                                 <p>Укажите тип оплаты:</p>
+                                                <select name="pay_type" id="id_pay_type">
+                                                    <option value="Онлайн" selected="">Онлайн</option>
+                                                    <option value="При получении">При получении</option>
+                                                </select>
+                                                <div class="block-submit">
+                                            <input type="submit" value="Заказать">
+                                        </div>
                                             </div>
                                         </div>
                                     {% endif %}
-
+                                    </form>
                                 </div>
                             </div>
                         </div>
