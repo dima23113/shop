@@ -11,6 +11,7 @@
             <div class="row">
                 <div class="col-md-2 col-sm-2 col-lg-2"></div>
                 <div class="col-md-8 col-sm-8 col-lg-8">
+                    {% include 'account/messages.html' %}
                     <div class="separator" style="margin-top: 35px; margin-bottom: 25px"></div>
                 </div>
                 <div class="col-md-2 col-sm-2 col-lg-2"></div>
@@ -94,6 +95,7 @@
                                             </div>
                                         </div>
                                     {% else %}
+                                        {% if cart|length > 0 %}
                                         <form method="post" action="{% url 'orders:order_create' %}">
                                         <div class="cart-side">
                                             <div class="done">
@@ -129,6 +131,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                            {% endif %}
                                     {% endif %}
                                     </form>
                                 </div>

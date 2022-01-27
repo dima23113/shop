@@ -30,3 +30,8 @@ class OrderCreateView(View):
                 return redirect('shop:index')
             else:
                 return redirect('account:orders')
+
+        else:
+            messages.add_message(request, messages.INFO,
+                                 'Не выбран тип оплаты/способ доставки или не заполнены данные профиля')
+            return redirect('cart:cart_detail')
