@@ -107,25 +107,26 @@
                                         <div class="cart-side">
                                             <div class="ship-info">
                                                 <h3>2. Доставка</h3>
-                                                <p>Укажите тип доставки:</p>
-                                                <select name="ship_type" id="id_ship_type">
+                                                <p>Укажите тип доставки: <select class="select-custom" name="ship_type" id="id_ship_type">
+                                                    <option disabled selected="" >Выбрать</option>
                                                     <option value="Доставка">Доставка</option>
-                                                    <option value="Самовывоз" selected="">Самовывоз</option>
-                                                </select>
+                                                    <option value="Самовывоз">Самовывоз</option>
+                                                </select></p>
+
                                             </div>
                                         </div>
                                         {% csrf_token %}
                                         <div class="cart-side">
                                             <div class="payment">
                                                 <h3>3. Оплата</h3>
-                                                <p>Укажите тип оплаты:</p>
-                                                <select name="pay_type" id="id_pay_type">
-                                                    <option value="Онлайн" selected="">Онлайн</option>
+                                                <p>Укажите тип оплаты: <select class="select-custom" name="pay_type" id="id_pay_type">
+                                                    <option disabled selected="">Выбрать</option>
+                                                    <option value="Онлайн" >Онлайн</option>
                                                     <option value="При получении">При получении</option>
-                                                </select>
-                                                <div class="block-submit">
-                                            <input type="submit" value="Заказать">
-                                        </div>
+                                                </select></p>
+                                                <div class="block-submit" style="text-align: center">
+                                                    <input type="submit" value="Заказать" style="font-size: 40px">
+                                                </div>
                                             </div>
                                         </div>
                                     {% endif %}

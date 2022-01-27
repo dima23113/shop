@@ -1066,3 +1066,18 @@ body {
 .table_order_list {
     width: 100%;
 }
+
+
+.order-list *{
+    font-family: 'Raleway', sans-serif;
+}
+
+
+.select-custom {
+    background: none; /* убираем фон */
+    border: 1px solid black; /* рамка */
+    border-radius: 0;/* скругление полей формы */
+    -webkit-appearance: none;/* Chrome */
+    -moz-appearance: none;/* Firefox */
+    appearance: auto;
+}
