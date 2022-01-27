@@ -233,3 +233,10 @@ class OrderListView(View):
     def get(self, request, *args, **kwargs):
         orders = Order.objects.all().only('id', 'created', 'address', 'ship_type', 'status')
         return render(request, 'account/order_list.html', {'orders': orders})
+
+
+class OrderDetailView(View):
+
+    def get(self, request, *args, **kwargs):
+        order = Order.objects.get(id=kwargs['id'])
+        return render(request, 'account/order_detail.html', {'order': order})

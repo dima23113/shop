@@ -17,7 +17,7 @@
             {% for order in orders %}
                 <tr class="order-list">
                     <td class="txt_gray">
-                        <a href="#">№{{ order.id }}</a>
+                        <a href="{% url 'account:order_detail' order.id %}">№{{ order.id }}</a>
                         <br>
                         <span class="faded_txt_gray">{{ order.pay_type }}</span>
                     </td>

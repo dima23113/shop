@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from shop.models import Product
 from account.models import CustomUser
 
@@ -43,12 +44,16 @@ class Order(models.Model):
     def get_total_cost(self):
         return sum(item.get_cost() for item in self.items.all())
 
+    def get_absolute_url(self):
+        return reverse('account:order_detail', kwargs={'id': self.id})
+
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE, verbose_name='Заказ')
     product = models.ForeignKey(Product, related_name='order_items', on_delete=models.CASCADE, verbose_name='Позиция')
     price = models.DecimalField(max_digits=10, decimal_places=2)
     qty = models.PositiveIntegerField(default=1)
+    size = models.CharField(max_length=10, verbose_name='Рамзер', blank=True, null=True)
 
     class Meta:
         verbose_name = 'Позиция'

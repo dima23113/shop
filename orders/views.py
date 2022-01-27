@@ -22,7 +22,8 @@ class OrderCreateView(View):
                                          customer=user, pay_type=pay_type, phone=user.phone)
             order.save()
             for item in cart:
-                OrderItem.objects.create(order=order, product=item['product'], price=item['price'], qty=item['qty'])
+                OrderItem.objects.create(order=order, product=item['product'], price=item['price'], qty=item['qty'],
+                                         size=item['size'])
             cart.clear()
             if ship_type == 'Доставка':
                 messages.add_message(request, messages.INFO,

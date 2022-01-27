@@ -76,21 +76,21 @@ class QtyProductSizeView(View):
         product = request.POST.get('product', None)
         max_qty = request.POST.get('max_qty', None)
         qty = request.POST.get('qty', None)
-        print(product, max_qty, qty)
         if qty and max_qty:
             cart = Cart(request)
             qty = int(qty)
             max_qty = int(max_qty)
             if max_qty >= qty > 0:
                 cart.cart[product]['qty'] = qty
-                print(cart.cart[product])
                 cart.save()
                 return JsonResponse({'status': 'true', 'message': 'Изменения внесены!'}, status=200)
 
             else:
-                return JsonResponse({'status': 'true', 'message': 'Текущее ко-во больше доступного или не может быть 0'}, status=200)
+                return JsonResponse(
+                    {'status': 'true', 'message': 'Текущее ко-во больше доступного или не может быть 0'}, status=200)
         else:
-            return JsonResponse({'status': 'false', 'message': 'Ко-во товара или максимальное ко-во незадано!'}, status=404)
+            return JsonResponse({'status': 'false', 'message': 'Ко-во товара или максимальное ко-во незадано!'},
+                                status=404)
 
 
 class CartPriceView(View):
@@ -98,7 +98,6 @@ class CartPriceView(View):
     def get(self, request, *args, **kwargs):
         cart = Cart(request)
         response = {'price': cart.get_total_price()}
-        print(response['price'])
         return JsonResponse(response)
 
 
@@ -107,6 +106,4 @@ class UpdateQtyCartView(View):
     def get(self, request, *args, **kwargs):
         cart = Cart(request)
         response = {'cart_qty': len(cart)}
-        print(response['cart_qty'])
         return JsonResponse(response)
-

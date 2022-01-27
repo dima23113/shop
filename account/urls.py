@@ -19,5 +19,6 @@ urlpatterns = [
     path('password-reset/', PasswordResetView.as_view(), name='password_reset'),
     path('address/', login_required(AddressesProfileView.as_view(), login_url=reverse_lazy('account:login')),
          name='address'),
+    path('orders/<int:id>/', OrderDetailView.as_view(), name='order_detail'),
     path('orders/', OrderListView.as_view(), name='orders')
 ]

@@ -1,7 +1,7 @@
 {% extends 'shop/base.html' %}
 {% load static %}
+{% load cache %}
 {% block title %}Профиль-Ноябрь{% endblock %}
-
 {% block content %}
     <div class="content">
         <div class="profile">
@@ -19,6 +19,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-1 col-sm-1 col-lg-1"></div>
+                    {% cache 86400 account_menu %}
                     <div class="account-menu col-md-10 col-sm-10 col-lg-10">
                         <ul class="account-menu-lst">
                             <li><a class="link-profile" href="{% url 'account:profile' %}">Профиль</a></li>
@@ -31,6 +32,7 @@
                         </ul>
                         <span></span>
                     </div>
+                    {% endcache %}
                     <div class="col-md-1 col-sm-1 col-lg-1"></div>
                 </div>
             </div>
