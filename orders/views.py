@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from django.views.generic import View
 from django.contrib import messages
+from django.db.models import F
 from .forms import CreateOrderForm
 from .models import Order, OrderItem
 from account.models import CustomUser
 from cart.cart import Cart
+from shop.models import ProductSize
 
 
 class OrderCreateView(View):
@@ -24,6 +26,9 @@ class OrderCreateView(View):
             for item in cart:
                 OrderItem.objects.create(order=order, product=item['product'], price=item['price'], qty=item['qty'],
                                          size=item['size'])
+                product = ProductSize.objects.filter(product_id=item['product'], name=item['size']).update(
+                    qty=F('qty') - 1)
+
             cart.clear()
             if ship_type == 'Доставка':
                 messages.add_message(request, messages.INFO,

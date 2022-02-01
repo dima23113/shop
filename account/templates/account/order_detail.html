@@ -15,7 +15,7 @@
                                 {% with product=item.product %}
                                     <div class="items-wrapper__product">
                                         <div class="product__image">
-                                            {% thumbnail product.image "100x100" crop="20%" as im %}
+                                            {% thumbnail product.image "100x100" crop="20%"  as im %}
                                                 <a class="img" href="{{ product.get_absolute_url }}">
                                                     <img src="{{ im.url }}">
                                                 </a>
