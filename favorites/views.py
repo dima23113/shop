@@ -8,7 +8,7 @@ from account.models import CustomUser
 class AddToFavorites(View):
 
     def post(self, request, *args, **kwargs):
-        product = Product.objects.get(slug=kwargs['id'])
+        product = Product.objects.get(id=request.POST.get('product'))
         user = CustomUser.objects.get(email=request.user)
         user.favorite.add(product)
         return JsonResponse({'status': 'true', 'message': 'Товар добавлен в избранное!'}, status=200)
@@ -17,7 +17,7 @@ class AddToFavorites(View):
 class RemoveFromFavorites(View):
 
     def post(self, request, *args, **kwargs):
-        product = Product.objects.get(slug=kwargs['id'])
+        product = Product.objects.get(id=request.POST.get('product'))
         user = CustomUser.objects.get(email=request.user)
-        user.favorite.remoce(product)
+        user.favorite.remove(product)
         return JsonResponse({'status': 'true', 'message': 'Товар удален из избранного!'}, status=200)
