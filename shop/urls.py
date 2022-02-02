@@ -1,7 +1,6 @@
 from django.urls import path
 from .views import *
 from django.conf import settings
-from django.views.decorators.cache import cache_page
 from django.conf.urls.static import static
 
 app_name = 'shop'

@@ -705,8 +705,13 @@ body {
     text-align: center;
 }
 
+.product-add {
+    display: flex;
+}
+.customer-login {
+    flex-basis: 90%;
+}
 .customer-login * {
-    display: inline-block;
     padding-left: 0;
     padding-top: 15px;
     padding-bottom: 5px;
@@ -1080,4 +1085,13 @@ body {
     -webkit-appearance: none;/* Chrome */
     -moz-appearance: none;/* Firefox */
     appearance: auto;
+}
+
+.delete_from_fav {
+    padding-top: 20px;
+}
+
+.add_to_fav {
+    padding-top: 20px;
+    cursor: pointer;
 }

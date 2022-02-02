@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'cart.apps.CartConfig',
     'shop.apps.ShopConfig',
     'orders.apps.OrdersConfig',
+    'favorites.apps.FavoritesConfig',
     'sorl.thumbnail',
     'debug_toolbar',
     'django_email_verification'

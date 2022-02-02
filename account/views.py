@@ -240,3 +240,11 @@ class OrderDetailView(View):
     def get(self, request, *args, **kwargs):
         order = Order.objects.get(id=kwargs['id'])
         return render(request, 'account/order_detail.html', {'order': order})
+
+
+class FavoritesDetailView(View):
+
+    def get(self, request, *args, **kwargs):
+        user = CustomUser.objects.get(email=request.user)
+        fav = user.favorite.all()
+        return render(request, 'account/favorites.html', {'favorites': fav})

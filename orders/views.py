@@ -27,7 +27,7 @@ class OrderCreateView(View):
                 OrderItem.objects.create(order=order, product=item['product'], price=item['price'], qty=item['qty'],
                                          size=item['size'])
                 product = ProductSize.objects.filter(product_id=item['product'], name=item['size']).update(
-                    qty=F('qty') - 1)
+                    qty=F('qty') - int(item['qty']))
 
             cart.clear()
             if ship_type == 'Доставка':

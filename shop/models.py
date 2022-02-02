@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from account.models import CustomUser
 
 
 class Category(models.Model):
@@ -95,6 +96,7 @@ class Product(models.Model):
     gender = models.CharField(max_length=256, verbose_name='Пол')
     compound = models.CharField(max_length=256, verbose_name='Состав', blank=True)
     image = models.ImageField(blank=True, null=True, upload_to='main_image', verbose_name='Главное изображение')
+    favorite = models.ManyToManyField(CustomUser, through='Favorites', related_name='favorite')
 
     class Meta:
         ordering = ('name',)
@@ -129,3 +131,16 @@ class ProductSize(models.Model):
     class Meta:
         verbose_name = 'Размер товара'
         verbose_name_plural = 'Размеры товара'
+
+
+class Favorites(models.Model):
+    users = models.ForeignKey(CustomUser, on_delete=models.CASCADE, verbose_name='Пользователь')
+    favorites = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='Избранный товар')
+    create = models.DateTimeField(auto_now_add=True, verbose_name='Дата добавления')
+
+    class Meta:
+        verbose_name = 'Избранное'
+        verbose_name_plural = 'Избранное'
+
+    def __str__(self):
+        return f'{self.users.id}-{self.favorites.name}'

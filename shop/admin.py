@@ -48,3 +48,7 @@ class BrandAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
     list_display = ['name', 'slug', 'description']
 
+
+@admin.register(Favorites)
+class FavoritesAdmin(admin.ModelAdmin):
+    pass

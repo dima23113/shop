@@ -48,27 +48,36 @@
                                             {% for i in product.product_sizer.all %}
                                                 {% if i %}
                                                     {% if i.qty <= 0 %}{% else %}
-                                                        <a class="size" id="{{ i.name }}" href="#" data-mydata={{ i.name }}>{{ i.name }}</a>
+                                                        <a class="size" id="{{ i.name }}" href="#"
+                                                           data-mydata={{ i.name }}>{{ i.name }}</a>
                                                     {% endif %}
-                                                {% else %} <p>Товар закончился</p>{% endif %}{% endfor %}
+                                                {% else %}<p>Товар закончился</p>{% endif %}{% endfor %}
                                         </div>
                                     </div>
                                 </div>
                             </li>
                             <li>
-                                <div class="customer-login">
-                                    <form class="login-form" method="post"
-                                          action="{% url 'cart:cart_add' product.slug %}"
-                                          style="padding-top: 0px;margin-top: 0px;">
-                                        <div class="block-a">
-                                            <input class="size" value="" type="text" name="size" required=""
-                                                   id="id_size" hidden>
-                                        </div>
-                                        {% csrf_token %}
-                                        <div class="block-submit">
-                                            <input type="submit" value="В козрину">
-                                        </div>
-                                    </form>
+                                <div class="product-add">
+                                    <div class="customer-login">
+                                        <form class="login-form" method="post"
+                                              action="{% url 'cart:cart_add' product.slug %}"
+                                              style="padding-top: 0px;margin-top: 0px;">
+                                            <div class="block-a">
+                                                <input class="size" value="" type="text" name="size" required=""
+                                                       id="id_size" hidden>
+                                            </div>
+                                            {% csrf_token %}
+                                            <div class="block-submit">
+                                                <input type="submit" value="В козрину">
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="add_to_fav" data-id="{{ product.id }}"
+                                         data-in_fav={% if product in user.favorite %}true{% else %}false{% endif %}>
+                                        <img class="img-fav"
+                                             src={% if product in user.favorite %}{% static 'img/added.png' %}{% else %}
+                                                 {% static 'img/add.png' %}{% endif %}>
+                                    </div>
                                 </div>
                             </li>
                             <li>
@@ -102,7 +111,7 @@
                 </div>
             </div>
         </div>
-        {% cache 500 recommendations %}
+        {% cache 86400 recommendations %}
             <div class="recommendation">
                 <div class="container-fluid">
                     <div class="row">
@@ -151,4 +160,40 @@
         })
     </script>
     <script src="{% static 'js/add_cart.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            $(".add_to_fav").click(function () {
+                var products = $(this).data("id");
+                var in_fav = $(this).data('in_fav')
+                console.log(products, in_fav)
+                if (in_fav === 'false') {
+                    $.ajax({
+                        data: {'product': products},
+                        url: "{% url 'favorites:add_to_fav' product.id %}",
+                        method: 'post',
+                        success: function (response) {
+                            console.log(response)
+                            $(".img-fav").src({% static 'img/added.png' %})
+                        },
+                        error: function (response) {
+                            console.log(response)
+                        }
+                    })
+                } else {
+                    $.ajax({
+                        data: {'product': products, 'csrfmiddlewaretoken': csrftoken},
+                        url: '{% url 'favorites:remove_from_fav' product.id %}',
+                        method: 'post',
+                        success: function (response) {
+                            console.log(response)
+                            $(".img-fav").src({% static 'img/add.png' %})
+                        },
+                        error: function (response) {
+                            console.log(response)
+                        }
+                    })
+                }
+            });
+        });
+    </script>
 {% endblock %}
