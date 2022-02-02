@@ -20,5 +20,6 @@ urlpatterns = [
     path('address/', login_required(AddressesProfileView.as_view(), login_url=reverse_lazy('account:login')),
          name='address'),
     path('orders/<int:id>/', OrderDetailView.as_view(), name='order_detail'),
-    path('orders/', OrderListView.as_view(), name='orders')
+    path('orders/', OrderListView.as_view(), name='orders'),
+    path('favorites/', FavoritesDetailView.as_view(), name='favorites')
 ]

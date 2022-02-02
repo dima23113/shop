@@ -1,3 +1,41 @@
 {% extends 'account/user_profile.html' %}
-
+{% load thumbnail %}
 {% block title %}Изранное-Ноябрь{% endblock %}
+
+{% block info %}
+    <div class="col-md-1 col-sm-1 col-lg-1"></div>
+    <div class="product-list col-md-10 col-sm-10 col-lg-10">
+        <ul class="products-list">
+            {% for i in favorites %}
+                <li class="product">
+                    <div class="col-item">
+                        {% thumbnail i.image "300x340" crop="20%" as im %}
+                            <a class="col-item-a" href="{% url 'shop:product_detail' i.slug %}"><img
+                                    alt="image"
+                                    src="{{ im.url }}"
+                                    width="{{ im.width }}"
+                                    height="{{ im.height }}"></a>
+                        {% endthumbnail %}
+                        <div class="col-item-about">
+                            <div class="col-item__title">
+                                <p>{{ i.brand }}</p>
+                                <p>{{ i.name }}</p>
+                            </div>
+                            <div class="price">{{ i.price }}</div>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="col-md-1 col-sm-1 col-lg-1"></div>
+    <style>
+        .link-profile {
+            border-bottom: none;
+        }
+
+        .link-favorites {
+            border-bottom: 2px solid;
+        }
+    </style>
+{% endblock %}

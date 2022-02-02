@@ -73,7 +73,7 @@
                                         </form>
                                     </div>
                                     <div class="add_to_fav" data-id="{{ product.id }}"
-                                         data-in_fav={% if product in user.favorite.all %}added{% else %}add{% endif %}>
+                                         data-in_fav={% if product in user.favorite.all %}added{% else %}add{% endif %} data-info={% if user.is_authenticated %}{% else %}log{% endif %}>
                                         <img class="img-fav" id="img-fav" src={% if product in user.favorite.all %}{% static 'img/added.png' %}{% else %}{% static 'img/add.png' %}{% endif %}>
                                     </div>
                                 </div>
