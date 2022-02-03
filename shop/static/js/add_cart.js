@@ -21,6 +21,10 @@ document.addEventListener('DOMContentLoaded', function () {
     $(document).ready(function () {
         $(".size").click(function () {
             var buttonData = $(this).data("mydata");
+            for (var i = 0; i < document.getElementsByClassName('size').length; i++){
+                document.getElementsByClassName('size')[i].className='size'
+            }
+            $(this).toggleClass('size_active')
             var preview = document.getElementById("id_size");
             preview.setAttribute("value", buttonData);
         });

@@ -1096,3 +1096,7 @@ body {
     padding-top: 20px;
     cursor: pointer;
 }
+
+.size_active {
+    border-bottom: 2px black solid;
+}
