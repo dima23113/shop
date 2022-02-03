@@ -1,6 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.db.models import Q
+from django.shortcuts import render
 from django.core.paginator import Paginator
 from django.views.generic import ListView, View
+from django.http import JsonResponse
 from cart.forms import CartAddProductForm
 from .models import *
 
@@ -98,3 +100,22 @@ class ProductDetail(View):
             'cart_add': form
         }
         return render(request, 'shop/product/product_detail.html', context=context)
+
+
+class JsonFilterProductView(ListView):
+
+    def get_queryset(self):
+        print(self.request.GET.get('product_type'))
+        print(self.request.GET.get('brand', None))
+        print(self.request.GET.get('size', None))
+        queryset = Product.objects.filter(
+            Q(subcategory_type__in=self.request.GET.get('product_type', '')) |
+            Q(brand__in=self.request.GET.get('brand', '')) |
+            Q(product_sizer__in=self.request.GET.get('size', ''))
+        ).values('name', 'slug', 'brand', 'image', 'price')
+        return queryset
+
+    def get(self, request, *args, **kwargs):
+        queryset = list(self.get_queryset())
+        print(queryset)
+        return JsonResponse({'products': queryset})
