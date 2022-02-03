@@ -72,8 +72,11 @@ document.addEventListener('DOMContentLoaded', function () {
         $(".sign").click(function () {
                 var product = $(this).data('name')
                 var sign = $(this).html()
-                var textinp = document.getElementsByClassName(product)[0]
                 var id = $(this).data('id')
+                tmp = 'intLimitTextBox'+id
+                var textinp = document.getElementById(tmp)
+                var size = textinp.getAttribute('data-size')
+                console.log(textinp)
                 console.log(textinp.value)
                 if (sign === '+') {
                     if (Number(textinp.getAttribute('data-max_qty')) > textinp.value) {
@@ -81,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         textinp.setAttribute('value', tmp)
                         textinp.setAttribute('data-qty', tmp)
                         console.log(textinp)
-                        updateQty(id, tmp, textinp.getAttribute('data-max_qty'))
+                        updateQty(id, tmp, textinp.getAttribute('data-max_qty'), size)
                         updatePrice()
                         updateQtyCart()
                     } else {
@@ -95,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         tmp = Number(textinp.value) - 1
                         textinp.setAttribute('value', tmp)
                         textinp.setAttribute('data-qty', tmp)
-                        updateQty(id, tmp, textinp.getAttribute('data-max_qty'))
+                        updateQty(id, tmp, textinp.getAttribute('data-max_qty'), size)
                         updatePrice()
                         updateQtyCart()
                     }
@@ -104,9 +107,9 @@ document.addEventListener('DOMContentLoaded', function () {
         )
     })
 
-    function updateQty(product, qty, max_qty) {
+    function updateQty(product, qty, max_qty, size) {
         $.ajax({
-            data: {'product': product, 'qty': qty, 'max_qty': max_qty, 'csrfmiddlewaretoken': csrftoken},
+            data: {'product': product, 'qty': qty, 'max_qty': max_qty, 'size': size, 'csrfmiddlewaretoken': csrftoken},
             url: 'qty/',
             method: 'post',
             success: function (response) {
@@ -163,26 +166,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
-function setInputFilter(textbox, inputFilter) {
-    ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function (event) {
-        textbox.addEventListener(event, function () {
-            if (inputFilter(this.value)) {
-                this.oldValue = this.value;
-                this.oldSelectionStart = this.selectionStart;
-                this.oldSelectionEnd = this.selectionEnd;
-            } else if (this.hasOwnProperty("oldValue")) {
-                this.value = this.oldValue;
-                this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
-            } else {
-                this.value = "";
-            }
-        });
-    });
-}
-
-setInputFilter(document.getElementById("intLimitTextBox"), function (value) {
-    return /^\d*$/.test(value) && (value === "" || parseInt(value) <= 50);
-});
 
 
 

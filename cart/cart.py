@@ -19,7 +19,7 @@ class Cart(object):
         self.cart = cart
 
     def add(self, product, qty=1, size=None, update_qty=False):
-        product_id = str(product.id)
+        product_id = str(product.id) + size
         if product_id not in self.cart:
             self.cart[product_id] = {
                 'qty': 0,
@@ -47,17 +47,17 @@ class Cart(object):
 
     def __iter__(self):
         product_ids = self.cart.keys()
-        print(product_ids)
-        products = Product.objects.filter(id__in=product_ids)
-        print(products)
-        for product in products:
-            self.cart[str(product.id)]['product'] = product
-        print(self.cart)
+        tst2 = []
+        for i in product_ids:
+            tst2.append(i)
+        for i in range(len(tst2)):
+            tmp = ''
+            tmp = tmp.join(c for c in tst2[i] if c.isdecimal())
+            self.cart[tst2[i]]['product'] = Product.objects.get(id=tmp)
         for item in self.cart.values():
             item['price'] = Decimal(item['price'])
             item['total_price'] = item['price'] * item['qty']
             yield item
-        print(self.cart)
 
     def __len__(self):
         return sum(item['qty'] for item in self.cart.values())
