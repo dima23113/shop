@@ -1100,3 +1100,20 @@ body {
 .size_active {
     border-bottom: 2px black solid;
 }
+
+
+.sidebar * {
+    text-decoration: none;
+    padding: 0;
+    font-family: 'Raleway', sans-serif;
+
+}
+
+.sidebar *:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.nw-i-sort, .nw-i-filter {
+    margin-bottom: 30px;
+}

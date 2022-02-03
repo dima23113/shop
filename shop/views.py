@@ -37,14 +37,19 @@ class BrandList(View):
 class ProductListByCategory(View):
 
     def get(self, request, *args, **kwargs):
-        category = Category.objects.get(slug=kwargs['slug'])
+        category = Category.objects.filter(slug=kwargs['slug'])[0]
+        brands = Brand.objects.all().values('name')
+        sizes = ProductSize.objects.all()
+        sizes = list(set([i.name.lower() for i in sizes]))
         products = Product.objects.filter(category=category, available=True)
         paginator = Paginator(products, 5)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
         context = {
             'products': page_obj,
-            'category': category
+            'category': category,
+            'brands': brands,
+            'sizes': sizes
         }
         return render(request, 'shop/product/product_list.html', context=context)
 

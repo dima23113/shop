@@ -77,7 +77,6 @@ class QtyProductSizeView(View):
         max_qty = request.POST.get('max_qty', None)
         qty = request.POST.get('qty', None)
         size = request.POST.get('size', None)
-        print(product, max_qty, qty, size)
         if qty and max_qty:
             cart = Cart(request)
             qty = int(qty)
@@ -85,9 +84,7 @@ class QtyProductSizeView(View):
             if max_qty >= qty > 0:
                 cart.cart[product]['qty'] = qty
                 cart.save()
-                print(cart)
                 return JsonResponse({'status': 'true', 'message': 'Изменения внесены!'}, status=200)
-
             else:
                 return JsonResponse(
                     {'status': 'true', 'message': 'Текущее ко-во больше доступного или не может быть 0'}, status=200)

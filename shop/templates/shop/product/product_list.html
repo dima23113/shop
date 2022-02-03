@@ -7,7 +7,52 @@
         <div class="content-items">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="sidebar col-md-1 col-sm-1 col-lg-1"></div>
+                    <div class="sidebar col-md-1 col-sm-1 col-lg-1">
+                        <div class="cell">
+                            <div class="nw-i-sort">
+                                <ul>
+                                    <li class="sort">
+                                        <a href="#" id="popular">Популярное</a>
+                                    </li>
+                                    <li class="sort">
+                                        <a href="#" id="newest">Новинки</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="nw-i-filter">
+                                <label class="product_type">Тип продукта:</label>
+                                <ul>
+                                    {% for i in category.subcategories.all %}
+                                        {% for c in i.subcategory_type.all %}
+                                            <li class="filter">
+                                                <a href="#" id="{{ c.name }}">{{ c.name }}</a>
+                                            </li>
+                                        {% endfor %}
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div class="nw-i-filter">
+                                <span class="brands">Бренд:</span>
+                                <ul>
+                                    {% for brand in brands %}
+                                        <li class="filter">
+                                            <a href="#" id="{{ bran.name }}">{{ brand.name }}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div class="nw-i-filter">
+                                <span class="sizes">Размеры:</span>
+                                <ul>
+                                    {%  for i in sizes %}
+                                    <li class="filter">
+                                        <a href="#" id="{{ i }}">{{ i }}</a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                     <div class="product-list col-md-11 col-sm-11 col-lg-11">
                         <ul class="products-list">
                             {% for i in products %}
