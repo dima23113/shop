@@ -1117,3 +1117,12 @@ body {
 .nw-i-sort, .nw-i-filter {
     margin-bottom: 30px;
 }
+
+.clear_all {
+    display: none;
+}
+
+.clear_all_active {
+    display: contents;
+    margin-bottom: 30px;
+}

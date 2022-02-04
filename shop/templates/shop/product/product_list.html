@@ -1,5 +1,6 @@
 {% extends 'shop/base.html' %}
 {% load thumbnail %}
+{% load cache %}
 {% block title %}{{ category.name }}{% endblock %}
 
 {% block content %}
@@ -7,54 +8,58 @@
         <div class="content-items">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="sidebar col-md-2 col-sm-2 col-lg-2">
-                        <div class="cell">
-                            <div class="clear"></div>
-                            <div class="nw-i-filter">
-                                <ul>
-                                    <li class="sort">
-                                        <a href="#" id="popular">Популярное</a>
-                                    </li>
-                                    <li class="sort">
-                                        <a href="#" id="newest">Новинки</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="nw-i-filter">
-                                <label class="product_type">Тип продукта:</label>
-                                <ul>
-                                    {% for i in category.subcategories.all %}
-                                        {% for c in i.subcategory_type.all %}
+                    {% cache 86400 sidebar %}
+                        <div class="sidebar col-md-2 col-sm-2 col-lg-2">
+                            <div class="cell">
+                                <div class="clear_all" style="margin-bottom: 30px;"><a class="clear_filter" href="#"
+                                                                                       id="clear_filter">Очистить</a>
+                                </div>
+                                <div class="nw-i-filter">
+                                    <ul>
+                                        <li class="sort">
+                                            <a href="#" id="popular">Популярное</a>
+                                        </li>
+                                        <li class="sort">
+                                            <a href="#" id="newest">Новинки</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="nw-i-filter">
+                                    <label class="products_type">Тип продукта:</label>
+                                    <ul>
+                                        {% for i in category.subcategories.all %}
+                                            {% for c in i.subcategory_type.all %}
+                                                <li class="filter">
+                                                    <a class="product_type" href="#" data-id="{{ c.id }}"
+                                                       id="{{ c.name }}">{{ c.name }}</a>
+                                                </li>
+                                            {% endfor %}
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                <div class="nw-i-filter">
+                                    <span class="brands">Бренд:</span>
+                                    <ul>
+                                        {% for brand in brands %}
                                             <li class="filter">
-                                                <a class="product_type" href="#" data-id="{{ c.id }}"
-                                                   id="{{ c.name }}">{{ c.name }}</a>
+                                                <a class="brands" href="#" data-id="{{ brand.id }}" id="{{ brand.name }}">{{ brand.name }}</a>
                                             </li>
                                         {% endfor %}
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                            <div class="nw-i-filter">
-                                <span class="brands">Бренд:</span>
-                                <ul>
-                                    {% for brand in brands %}
-                                        <li class="filter">
-                                            <a class="brands" href="#" id="{{ brand.name }}">{{ brand.name }}</a>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                            <div class="nw-i-filter">
-                                <span class="sizes">Размеры:</span>
-                                <ul>
-                                    {% for i in sizes %}
-                                        <li class="filter">
-                                            <a class="sizes" href="#" id="{{ i }}">{{ i }}</a>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
+                                    </ul>
+                                </div>
+                                <div class="nw-i-filter">
+                                    <span class="sizes">Размеры:</span>
+                                    <ul>
+                                        {% for i in sizes %}
+                                            <li class="filter">
+                                                <a class="sizes" href="#" data-id="{{ i }}" id="{{ i }}">{{ i }}</a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    {% endcache %}
                     <div class="product-list col-md-10 col-sm-10 col-lg-10">
                         <ul class="products-list">
                             {% for i in products %}
@@ -107,16 +112,27 @@
         document.addEventListener('DOMContentLoaded', function () {
 
             let producttype = []
-            var brand = []
-            var size = []
+            let brand = []
+            let size = []
 
             $(".product_type").click(function () {
                 var product_type = $(this).data('id')
                 producttype.push(product_type)
-                console.log(producttype)
                 getProductByFilter(producttype, brand, size)
-                console.log('end')
             });
+
+            $('.brands').click(function (){
+                var brands = $(this).data('id')
+                brand.push(brands)
+                getProductByFilter(producttype, brand, size)
+            });
+
+            $('.sizes').click(function (){
+                var sizes = $(this).data('id')
+                size.push(sizes)
+                getProductByFilter(producttype, brand, size)
+            })
+
             $(".clear_filter").click(function () {
                 location.reload()
             })
@@ -129,14 +145,8 @@
                 data: {'product_type': product_type, 'brand': brand, 'size': size},
                 url: "{% url 'shop:json_filter' %}",
                 success: function (response) {
-                    console.log(response)
-                    a = `<div class="nw-i-filter"><a class="clear_filter" href="#" id="clear_filter">Очистить</a></div>`
-                    b = document.getElementsByClassName('clear')[0].childNodes
                     render(response['render'])
-                    if (b[0]) {
-                    } else {
-                        $('.clear').append(a)
-                    }
+                    $('.clear_all').toggleClass('clear_all_active')
                 },
                 error: function (response) {
                     console.log(response.responseJSON.errors)
