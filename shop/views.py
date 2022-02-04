@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.core.paginator import Paginator
 from django.views.generic import ListView, View
 from django.http import JsonResponse
+from django.template.loader import render_to_string
 from cart.forms import CartAddProductForm
 from .models import *
 
@@ -105,17 +106,14 @@ class ProductDetail(View):
 class JsonFilterProductView(ListView):
 
     def get_queryset(self):
-        print(self.request.GET.getlist('product_type[]'))
-        print(self.request.GET.get('brand', None))
-        print(self.request.GET.get('size', None))
         queryset = Product.objects.filter(
             Q(subcategory_type__in=self.request.GET.getlist('product_type[]', '')) |
             Q(brand__in=self.request.GET.getlist('brand[]', '')) |
             Q(product_sizer__in=self.request.GET.getlist('size[]', ''))
-        ).distinct().values('name', 'slug', 'brand', 'image', 'price')
+        ).distinct().select_related('brand').values('name', 'slug', 'brand__name', 'image', 'price')
         return queryset
 
     def get(self, request, *args, **kwargs):
         queryset = list(self.get_queryset())
-        print(queryset)
-        return JsonResponse({'products': queryset})
+        rendered = render_to_string('shop/product/product_by_filter.html', {'products': queryset})
+        return JsonResponse({'products': queryset, 'render': rendered})

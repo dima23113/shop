@@ -117,6 +117,10 @@
                 getProductByFilter(producttype, brand, size)
                 console.log('end')
             });
+            $(".clear_filter").click(function () {
+                location.reload()
+            })
+
         });
 
         function getProductByFilter(product_type, brand, size) {
@@ -126,8 +130,9 @@
                 url: "{% url 'shop:json_filter' %}",
                 success: function (response) {
                     console.log(response)
-                    a = `<div class="nw-i-filter"><a href="#" id="clear">Очистить</a></div>`
+                    a = `<div class="nw-i-filter"><a class="clear_filter" href="#" id="clear_filter">Очистить</a></div>`
                     b = document.getElementsByClassName('clear')[0].childNodes
+                    render(response['render'])
                     if (b[0]) {
                     } else {
                         $('.clear').append(a)
@@ -137,6 +142,11 @@
                     console.log(response.responseJSON.errors)
                 }
             });
+        }
+
+        function render(rendered) {
+            $('.products-list').remove()
+            $('.product-list').append(rendered)
         }
 
     </script>
