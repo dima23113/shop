@@ -19,7 +19,7 @@ class Cart(object):
         self.cart = cart
 
     def add(self, product, qty=1, size=None, update_qty=False):
-        product_id = str(product.id) + size
+        product_id = str(product.id) + '-' + size
         if product_id not in self.cart:
             self.cart[product_id] = {
                 'qty': 0,
@@ -50,10 +50,9 @@ class Cart(object):
         tst2 = []
         for i in product_ids:
             tst2.append(i)
+        print(tst2)
         for i in range(len(tst2)):
-            tmp = ''
-            tmp = tmp.join(c for c in tst2[i] if c.isdecimal())
-            self.cart[tst2[i]]['product'] = Product.objects.get(id=tmp)
+            self.cart[tst2[i]]['product'] = Product.objects.get(id=tst2[i].split('-')[0])
         for item in self.cart.values():
             item['price'] = Decimal(item['price'])
             item['total_price'] = item['price'] * item['qty']

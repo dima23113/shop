@@ -25,9 +25,10 @@ class Subcategory(models.Model):
     slug = models.SlugField(max_length=256, verbose_name='Слаг подкатегории')
     category = models.ForeignKey(Category, related_name='subcategories',
                                  on_delete=models.CASCADE, verbose_name='Категория')
+    line_num = models.IntegerField(blank=True, null=True, verbose_name='Порядок подкатегорий в меню сайта')
 
     class Meta:
-        ordering = ('name',)
+        ordering = ('line_num',)
         verbose_name = 'Подкатегория'
         verbose_name_plural = 'Подкатегории'
 

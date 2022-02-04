@@ -15,6 +15,7 @@ class CartAddView(View):
         form = CartAddProductForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
+            print(cd['size'])
             cart.add(product=product, qty=1, size=cd['size'], update_qty=False)
         return redirect('cart:cart_detail')
 
