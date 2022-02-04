@@ -40,7 +40,7 @@ class Cart(object):
         self.session.modified = True
 
     def remove(self, product):
-        product_id = str(product.id)
+        product_id = str(product)
         if product_id in self.cart:
             del self.cart[product_id]
             self.save()

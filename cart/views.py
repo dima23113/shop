@@ -30,8 +30,8 @@ class CartRemoveProductView(View):
             cart.clear()
             return JsonResponse({'status': 'true', 'message': 'Корзина удалена'}, status=200)
         else:
-            product = get_object_or_404(Product, id=product_id)
-            cart.remove(product)
+            product = get_object_or_404(Product, id=product_id.split('-')[0])
+            cart.remove(product_id)
             return JsonResponse({'id': product.id})
 
 

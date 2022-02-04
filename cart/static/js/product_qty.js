@@ -51,6 +51,8 @@ document.addEventListener('DOMContentLoaded', function () {
     $(document).ready(function () {
         $(".remove-btn").click(function () {
             var product_id = $(this).data('product')
+            var size = $(this).data('size')
+            product_id = product_id + '-' + size
             console.log(product_id)
             $.ajax({
                 data: {'product_id': product_id, 'csrfmiddlewaretoken': csrftoken},
