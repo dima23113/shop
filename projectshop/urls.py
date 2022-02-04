@@ -11,4 +11,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('__debug__/', include('debug_toolbar.urls')),
     path('email/', include(email_urls)),
+    path('tinymce/', include('tinymce.urls')),
 ]

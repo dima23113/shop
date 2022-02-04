@@ -137,3 +137,4 @@ dmypy.json
 /account/migrations/
 /orders/migrations/
 /favorites/migrations/
+/blog/migrations/
