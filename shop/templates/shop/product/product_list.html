@@ -9,6 +9,7 @@
                 <div class="row">
                     <div class="sidebar col-md-2 col-sm-2 col-lg-2">
                         <div class="cell">
+                            <div class="clear"></div>
                             <div class="nw-i-filter">
                                 <ul>
                                     <li class="sort">
@@ -25,7 +26,8 @@
                                     {% for i in category.subcategories.all %}
                                         {% for c in i.subcategory_type.all %}
                                             <li class="filter">
-                                                <a class="product_type" href="#" data-id="{{ c.id }}" id="{{ c.name }}">{{ c.name }}</a>
+                                                <a class="product_type" href="#" data-id="{{ c.id }}"
+                                                   id="{{ c.name }}">{{ c.name }}</a>
                                             </li>
                                         {% endfor %}
                                     {% endfor %}
@@ -102,21 +104,40 @@
     </div>
 
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        $(".product_type").click(function () {
-            var product_type = $(this).data('id')
+        document.addEventListener('DOMContentLoaded', function () {
+
+            let producttype = []
+            var brand = []
+            var size = []
+
+            $(".product_type").click(function () {
+                var product_type = $(this).data('id')
+                producttype.push(product_type)
+                console.log(producttype)
+                getProductByFilter(producttype, brand, size)
+                console.log('end')
+            });
+        });
+
+        function getProductByFilter(product_type, brand, size) {
             console.log(product_type)
             $.ajax({
-                data: {'product_type': product_type},
+                data: {'product_type': product_type, 'brand': brand, 'size': size},
                 url: "{% url 'shop:json_filter' %}",
                 success: function (response) {
                     console.log(response)
+                    a = `<div class="nw-i-filter"><a href="#" id="clear">Очистить</a></div>`
+                    b = document.getElementsByClassName('clear')[0].childNodes
+                    if (b[0]) {
+                    } else {
+                        $('.clear').append(a)
+                    }
                 },
                 error: function (response) {
                     console.log(response.responseJSON.errors)
                 }
             });
-        });
-        });
+        }
+
     </script>
 {% endblock %}

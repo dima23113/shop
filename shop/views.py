@@ -105,14 +105,14 @@ class ProductDetail(View):
 class JsonFilterProductView(ListView):
 
     def get_queryset(self):
-        print(self.request.GET.get('product_type'))
+        print(self.request.GET.getlist('product_type[]'))
         print(self.request.GET.get('brand', None))
         print(self.request.GET.get('size', None))
         queryset = Product.objects.filter(
-            Q(subcategory_type__in=self.request.GET.get('product_type', '')) |
-            Q(brand__in=self.request.GET.get('brand', '')) |
-            Q(product_sizer__in=self.request.GET.get('size', ''))
-        ).values('name', 'slug', 'brand', 'image', 'price')
+            Q(subcategory_type__in=self.request.GET.getlist('product_type[]', '')) |
+            Q(brand__in=self.request.GET.getlist('brand[]', '')) |
+            Q(product_sizer__in=self.request.GET.getlist('size[]', ''))
+        ).distinct().values('name', 'slug', 'brand', 'image', 'price')
         return queryset
 
     def get(self, request, *args, **kwargs):
