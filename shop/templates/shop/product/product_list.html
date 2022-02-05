@@ -8,58 +8,57 @@
         <div class="content-items">
             <div class="container-fluid">
                 <div class="row">
-                    {% cache 86400 sidebar %}
-                        <div class="sidebar col-md-2 col-sm-2 col-lg-2">
-                            <div class="cell">
-                                <div class="clear_all" style="margin-bottom: 30px;"><a class="clear_filter" href="#"
-                                                                                       id="clear_filter">Очистить</a>
-                                </div>
-                                <div class="nw-i-filter">
-                                    <ul>
-                                        <li class="sort">
-                                            <a href="#" id="popular">Популярное</a>
-                                        </li>
-                                        <li class="sort">
-                                            <a href="#" id="newest">Новинки</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="nw-i-filter">
-                                    <label class="products_type">Тип продукта:</label>
-                                    <ul>
-                                        {% for i in category.subcategories.all %}
-                                            {% for c in i.subcategory_type.all %}
-                                                <li class="filter">
-                                                    <a class="product_type" href="#" data-id="{{ c.id }}"
-                                                       id="{{ c.name }}">{{ c.name }}</a>
-                                                </li>
-                                            {% endfor %}
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                                <div class="nw-i-filter">
-                                    <span class="brands">Бренд:</span>
-                                    <ul>
-                                        {% for brand in brands %}
+                    <div class="sidebar col-md-2 col-sm-2 col-lg-2">
+                        <div class="cell">
+                            <div class="clear_all" style="margin-bottom: 30px;"><a class="clear_filter" href="#"
+                                                                                   id="clear_filter">Очистить</a>
+                            </div>
+                            <div class="nw-i-filter">
+                                <ul>
+                                    <li class="sort">
+                                        <a href="#" id="popular">Популярное</a>
+                                    </li>
+                                    <li class="sort">
+                                        <a href="#" id="newest">Новинки</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="nw-i-filter">
+                                <label class="products_type" data-id="{{ category.id }}">Тип продукта:</label>
+                                <ul>
+                                    {% for i in category.subcategories.all %}
+                                        {% for c in i.subcategory_type.all %}
                                             <li class="filter">
-                                                <a class="brands" href="#" data-id="{{ brand.id }}" id="{{ brand.name }}">{{ brand.name }}</a>
+                                                <a class="product_type" href="#" data-id="{{ c.id }}"
+                                                   id="{{ c.name }}">{{ c.name }}</a>
                                             </li>
                                         {% endfor %}
-                                    </ul>
-                                </div>
-                                <div class="nw-i-filter">
-                                    <span class="sizes">Размеры:</span>
-                                    <ul>
-                                        {% for i in sizes %}
-                                            <li class="filter">
-                                                <a class="sizes" href="#" data-id="{{ i }}" id="{{ i }}">{{ i }}</a>
-                                            </li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div class="nw-i-filter">
+                                <span class="brands">Бренд:</span>
+                                <ul>
+                                    {% for brand in brands %}
+                                        <li class="filter">
+                                            <a class="brands" href="#" data-id="{{ brand.id }}"
+                                               id="{{ brand.name }}">{{ brand.name }}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div class="nw-i-filter">
+                                <span class="sizes">Размеры:</span>
+                                <ul>
+                                    {% for i in sizes %}
+                                        <li class="filter">
+                                            <a class="sizes" href="#" data-id="{{ i }}" id="{{ i }}">{{ i }}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
                             </div>
                         </div>
-                    {% endcache %}
+                    </div>
                     <div class="product-list col-md-10 col-sm-10 col-lg-10">
                         <ul class="products-list">
                             {% for i in products %}
@@ -114,23 +113,24 @@
             let producttype = []
             let brand = []
             let size = []
-
+            let category = $('.products_type').data('id')
+            console.log(category)
             $(".product_type").click(function () {
                 var product_type = $(this).data('id')
                 producttype.push(product_type)
-                getProductByFilter(producttype, brand, size)
+                getProductByFilter(producttype, brand, size, category)
             });
 
-            $('.brands').click(function (){
+            $('.brands').click(function () {
                 var brands = $(this).data('id')
                 brand.push(brands)
-                getProductByFilter(producttype, brand, size)
+                getProductByFilter(producttype, brand, size, category)
             });
 
-            $('.sizes').click(function (){
+            $('.sizes').click(function () {
                 var sizes = $(this).data('id')
                 size.push(sizes)
-                getProductByFilter(producttype, brand, size)
+                getProductByFilter(producttype, brand, size, category)
             })
 
             $(".clear_filter").click(function () {
@@ -139,14 +139,18 @@
 
         });
 
-        function getProductByFilter(product_type, brand, size) {
+        function getProductByFilter(product_type, brand, size, category) {
             console.log(product_type)
             $.ajax({
-                data: {'product_type': product_type, 'brand': brand, 'size': size},
+                data: {'product_type': product_type, 'brand': brand, 'size': size, 'category': category},
                 url: "{% url 'shop:json_filter' %}",
                 success: function (response) {
                     render(response['render'])
-                    $('.clear_all').toggleClass('clear_all_active')
+                    if ($('.clear_all ').attr('class') == 'clear_all clear_all_active') {
+
+                    } else {
+                        $('.clear_all').toggleClass('clear_all_active')
+                    }
                 },
                 error: function (response) {
                     console.log(response.responseJSON.errors)
