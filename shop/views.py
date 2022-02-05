@@ -77,9 +77,32 @@ class ProductListByBrand(View):
 class ProductListBySubcategory(View):
 
     def get(self, request, *args, **kwargs):
-        products = Product.objects.filter(subcategory__slug=kwargs['slug'], available=True)
+        products = Product.objects.filter(subcategory__slug=kwargs['slug'], available=True).values('image', 'brand',
+                                                                                                   'slug', 'name',
+                                                                                                   'price')
+        paginator = Paginator(products, 50)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
         context = {
-            'products': products
+            'products': page_obj
+        }
+        return render(request, 'shop/product/product_list.html', context=context)
+
+
+class ProductListBySubcategoryType(View):
+
+    def get(self, request, *args, **kwargs):
+        products = Product.objects.filter(subcategory_type__slug=kwargs['slug'], available=True).values('image',
+                                                                                                        'brand',
+                                                                                                        'slug', 'name',
+                                                                                                        'price')
+        paginator = Paginator(products, 50)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
+        context = {
+            'products': page_obj
         }
         return render(request, 'shop/product/product_list.html', context=context)
 
@@ -106,7 +129,6 @@ class ProductDetail(View):
 class JsonFilterProductView(ListView):
 
     def get_queryset(self):
-        print(self.request.GET.get('category'))
         queryset = Product.objects.filter(
             Q(subcategory_type__in=self.request.GET.getlist('product_type[]', '')) |
             Q(brand__in=self.request.GET.getlist('brand[]', ''), category=self.request.GET.get('category')) |
@@ -116,6 +138,5 @@ class JsonFilterProductView(ListView):
 
     def get(self, request, *args, **kwargs):
         queryset = list(self.get_queryset())
-        print(queryset)
         rendered = render_to_string('shop/product/product_by_filter.html', {'products': queryset})
         return JsonResponse({'products': queryset, 'render': rendered})

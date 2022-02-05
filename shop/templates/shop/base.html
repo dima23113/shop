@@ -29,25 +29,12 @@
                                                            href="{% url 'shop:product_list_by_category' i.slug %}">{{ i.name }}</a>
                                 <ul class="sub-menu" style="padding-top: 16px;top: 62px;padding-left: 30px;">
                                     {% for l in i.subcategories.all %}
-                                        <li class="sub-menu-li"><a href="#">{{ l.name }}</a>
-                                            <ul class="sub-menu-sub "
-                                                style="padding-left: 0rem;padding-top: 0; margin-top: 80px">
+                                        <li class="sub-menu-li"><a href="{% url 'shop:product_list_by_subcategory' l.slug %}">{{ l.name }}</a>
+                                            <ul class="sub-menu-sub"
+                                                style="padding-left: 0rem;padding-top: 0; margin-top: 40px">
                                                 {% for c in l.subcategory_type.all %}
                                                     <li class="sub-menu-sub-li" style="text-decoration: none;"><a
-                                                            href="#">{{ c.name }}</a></li>
-                                                {% endfor %}
-                                                {% for d in category_img %}
-                                                    {% if d.category.name == i.name %}
-                                                        {% if d.subcategory.name == l.name %}
-                                                            {% thumbnail d.image "200x250" crop="100%" as im %}
-                                                                <li class="sub-menu-sub-li"><a
-                                                                        href="{% url 'shop:product_detail' d.slug %}"><img
-                                                                        class="img-info"
-                                                                        src="{{ im.url }}"></a>
-                                                                </li>
-                                                            {% endthumbnail %}
-                                                        {% endif %}
-                                                    {% endif %}
+                                                            href="{% url 'shop:product_list_by_subcategory_type' c.slug %}">{{ c.name }}</a></li>
                                                 {% endfor %}
                                             </ul>
                                         </li>
