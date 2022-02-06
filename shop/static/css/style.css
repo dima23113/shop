@@ -772,12 +772,13 @@ body {
 .left-menu .sub-menu {
     display: none;
     position: absolute;
-    top: 62px;
     left: 0;
     z-index: 0;
     width: -1px;
     margin: 0;
-    padding: 0;
+    padding-top: 16px;
+    top: 62px;
+    padding-left: 30px;
     list-style: none;
     cursor: pointer;
 }
@@ -1126,3 +1127,7 @@ body {
     display: contents;
     margin-bottom: 30px;
 }
+
+
+
+

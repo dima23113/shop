@@ -6,6 +6,10 @@
         font-size: 18px;
         font-family: 'Merriweather', serif;
     }
+
+    .left-menu .sub-menu {
+        top: 56px;
+    }
 }
 
 /* lg <= Extra large (xl) */
@@ -17,6 +21,9 @@
 
     .logo-img {
         width: 160px;
+    }
+    .left-menu .sub-menu {
+        top: 47px;
     }
 
 }
@@ -63,6 +70,10 @@
         display: block;
         text-align: center;
         padding: 14px 35px;
+    }
+
+    .left-menu > li:hover .sub-menu {
+        display: none;
     }
 
 }
