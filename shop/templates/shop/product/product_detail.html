@@ -10,7 +10,7 @@
                 <div class="row">
                     <div class="images col-md-8 col-sm-8 col-lg-8">
                         <div class="img-product" id="img-product">
-                            {% for i in product.product_img.all %}
+                            {% for i in images %}
                                 {% thumbnail i.img "535x605" crop="100%" as im %}
                                     <a href="{{ im.url }}" data-lightbox="test"><img src="{{ im.url }}"
                                                                                      alt="{{ product.name }}"></a>
@@ -20,7 +20,7 @@
                         <div class="roll-swipe">
                             <div class="swiper mySwiper">
                                 <div class="swiper-wrapper">
-                                    {% for i in product.product_img.all %}
+                                    {% for i in images %}
                                         {% thumbnail i.img "535x605" crop="20%" as im %}
                                             <div class="swiper-slide"><img src="{{ im.url }}" alt="{{ product.name }}">
                                             </div>
@@ -124,9 +124,7 @@
                                             {% thumbnail i.image "319x344" crop="20%" as im %}
                                                 <a class="col-item-a" href="{% url 'shop:product_detail' i.slug %}"><img
                                                         alt="image"
-                                                        src="{{ im.url }}"
-                                                        width="{{ im.width }}"
-                                                        height="{{ im.height }}"></a>
+                                                        src="{{ im.url }}"></a>
                                             {% endthumbnail %}
                                             <div class="col-item-about">
                                                 <div class="col-item__title">

@@ -26,13 +26,11 @@
                             <div class="nw-i-filter">
                                 <label class="products_type" data-id="{{ category.id }}">Тип продукта:</label>
                                 <ul>
-                                    {% for i in category.subcategories.all %}
-                                        {% for c in i.subcategory_type.all %}
-                                            <li class="filter">
-                                                <a class="product_type" href="#" data-id="{{ c.id }}"
-                                                   id="{{ c.name }}">{{ c.name }}</a>
-                                            </li>
-                                        {% endfor %}
+                                    {% for c in subcategory %}
+                                        <li class="filter">
+                                            <a class="product_type" href="#" data-id="{{ c.id }}"
+                                               id="{{ c.name }}">{{ c.name }}</a>
+                                        </li>
                                     {% endfor %}
                                 </ul>
                             </div>
@@ -52,7 +50,7 @@
                                 <ul>
                                     {% for i in sizes %}
                                         <li class="filter">
-                                            <a class="sizes" href="#" data-id="{{ i }}" id="{{ i }}">{{ i }}</a>
+                                            <a class="sizes" href="#" data-id="{{ i.name }}" id="{{ i.name }}">{{ i.name }}</a>
                                         </li>
                                     {% endfor %}
                                 </ul>
@@ -67,9 +65,7 @@
                                         {% thumbnail i.image "300x340" crop="20%" as im %}
                                             <a class="col-item-a" href="{% url 'shop:product_detail' i.slug %}"><img
                                                     alt="image"
-                                                    src="{{ im.url }}"
-                                                    width="{{ im.width }}"
-                                                    height="{{ im.height }}"></a>
+                                                    src="{{ im.url }}"></a>
                                         {% endthumbnail %}
                                         <div class="col-item-about">
                                             <div class="col-item__title">

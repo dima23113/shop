@@ -25,8 +25,6 @@ class BrandList(View):
                 'name': i.name,
                 'slug': i.slug
             }
-            if i.image:
-                s['img'] = i
             lst.append(s)
         lst1 = lst[(len(lst) // 2) + 1:]
         lst = lst[:(len(lst) // 2) + 1]
@@ -41,10 +39,11 @@ class ProductListByCategory(View):
 
     def get(self, request, *args, **kwargs):
         category = Category.objects.filter(slug=kwargs['slug'])[0]
-        brands = Brand.objects.all().values('name', 'id')
-        sizes = ProductSize.objects.filter(product__category=category)
-        sizes = list(set([i.name.lower() for i in sizes]))
-        products = Product.objects.filter(category=category, available=True)
+        subcategory_type = SubcategoryType.objects.filter(
+            subcategory__category=category).only('id', 'name')
+        sizes = ProductSize.objects.filter(product__category=category).only('name').distinct('name')
+        products = Product.objects.filter(category=category, available=True).select_related('brand')
+        brands = Brand.objects.filter(product__in=products).values('name', 'id').distinct()
         paginator = Paginator(products, 5)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
@@ -52,7 +51,8 @@ class ProductListByCategory(View):
             'products': page_obj,
             'category': category,
             'brands': brands,
-            'sizes': sizes
+            'sizes': sizes,
+            'subcategory': subcategory_type
         }
         return render(request, 'shop/product/product_list.html', context=context)
 
@@ -110,18 +110,21 @@ class ProductListBySubcategoryType(View):
 class ProductDetail(View):
 
     def get(self, request, *args, **kwargs):
-        product = Product.objects.filter(slug=kwargs['slug']).first()
+        product = Product.objects.filter(slug=kwargs['slug']).select_related('brand').first()
         spec = ['Характеристики:']
         if product.specifications:
             var = product.specifications.split('\n')
             spec.append(var)
-        recommendation = Product.objects.all()[:6].select_related('brand')
+        recommendation = Product.objects.all()[:6].select_related('brand').only('slug', 'brand', 'name', 'image',
+                                                                                'price')
+        product_image = ImgProduct.objects.filter(product=product)
         form = CartAddProductForm()
         context = {
             'product': product,
             'spec': spec,
             'recommendation': recommendation,
-            'cart_add': form
+            'cart_add': form,
+            'images': product_image
         }
         return render(request, 'shop/product/product_detail.html', context=context)
 
