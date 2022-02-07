@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cart.apps.CartConfig',
     'blog.apps.BlogConfig',
+    'search.apps.SearchConfig',
     'shop.apps.ShopConfig',
     'orders.apps.OrdersConfig',
     'favorites.apps.FavoritesConfig',
@@ -51,7 +52,6 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'django_email_verification',
     'tinymce'
-
 ]
 
 MIDDLEWARE = [

@@ -7,6 +7,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     }
 
+    $('.search').click(function (){
+        $('.search-form').toggleClass('search-form__active')
+    })
+
     $('.menu-toggle').click(function () {
         toggleMenu();
     })

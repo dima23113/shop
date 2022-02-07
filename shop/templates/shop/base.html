@@ -20,6 +20,16 @@
 {% cache 86400 navbar %}
     <div class="navbar" id="navbar">
         <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-lg-12">
+                <form class="search-form" method="get" action="{% url 'search:product_search' %}">
+                    <input type="text" class="search__input" name="search_field" id="id_search_field" required="" placeholder="Что будем искать?">
+                    <input type="submit" value="Поиск" hidden>
+                </form>
+            </div>
+        </div>
+        </div>
+        <div class="container-fluid">
             <div class="row">
                 <div class="products col-md-5 col-sm-3 col-lg-5 menu-container">
                     <i class="menu-toggle"></i>
@@ -60,7 +70,7 @@
                         <li class="right-menu__item"><a href="
                                 {% if user.is_authenticated %}{% url 'account:profile' %}{% else %}{% url 'account:login' %}{% endif %}">Профиль</a>
                         </li>
-                        <li class="right-menu__item"><a href="#">Поиск</a></li>
+                        <li class="right-menu__item"><a class="search" href="#">Поиск</a></li>
                         <li class="right-menu__item"><a href="{% url 'cart:cart_detail' %}">Корзина <span id="cart_qty">[]</span></a>
                         </li>
                     </ul>

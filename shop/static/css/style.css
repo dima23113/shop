@@ -1128,6 +1128,32 @@ body {
     margin-bottom: 30px;
 }
 
+.search-form {
+    display: none;
+    width: 100%;
+    background-color: #afb1b1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+    transition: all .2s ease;
+}
 
+.search-form__active {
+    display: contents;
+}
 
+.search-div {
+    background-color: #afb1b1;
+    height: 60px;
+}
 
+.search__input {
+    width: 100%;
+    background-color: #afb1b1;
+    border: none;
+    outline: none;
+    -webkit-appearance: none;
+    height: 60px;
+    text-align: center;
+}
