@@ -27,8 +27,3 @@ class SearchProductListView(View):
             return render(request, 'search/product_search.html', context=context)
         else:
             return render(request, 'search/product_search.html')
-
-    def post(self, request, *args, **kwargs):
-        form = SearchProductForm(request.POST)
-        if form.is_valid():
-            return redirect('search:product_search')

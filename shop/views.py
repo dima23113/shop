@@ -40,14 +40,13 @@ class ProductListByCategory(View):
     def get(self, request, *args, **kwargs):
         category = Category.objects.filter(slug=kwargs['slug'])[0]
         sizes = ProductSize.objects.filter(product__category=category).only('name').distinct('name')
-        products = Product.objects.filter(category=category, available=True).select_related('brand').only('image',
-                                                                                                          'slug',
-                                                                                                          'brand',
-                                                                                                          'name',
-                                                                                                          'price')
+        products = Product.objects.filter(category=category,
+                                          available=True).select_related(
+            'brand').only('image', 'slug', 'brand', 'name', 'price')
         subcategory = Subcategory.objects.filter(subcategory_products__in=products).distinct().only('id', 'name')
         subcategory_type = SubcategoryType.objects.filter(
-            subcategory__category=category, product__in=products).distinct().only('id', 'name')
+            subcategory__category=category,
+            product__in=products).distinct().only('id', 'name')
         brands = Brand.objects.filter(product__in=products).values('name', 'id').distinct()
         paginator = Paginator(products, 5)
         page_number = request.GET.get('page')
@@ -115,16 +114,24 @@ class ProductListBySubcategory(View):
 class ProductListBySubcategoryType(View):
 
     def get(self, request, *args, **kwargs):
-        products = Product.objects.filter(subcategory_type__slug=kwargs['slug'], available=True).values('image',
-                                                                                                        'brand',
-                                                                                                        'slug', 'name',
-                                                                                                        'price')
+        subcategory_type = SubcategoryType.objects.get(slug=kwargs['slug'])
+        products = Product.objects.filter(subcategory_type=subcategory_type,
+                                          available=True)
+        category = Category.objects.filter(products__in=products)
+        subcategory = Subcategory.objects.filter(subcategory_type=subcategory_type)
+        sizes = ProductSize.objects.filter(product__in=products).distinct('name')
+        brands = Brand.objects.filter(product__in=products).only('name', 'id').distinct()
         paginator = Paginator(products, 50)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
 
         context = {
-            'products': page_obj
+            'products': page_obj,
+            'brand': brands,
+            'sizes': sizes,
+            'category': category,
+            'subcategory': subcategory,
+            'subcategory_type': subcategory_type
         }
         return render(request, 'shop/product/product_list.html', context=context)
 
