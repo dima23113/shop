@@ -1,6 +1,7 @@
 {% extends 'shop/base.html' %}
 {% load thumbnail %}
 {% load cache %}
+{% load static %}
 {% block title %}{{ category.name }}{% endblock %}
 
 {% block content %}
@@ -9,53 +10,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="sidebar col-md-2 col-sm-2 col-lg-2">
-                        <div class="cell">
-                            <div class="clear_all" style="margin-bottom: 30px;"><a class="clear_filter" href="#"
-                                                                                   id="clear_filter">Очистить</a>
-                            </div>
-                            <div class="nw-i-filter">
-                                <ul>
-                                    <li class="sort">
-                                        <a href="#" id="popular">Популярное</a>
-                                    </li>
-                                    <li class="sort">
-                                        <a href="#" id="newest">Новинки</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="nw-i-filter">
-                                <label class="products_type" data-id="{{ category.id }}">Тип продукта:</label>
-                                <ul>
-                                    {% for c in subcategory %}
-                                        <li class="filter">
-                                            <a class="product_type" href="#" data-id="{{ c.id }}"
-                                               id="{{ c.name }}">{{ c.name }}</a>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                            <div class="nw-i-filter">
-                                <span class="brands">Бренд:</span>
-                                <ul>
-                                    {% for brand in brands %}
-                                        <li class="filter">
-                                            <a class="brands" href="#" data-id="{{ brand.id }}"
-                                               id="{{ brand.name }}">{{ brand.name }}</a>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                            <div class="nw-i-filter">
-                                <span class="sizes">Размеры:</span>
-                                <ul>
-                                    {% for i in sizes %}
-                                        <li class="filter">
-                                            <a class="sizes" href="#" data-id="{{ i.name }}" id="{{ i.name }}">{{ i.name }}</a>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                        </div>
+                        {% include 'shop/includes/filter.html' %}
                     </div>
                     <div class="product-list col-md-10 col-sm-10 col-lg-10">
                         <ul class="products-list">
@@ -102,7 +57,7 @@
             </div>
         </div>
     </div>
-
+    <!--
     <script>
         document.addEventListener('DOMContentLoaded', function () {
 
@@ -139,7 +94,7 @@
             console.log(product_type)
             $.ajax({
                 data: {'product_type': product_type, 'brand': brand, 'size': size, 'category': category},
-                url: "{% url 'shop:json_filter' %}",
+                url: ,
                 success: function (response) {
                     render(response['render'])
                     if ($('.clear_all ').attr('class') == 'clear_all clear_all_active') {
@@ -160,4 +115,6 @@
         }
 
     </script>
+    -->
+    <script src="{% static 'js/product_filter.js' %}"></script>
 {% endblock %}

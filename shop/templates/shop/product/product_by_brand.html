@@ -1,6 +1,8 @@
 {% extends 'shop/base.html' %}
 {% load thumbnail %}
+{% load static %}
 {% block title %}{{ brand.name }}-Ноябрь Скейтшоп{% endblock %}
+
 
 
 {% block content %}
@@ -9,8 +11,10 @@
         <div class="content-items">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="sidebar col-md-1 col-sm-1 col-lg-1"></div>
-                    <div class="products col-md-11 col-sm-11 col-lg-11">
+                    <div class="sidebar col-md-2 col-sm-2 col-lg-2">
+                        {% include 'shop/includes/filter.html' %}
+                    </div>
+                    <div class="products col-md-10 col-sm-10 col-lg-10">
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="brand-name col-md-6 col-sm-6 col-lg-6">
@@ -75,4 +79,5 @@
             </div>
         </div>
     </div>
+    <script src="{% static 'js/product_filter.js' %}"></script>
 {% endblock %}
