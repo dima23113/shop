@@ -267,7 +267,8 @@ a:active {
 
 .logo-brand {
     text-align: left;
-    display: inline-block;
+    display: inline-flex;
+    max-height: 350px;
 }
 
 .brand-name {

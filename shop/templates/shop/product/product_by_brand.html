@@ -21,7 +21,7 @@
                                     <div class="brand-name-name"><h1>{{ brand.name }}</h1></div>
                                     <div class="about">{{ brand.description }}<br></div>
                                 </div>
-                                {% thumbnail brand.image "300x300" crop="80%" as im %}
+                                {% thumbnail brand.image "400x400" crop="80%" as im %}
                                     <div class="logo-brand col-md-6 col-sm-6 col-lg-6"><img alt="brand-logo"
                                                                                             src="{{ im.url }}"></div>
                                 {% endthumbnail %}
