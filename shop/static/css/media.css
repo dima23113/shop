@@ -117,6 +117,17 @@
     .footer * {
         font-size: 8px;
     }
+    .col-item__title *{
+        font-size: 8px;
+        margin-bottom: 0;
+
+    }
+    .col-item__title p:last-child {
+        margin-bottom: 10px;
+    }
+    .price {
+        font-size: 10px;
+    }
 }
 
 /* xs <= Small (sm) */
