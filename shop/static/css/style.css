@@ -159,11 +159,6 @@ a:active {
     text-align: center;
     left: 0;
     top: 50px;
-    /*
-    top: 30px;
-    padding: 0;
-    margin-left: 30%;
-    margin-right: 30%;*/
 }
 
 .left-menu.left-menu_active li {
@@ -178,11 +173,6 @@ a:active {
     text-align: center;
     top: 26px;
     right: 0;
-
-    /*top: 131px;
-    padding: 0;
-    margin-left: 30%;
-    margin-right: 30%;*/
 }
 
 .right-auth.right-auth_active li {
@@ -211,11 +201,6 @@ a:active {
 
 
 .product-list {
-    padding: 0;
-    text-align: left;
-}
-
-.products-list {
     padding: 0;
     text-align: left;
 }
@@ -258,11 +243,6 @@ a:active {
 
 .paginator-list:visited {
     color: black; /* Цвет посещенных ссылок */
-}
-
-
-.products {
-
 }
 
 .logo-brand {

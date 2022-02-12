@@ -139,7 +139,13 @@ class ProductListBySubcategoryType(View):
 class ProductDetail(View):
 
     def get(self, request, *args, **kwargs):
-        product = Product.objects.filter(slug=kwargs['slug']).select_related('brand').first()
+        product = Product.objects.select_related('brand').\
+            defer('compound',
+                  'gender',
+                  'mark',
+                  'type_of',
+                  'updated',
+                  'created').get(slug=kwargs['slug'])
         spec = ['Характеристики:']
         if product.specifications:
             var = product.specifications.split('\n')
