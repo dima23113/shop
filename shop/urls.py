@@ -8,7 +8,7 @@ app_name = 'shop'
 
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
-    path('brand/', BrandList.as_view(), name='brand_list'),
+    path('brand/', cache_page(60*100)(BrandList.as_view()), name='brand_list'),
     path('brand/<slug:slug>/', cache_page(60*100)(ProductListByBrand.as_view()),
          name='product_list_by_brand'),
     path('category/<slug:slug>/', cache_page(60*100)(ProductListByCategory.as_view()),

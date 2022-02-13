@@ -80,7 +80,7 @@ class Product(models.Model):
     subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE, verbose_name='Подкатегория',
                                     related_name='subcategory_products')
     subcategory_type = models.ForeignKey(SubcategoryType, on_delete=models.CASCADE, verbose_name='Тип подкатегории',
-                                         blank=True, null=True)
+                                         blank=True, null=True, related_name='subcategory_type_products')
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, verbose_name='Название бренда')
     name = models.CharField(max_length=256, verbose_name='Название товара')
     slug = models.SlugField(max_length=256, verbose_name='Слаг товара')
