@@ -61,7 +61,6 @@ class QtyProductSizeView(View):
     def get(self, request, *args, **kwargs):
         product = request.GET.get('product', None)
         size = request.GET.get('size', None)
-        print(product, size)
         if product and size:
             product_size = ProductSize.objects.filter(product__name=product, name=size)[0]
             response = {

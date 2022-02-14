@@ -1138,3 +1138,7 @@ body {
     height: 60px;
     text-align: center;
 }
+
+.menu_phone {
+    display: none;
+}

@@ -1,3 +1,8 @@
+$('#products-menu').clone(true).unwrap().appendTo('#menu_phone');
+a = document.getElementsByClassName('menu-toggle')[0]
+$('#menu_phone')[0].getElementsByClassName('products')[0].getElementsByClassName('menu-toggle')[0].remove()
+$('#products-menu-right').clone(true).unwrap().appendTo('#menu_phone');
+
 document.addEventListener('DOMContentLoaded', function () {
     function toggleMenu() {
         $('.menu-toggle').toggleClass('menu-toggle_active');
@@ -7,8 +12,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     }
 
-    $('.search').click(function (){
+    $('.search').click(function () {
         $('.search-form').toggleClass('search-form__active')
+        window.scrollTo(0, 100)
     })
 
     $('.menu-toggle').click(function () {
@@ -101,3 +107,4 @@ var swiper = new Swiper(".mySwiper", {
         prevEl: ".swiper-button-prev",
     },
 });
+
