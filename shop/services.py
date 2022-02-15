@@ -56,5 +56,5 @@ def get_left_filter_submenu(product):
     subcategory_type = SubcategoryType.objects.filter(subcategory_type_products__in=product). \
         distinct('name').only('id', 'slug', 'name')
     sizes = ProductSize.objects.filter(product__in=product).distinct('name').only('id', 'name')
-    brands = Brand.objects.filter(product__in=product).distinct('name').only('id', 'slug', 'name')
+    brands = Brand.objects.filter(product__in=product).distinct('name')
     return category, subcategory, subcategory_type, sizes, brands

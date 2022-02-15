@@ -18,13 +18,16 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="brand-name col-md-6 col-sm-6 col-lg-6">
-                                    <div class="brand-name-name"><h1>{{ brand.name }}</h1></div>
-                                    <div class="about">{{ brand.description }}<br></div>
-                                </div>
-                                {% thumbnail brand.image "400x400" crop="80%" as im %}
-                                    <div class="logo-brand col-md-6 col-sm-6 col-lg-6"><img alt="brand-logo"
-                                                                                            src="{{ im.url }}"></div>
-                                {% endthumbnail %}
+                                    {% for i in brand %}
+                                        <div class="brand-name-name"><h1>{{ i.name }}</h1></div>
+                                        <div class="about">{{ i.description }}<br></div>
+                                        </div>
+                                        {% thumbnail i.image "400x400" crop="80%" as im %}
+                                            <div class="logo-brand col-md-6 col-sm-6 col-lg-6"><img alt="brand-logo"
+                                                                                                    src="{{ im.url }}">
+                                            </div>
+                                        {% endthumbnail %}
+                                    {% endfor %}
                             </div>
                         </div>
                         <div class="container-fluid">
