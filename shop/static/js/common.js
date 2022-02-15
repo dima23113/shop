@@ -1,14 +1,20 @@
 $('#products-menu').clone(true).unwrap().appendTo('#menu_phone');
 a = document.getElementsByClassName('menu-toggle')[0]
 $('#menu_phone')[0].getElementsByClassName('products')[0].getElementsByClassName('menu-toggle')[0].remove()
-$('#products-menu-right').clone(true).unwrap().appendTo('#menu_phone');
-
+$('#products-menu-right').clone(true).unwrap().appendTo('#menu_phone')
+$('#menu_phone')[0].getElementsByClassName('products')[0].setAttribute('class', 'menu_phone_left')
+$('#menu_phone')[0].getElementsByClassName('auth')[0].setAttribute('class', 'menu_phone_right')
+$('#menu_phone')[0].getElementsByClassName('menu_phone_right')[0].getElementsByClassName('right-auth')[0].setAttribute('class', 'menu_phone_right_ul')
+$('#menu_phone')[0].getElementsByClassName('menu_phone_left')[0].getElementsByClassName('left-menu')[0].setAttribute('class', 'menu_phone_left_ul')
 document.addEventListener('DOMContentLoaded', function () {
     function toggleMenu() {
         $('.menu-toggle').toggleClass('menu-toggle_active');
-        $('.left-menu').toggleClass('left-menu_active');
-        $('.right-auth').toggleClass('right-auth_active');
+        //$('.left-menu').toggleClass('left-menu_active');
+        //$('.right-auth').toggleClass('right-auth_active');
+        $('#menu_phone').toggleClass('menu_phone_active')
+        //$('#menu_phone').getElementsByClassName('products')[0].toggleClass('left-menu_active')
         $('.navbar').toggleClass('navbar_active');
+
 
     }
 
@@ -64,9 +70,11 @@ $('document').ready(function () {
 
     function closeMenu() {
         $('.menu-toggle').removeClass('menu-toggle_active');
-        $('.left-menu').removeClass('left-menu_active');
-        $('.right-auth').removeClass('right-auth_active');
+        //$('.left-menu').removeClass('left-menu_active');
+        //$('.right-auth').removeClass('right-auth_active');
+        $('#menu_phone').removeClass('menu_phone_active')
         $('.navbar').removeClass('navbar_active');
+
     }
 
     function screenClass() {

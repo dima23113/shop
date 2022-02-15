@@ -1142,3 +1142,36 @@ body {
 .menu_phone {
     display: none;
 }
+
+.menu_phone_active {
+    display: block;
+}
+
+.menu_phone_right_ul {
+    text-decoration: none;
+}
+
+.menu_phone_left_ul {
+    text-decoration: none;
+}
+
+.menu_phone_right_ul *:hover {
+    text-decoration: none;
+}
+
+.menu_phone_left_ul *:hover{
+    text-decoration: none;
+}
+
+
+.menu_phone_left_ul li ul {
+    display: none;
+}
+
+.menu_phone_left_ul li a {
+    text-decoration: none;
+}
+
+.menu_phone_right_ul li a {
+    text-decoration: none;
+}
