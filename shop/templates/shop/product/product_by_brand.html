@@ -22,7 +22,7 @@
                                         <div class="brand-name-name"><h1>{{ i.name }}</h1></div>
                                         <div class="about">{{ i.description }}<br></div>
                                         </div>
-                                        {% thumbnail i.image "400x400" crop="80%" as im %}
+                                        {% thumbnail i.image "400x400"  as im %}
                                             <div class="logo-brand col-md-6 col-sm-6 col-lg-6"><img alt="brand-logo"
                                                                                                     src="{{ im.url }}">
                                             </div>
@@ -30,6 +30,7 @@
                                     {% endfor %}
                             </div>
                         </div>
+                        <div class="separator" style="margin-bottom: 15px"></div>
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="product-list col-md-12 col-sm-12 col-lg-12">
