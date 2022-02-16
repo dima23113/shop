@@ -22,6 +22,7 @@
     .logo-img {
         width: 160px;
     }
+
     .left-menu .sub-menu {
         top: 47px;
     }
@@ -117,14 +118,17 @@
     .footer * {
         font-size: 8px;
     }
-    .col-item__title *{
+
+    .col-item__title * {
         font-size: 8px;
         margin-bottom: 0;
 
     }
+
     .col-item__title p:last-child {
         margin-bottom: 10px;
     }
+
     .price {
         font-size: 10px;
     }
@@ -161,6 +165,42 @@
 
     .content {
         padding-bottom: 127px;
+    }
+
+    .sort_toggle {
+        display: contents;
+        font-size: 17px;
+        cursor: pointer;
+    }
+    .filter_toggle {
+        display: contents;
+        font-size: 17px;
+        cursor: pointer;
+    }
+
+    .sort_by .nw-i-filter {
+        display: none;
+    }
+
+    .filter_by .nw-i-filter {
+        display: none;
+    }
+    .sort_filter_flex {
+        display: flex;
+    }
+    .sort_by {
+        flex: 50%;
+        text-align: left;
+    }
+    .filter_by {
+        flex: 50%;
+        text-align: right;
+    }
+    .wrapper {
+        margin-top: 15px;
+    }
+    .sidebar {
+        margin-bottom: 15px;
     }
 }
 

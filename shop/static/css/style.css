@@ -634,9 +634,11 @@ body {
 .product-add {
     display: flex;
 }
+
 .customer-login {
     flex-basis: 90%;
 }
+
 .customer-login * {
     padding-left: 0;
     padding-top: 15px;
@@ -923,16 +925,17 @@ body {
     padding-left: 16px;
 }
 
-.cart-side *{
+.cart-side * {
     font-family: 'Raleway', sans-serif;
     font-size: 16px;
 }
+
 .items-wrapper__product a:hover {
     color: black;
     text-decoration: underline;
 }
 
-.items-wrapper__product *{
+.items-wrapper__product * {
     text-decoration: none;
 }
 
@@ -941,14 +944,15 @@ body {
     text-decoration: underline;
 }
 
-.cart-clear *{
+.cart-clear * {
     text-decoration: none;
 }
 
 .ui-btn-collections {
     display: inline-flex;
 }
-.ui-btn-collections *{
+
+.ui-btn-collections * {
     width: 23px;
     height: 23px;
     line-height: 23px;
@@ -980,7 +984,7 @@ body {
 
 }
 
-.log *{
+.log * {
     font-size: 16px;
     flex-basis: 50%;
 }
@@ -1000,7 +1004,7 @@ body {
 }
 
 
-.order-list *{
+.order-list * {
     font-family: 'Raleway', sans-serif;
 }
 
@@ -1008,9 +1012,9 @@ body {
 .select-custom {
     background: none; /* убираем фон */
     border: 1px solid black; /* рамка */
-    border-radius: 0;/* скругление полей формы */
-    -webkit-appearance: none;/* Chrome */
-    -moz-appearance: none;/* Firefox */
+    border-radius: 0; /* скругление полей формы */
+    -webkit-appearance: none; /* Chrome */
+    -moz-appearance: none; /* Firefox */
     appearance: auto;
 }
 
@@ -1105,7 +1109,7 @@ body {
     text-decoration: none;
 }
 
-.menu_phone_left_ul *:hover{
+.menu_phone_left_ul *:hover {
     text-decoration: none;
 }
 
@@ -1121,3 +1125,16 @@ body {
 .menu_phone_right_ul li a {
     text-decoration: none;
 }
+
+.sort_toggle, .filter_toggle {
+    text-decoration: underline;
+    color: black;
+    display: none;
+}
+
+.sort_toggle:hover, .filter_toggle:hover {
+    text-decoration: none;
+    color: black;
+}
+
+
