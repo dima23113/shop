@@ -9,13 +9,8 @@ $('#menu_phone')[0].getElementsByClassName('menu_phone_left')[0].getElementsByCl
 document.addEventListener('DOMContentLoaded', function () {
     function toggleMenu() {
         $('.menu-toggle').toggleClass('menu-toggle_active');
-        //$('.left-menu').toggleClass('left-menu_active');
-        //$('.right-auth').toggleClass('right-auth_active');
         $('#menu_phone').toggleClass('menu_phone_active')
-        //$('#menu_phone').getElementsByClassName('products')[0].toggleClass('left-menu_active')
         $('.navbar').toggleClass('navbar_active');
-
-
     }
 
     $('.search').click(function () {
@@ -27,6 +22,22 @@ document.addEventListener('DOMContentLoaded', function () {
             $('.cart').css('margin-top', '74px')
             window.scrollTo(0, 100)
             console.log($('.search-form').attr('class'))
+        }
+    })
+
+    $('.sort_by').click(function () {
+        if ($('.sort_toggle_d').attr('class') == 'sort_toggle_d sort_toggle_d_active') {
+            $('.sort_toggle_d').removeClass('sort_toggle_d_active')
+        } else {
+            $('.sort_toggle_d').toggleClass('sort_toggle_d_active')
+        }
+    })
+
+    $('.filter_toggle').click(function () {
+        if ($('.filter_toggle_d').attr('class') == 'filter_toggle_d filter_toggle_d_active') {
+            $('.filter_toggle_d').removeClass('filter_toggle_d_active')
+        } else {
+            $('.filter_toggle_d').toggleClass('filter_toggle_d_active')
         }
     })
 

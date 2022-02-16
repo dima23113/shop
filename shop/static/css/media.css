@@ -172,36 +172,67 @@
         font-size: 17px;
         cursor: pointer;
     }
+
     .filter_toggle {
         display: contents;
         font-size: 17px;
         cursor: pointer;
     }
 
-    .sort_by .nw-i-filter {
+    .sort_toggle_d {
         display: none;
     }
 
-    .filter_by .nw-i-filter {
+    .filter_toggle_d {
         display: none;
     }
+
     .sort_filter_flex {
         display: flex;
     }
+
     .sort_by {
         flex: 50%;
         text-align: left;
     }
+
+    .sort_by * {
+        padding-bottom: 10px;
+        margin-bottom: 0;
+    }
+
     .filter_by {
         flex: 50%;
         text-align: right;
     }
+
     .wrapper {
         margin-top: 15px;
     }
+
     .sidebar {
         margin-bottom: 15px;
     }
+
+    .filter_toggle_d_active {
+        display: contents;
+    }
+
+    .sort_toggle_d_active {
+        display: contents;
+    }
+
+    .sort_toggle_d_active * {
+        font-size: 17px;
+    }
+
+    .filter_toggle_d_active *{
+        font-size: 17px;
+    }
+    .filter_toggle_d .nw-i-filter {
+        text-align: left;
+    }
+
 }
 
 @media (max-width: 500px) {

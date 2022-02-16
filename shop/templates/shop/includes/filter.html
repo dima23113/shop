@@ -6,108 +6,112 @@
     <div class="sort_filter_flex">
         <div class="sort_by">
             <a href="#" class="sort_toggle">Сортировать</a>
-            <div class="nw-i-filter">
-                <ul>
-                    <li class="sort">
-                        <a href="#" id="popular">Популярное</a>
-                    </li>
-                    <li class="sort">
-                        <a href="#" id="newest">Новинки</a>
-                    </li>
-                </ul>
+            <div class="sort_toggle_d">
+                <div class="nw-i-filter">
+                    <ul>
+                        <li class="sort">
+                            <a href="#" id="popular">Популярное</a>
+                        </li>
+                        <li class="sort">
+                            <a href="#" id="newest">Новинки</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
         <div class="filter_by">
             <a href="#" class="filter_toggle">Фильтровать</a>
-            <div class="nw-i-filter">
-                <label class="category_type" data-id="">Категория:</label>
-                <ul>
-                    {% if category|length >= 1 %}
-                        {% for c in category %}
+            <div class="filter_toggle_d">
+                <div class="nw-i-filter">
+                    <label class="category_type" data-id="">Категория:</label>
+                    <ul>
+                        {% if category|length >= 1 %}
+                            {% for c in category %}
+                                <li class="filter">
+                                    <a class="category" href="#" data-id="{{ c.id }}"
+                                       id="{{ c.name }}">{{ c.name }}</a>
+                                </li>
+                            {% endfor %}
+                        {% else %}
                             <li class="filter">
-                                <a class="category" href="#" data-id="{{ c.id }}"
-                                   id="{{ c.name }}">{{ c.name }}</a>
+                                <a class="category" href="#" data-id="{{ category.id }}"
+                                   id="{{ category.name }}">{{ category.name }}</a>
                             </li>
-                        {% endfor %}
-                    {% else %}
-                        <li class="filter">
-                            <a class="category" href="#" data-id="{{ category.id }}"
-                               id="{{ category.name }}">{{ category.name }}</a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </div>
-            <div class="nw-i-filter">
-                <label class="subcategory_type" data-id="">Подкатегория:</label>
-                <ul>
-                    {% if subcategory|length >= 1 %}
-                        {% for c in subcategory %}
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="nw-i-filter">
+                    <label class="subcategory_type" data-id="">Подкатегория:</label>
+                    <ul>
+                        {% if subcategory|length >= 1 %}
+                            {% for c in subcategory %}
+                                <li class="filter">
+                                    <a class="subcategory" href="#" data-id="{{ c.id }}"
+                                       id="{{ c.name }}">{{ c.name }}</a>
+                                </li>
+                            {% endfor %}
+                        {% else %}
                             <li class="filter">
-                                <a class="subcategory" href="#" data-id="{{ c.id }}"
-                                   id="{{ c.name }}">{{ c.name }}</a>
+                                <a class="subcategory" href="#" data-id="{{ subcategory.id }}"
+                                   id="{{ subcategory.name }}">{{ subcategory.name }}</a>
                             </li>
-                        {% endfor %}
-                    {% else %}
-                        <li class="filter">
-                            <a class="subcategory" href="#" data-id="{{ subcategory.id }}"
-                               id="{{ subcategory.name }}">{{ subcategory.name }}</a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </div>
-            <div class="nw-i-filter">
-                <label class="subcategory_type_type" data-id="">Тип Подкатегории:</label>
-                <ul>
-                    {% if subcategory_type|length >= 1 %}
-                        {% for c in subcategory_type %}
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="nw-i-filter">
+                    <label class="subcategory_type_type" data-id="">Тип Подкатегории:</label>
+                    <ul>
+                        {% if subcategory_type|length >= 1 %}
+                            {% for c in subcategory_type %}
+                                <li class="filter">
+                                    <a class="subcategory_type_type_t" href="#" data-id="{{ c.id }}"
+                                       id="{{ c.name }}">{{ c.name }}</a>
+                                </li>
+                            {% endfor %}
+                        {% else %}
                             <li class="filter">
-                                <a class="subcategory_type_type_t" href="#" data-id="{{ c.id }}"
-                                   id="{{ c.name }}">{{ c.name }}</a>
+                                <a class="subcategory_type_type_t" href="#" data-id="{{ subcategory_type.id }}"
+                                   id="{{ subcategory_type.name }}">{{ subcategory_type.name }}</a>
                             </li>
-                        {% endfor %}
-                    {% else %}
-                        <li class="filter">
-                            <a class="subcategory_type_type_t" href="#" data-id="{{ subcategory_type.id }}"
-                               id="{{ subcategory_type.name }}">{{ subcategory_type.name }}</a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </div>
-            <div class="nw-i-filter">
-                <label class="brand_type" data-id="">Бренд:</label>
-                <ul>
-                    {% if brand|length >= 1 %}
-                        {% for c in brand %}
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="nw-i-filter">
+                    <label class="brand_type" data-id="">Бренд:</label>
+                    <ul>
+                        {% if brand|length >= 1 %}
+                            {% for c in brand %}
+                                <li class="filter">
+                                    <a class="brands" href="#" data-id="{{ c.id }}"
+                                       id="{{ c.name }}">{{ c.name }}</a>
+                                </li>
+                            {% endfor %}
+                        {% else %}
                             <li class="filter">
-                                <a class="brands" href="#" data-id="{{ c.id }}"
-                                   id="{{ c.name }}">{{ c.name }}</a>
+                                <a class="brands" href="#" data-id="{{ brand.id }}"
+                                   id="{{ brand.name }}">{{ brand.name }}</a>
                             </li>
-                        {% endfor %}
-                    {% else %}
-                        <li class="filter">
-                            <a class="brands" href="#" data-id="{{ brand.id }}"
-                               id="{{ brand.name }}">{{ brand.name }}</a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </div>
-            <div class="nw-i-filter">
-                <span class="sizes">Размеры:</span>
-                <ul>
-                    {% if sizes|length >= 1 %}
-                        {% for i in sizes %}
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="nw-i-filter">
+                    <span class="sizes">Размеры:</span>
+                    <ul>
+                        {% if sizes|length >= 1 %}
+                            {% for i in sizes %}
+                                <li class="filter">
+                                    <a class="size" href="#" data-id="{{ i.name }}"
+                                       id="{{ i.name }}">{{ i.name }}</a>
+                                </li>
+                            {% endfor %}
+                        {% else %}
                             <li class="filter">
-                                <a class="size" href="#" data-id="{{ i.name }}"
-                                   id="{{ i.name }}">{{ i.name }}</a>
+                                <a class="size" href="#" data-id="{{ sizes.name }}"
+                                   id="{{ sizes.name }}">{{ sizes.name }}</a>
                             </li>
-                        {% endfor %}
-                    {% else %}
-                        <li class="filter">
-                            <a class="size" href="#" data-id="{{ sizes.name }}"
-                               id="{{ sizes.name }}">{{ sizes.name }}</a>
-                        </li>
-                    {% endif %}
-                </ul>
+                        {% endif %}
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
