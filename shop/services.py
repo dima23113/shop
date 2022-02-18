@@ -62,6 +62,7 @@ def get_left_filter_submenu(product):
 
 def get_banners_for_index_page():
     """Получаем баннеры для главной страницы"""
-    banners = Banners.objects.all()[:5]
-    return banners
+    banners = Banner.objects.filter(is_actual=True)[:5]
+    small_banners = SmallBanner.objects.filter(is_actual=True)[:5]
+    return banners, small_banners
 

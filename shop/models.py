@@ -76,16 +76,30 @@ class Brand(models.Model):
         return reverse('shop:product_list_by_brand', kwargs={'slug': self.slug})
 
 
-class Banners(models.Model):
+class Banner(models.Model):
     image = ImageField(upload_to='banners', verbose_name='Изображение баненра')
     is_actual = models.BooleanField(default=True, verbose_name='Актуальность баннера')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания баннера')
-    banners = models.ForeignKey(Brand, related_name='brand', on_delete=models.CASCADE,
+    banners = models.ForeignKey(Brand, related_name='big_brand_banner', on_delete=models.CASCADE,
                                 verbose_name='Бренд для главной страницы', null=True, blank=True)
+    is_sale_banner = models.BooleanField(default=False, verbose_name='Флаг распродажи без привязки к бренду')
 
     class Meta:
         verbose_name = 'Баннер'
         verbose_name_plural = 'Баннеры'
+
+
+class SmallBanner(models.Model):
+    image = ImageField(upload_to='small_banner', verbose_name='Изображение маленького баннера')
+    is_actual = models.BooleanField(default=True, verbose_name='Актуальность баннера')
+    created = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания баннера')
+    banners = models.ForeignKey(Brand, related_name='small_brand_banner', on_delete=models.CASCADE,
+                                verbose_name='Бренд для главной страницы', null=True, blank=True)
+    is_sale_banner = models.BooleanField(default=False, verbose_name='Флаг распродажи без привязки к бренду')
+
+    class Meta:
+        verbose_name = 'Маленький баннер'
+        verbose_name_plural = 'Маленькие баннеры'
 
 
 class Product(models.Model):

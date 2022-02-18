@@ -8,24 +8,18 @@ class ProductImgInline(admin.StackedInline):
     extra = 0
 
 
-class ProductSize(admin.StackedInline):
+class ProductSizeInline(admin.StackedInline):
     model = ProductSize
     max_num = 50
     extra = 0
 
 
 class ProductInline(admin.ModelAdmin):
-    inlines = [ProductImgInline, ProductSize]
+    inlines = [ProductImgInline, ProductSizeInline]
     list_display = ['name', 'slug', 'price', 'available', 'created', 'updated']
     list_filter = ['name', 'slug']
     list_editable = ['price', 'available']
     prepopulated_fields = {'slug': ('name',)}
-
-
-class BrandInline(admin.StackedInline):
-    model = Brand
-    max_num = 50
-    extra = 0
 
 
 @admin.register(Category)
@@ -60,6 +54,11 @@ class FavoritesAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(Banners)
+@admin.register(Banner)
 class BannersAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(SmallBanner)
+class SmallBannerAdmin(admin.ModelAdmin):
     pass

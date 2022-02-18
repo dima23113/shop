@@ -12,9 +12,10 @@ from .services import sort_brand_list_into_2_columns, get_product_list_by, get_b
 class IndexView(View):
 
     def get(self, request, *args, **kwargs):
-        banners = get_banners_for_index_page()
+        banners, small_banners = get_banners_for_index_page()
         context = {
-            'banners': banners
+            'banners': banners,
+            'small_banners': small_banners
         }
         return render(request, 'shop/base.html', context=context)
 

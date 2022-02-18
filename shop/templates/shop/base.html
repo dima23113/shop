@@ -73,6 +73,7 @@
 
 
 
+
         {% if user.is_authenticated %}{% url 'account:profile' %}{% else %}{% url 'account:login' %}{% endif %}">Профиль</a>
 </li>
 <li class="right-menu__item"><a class="search" href="#">Поиск</a></li>
@@ -104,15 +105,33 @@
                 <div class="row">
                     <div class="col-md-2 col-sm-2 col-lg-2"></div>
                     <div class="col-md-8 col-sm-8 col-lg-8">
-                        <div class="swiper indexSwiper">
-                            <div class="swiper-wrapper">
-                                {% for banner in banners %}
-                                    <div class="swiper-slide">
-                                        <a href="#"><img src={% thumbnail banner.image "1420x466" as im %}"{{ im.url }}"{% endthumbnail %}></a>
-                                    </div>
+                        <div class="swiper_box">
+                            <div class="swiper indexSwiper">
+                                <div class="swiper-wrapper">
+                                    {% for banner in banners %}
+                                        <div class="swiper-slide">
+                                            <a href="#"><img
+                                                    src={% thumbnail banner.image "1420x466" as im %}"{{ im.url }}"{% endthumbnail %}></a>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="swiper-pagination"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-lg-2"></div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-2 col-sm-2 col-lg-2"></div>
+                    <div class="col-md-8 col-sm-8 col-lg-8">
+                        <div class="small_banner">
+                            <div class="small_banners">
+                                {% for sb in small_banners %}
+                                <a href="#"><img src={% thumbnail sb.image "276x276" as im %}"{{ im.url }}"{% endthumbnail %}></a>
                                 {% endfor %}
                             </div>
-                            <div class="swiper-pagination"></div>
                         </div>
                     </div>
                     <div class="col-md-2 col-sm-2 col-lg-2"></div>
