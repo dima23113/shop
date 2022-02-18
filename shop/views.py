@@ -6,13 +6,17 @@ from django.http import JsonResponse
 from django.template.loader import render_to_string
 from cart.forms import CartAddProductForm
 from .models import *
-from .services import sort_brand_list_into_2_columns, get_product_list_by
+from .services import sort_brand_list_into_2_columns, get_product_list_by, get_banners_for_index_page
 
 
 class IndexView(View):
 
     def get(self, request, *args, **kwargs):
-        return render(request, 'shop/base.html')
+        banners = get_banners_for_index_page()
+        context = {
+            'banners': banners
+        }
+        return render(request, 'shop/base.html', context=context)
 
 
 class BrandList(View):

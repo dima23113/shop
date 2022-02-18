@@ -58,3 +58,10 @@ def get_left_filter_submenu(product):
     sizes = ProductSize.objects.filter(product__in=product).distinct('name').only('id', 'name')
     brands = Brand.objects.filter(product__in=product).distinct('name')
     return category, subcategory, subcategory_type, sizes, brands
+
+
+def get_banners_for_index_page():
+    """Получаем баннеры для главной страницы"""
+    banners = Banners.objects.all()[:5]
+    return banners
+

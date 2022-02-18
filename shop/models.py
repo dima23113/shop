@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from sorl.thumbnail import ImageField
 from account.models import CustomUser
 
 
@@ -73,6 +74,18 @@ class Brand(models.Model):
 
     def get_absolute_url(self):
         return reverse('shop:product_list_by_brand', kwargs={'slug': self.slug})
+
+
+class Banners(models.Model):
+    image = ImageField(upload_to='banners', verbose_name='Изображение баненра')
+    is_actual = models.BooleanField(default=True, verbose_name='Актуальность баннера')
+    created = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания баннера')
+    banners = models.ForeignKey(Brand, related_name='brand', on_delete=models.CASCADE,
+                                verbose_name='Бренд для главной страницы', null=True, blank=True)
+
+    class Meta:
+        verbose_name = 'Баннер'
+        verbose_name_plural = 'Баннеры'
 
 
 class Product(models.Model):

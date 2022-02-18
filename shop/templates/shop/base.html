@@ -19,73 +19,79 @@
 
 {% cache 86400 navbar %}
     <div class="navbar" id="navbar">
-        <div class="container-fluid">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-md-12 col-sm-12 col-lg-12">
                 <form class="search-form" method="get" action="{% url 'search:product_search' %}">
-                    <input type="text" class="search__input" name="search_field" id="id_search_field" required="" placeholder="Что будем искать?">
+                    <input type="text" class="search__input" name="search_field" id="id_search_field" required=""
+                           placeholder="Что будем искать?">
                     <input type="submit" value="Поиск" hidden>
                 </form>
             </div>
         </div>
-        </div>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="products col-md-5 col-sm-3 col-lg-5 menu-container" id="products-menu">
-                    <i class="menu-toggle"></i>
-                    <ul class="left-menu">
-                        {% for i in categories %}
-                            <li class="left-menu__item"><a style="text-decoration: none;"
-                                                           href="{% url 'shop:product_list_by_category' i.slug %}">{{ i.name }}</a>
-                                <ul class="sub-menu">
-                                    {% for l in i.subcategories.all %}
-                                        <li class="sub-menu-li"><a href="{% url 'shop:product_list_by_subcategory' l.slug %}">{{ l.name }}</a>
-                                            <ul class="sub-menu-sub"
-                                                style="padding-left: 0rem;padding-top: 0; margin-top: 40px">
-                                                {% for c in l.subcategory_type.all %}
-                                                    <li class="sub-menu-sub-li" style="text-decoration: none;"><a
-                                                            href="{% url 'shop:product_list_by_subcategory_type' c.slug %}">{{ c.name }}</a></li>
-                                                {% endfor %}
-                                            </ul>
+    </div>
+    <div class="container-fluid">
+    <div class="row">
+    <div class="products col-md-5 col-sm-3 col-lg-5 menu-container" id="products-menu">
+        <i class="menu-toggle"></i>
+        <ul class="left-menu">
+            {% for i in categories %}
+                <li class="left-menu__item"><a style="text-decoration: none;"
+                                               href="{% url 'shop:product_list_by_category' i.slug %}">{{ i.name }}</a>
+                    <ul class="sub-menu">
+                        {% for l in i.subcategories.all %}
+                            <li class="sub-menu-li"><a
+                                    href="{% url 'shop:product_list_by_subcategory' l.slug %}">{{ l.name }}</a>
+                                <ul class="sub-menu-sub"
+                                    style="padding-left: 0rem;padding-top: 0; margin-top: 40px">
+                                    {% for c in l.subcategory_type.all %}
+                                        <li class="sub-menu-sub-li" style="text-decoration: none;"><a
+                                                href="{% url 'shop:product_list_by_subcategory_type' c.slug %}">{{ c.name }}</a>
                                         </li>
                                     {% endfor %}
                                 </ul>
                             </li>
                         {% endfor %}
-                        <li class="left-menu__item"><a href="{% url 'shop:brand_list' %}">Бренды</a></li>
-                        <li class="left-menu__item"><a href="#">Sale</a></li>
                     </ul>
-                </div>
-                <div class="logo col-md-2 col-sm-4 col-lg-2">
-                    <a href="{% url 'shop:index' %}"><img class="logo-img" src=" {% static 'img/logo.png' %}"
-                                                          alt="logo">
-                    </a>
-                    <a class="cart" href="#"></a>
-                </div>
-                <div class="auth col-md-5 col-sm-3 col-lg-5 menu-container" id="products-menu-right">
-                    <ul class="right-auth">
-                        <li class="right-menu__item"><a href="#">Блог</a></li>
-                    {% endcache %}
-                        <li class="right-menu__item"><a href="
-                                {% if user.is_authenticated %}{% url 'account:profile' %}{% else %}{% url 'account:login' %}{% endif %}">Профиль</a>
-                        </li>
-                        <li class="right-menu__item"><a class="search" href="#">Поиск</a></li>
-                        <li class="right-menu__item"><a href="{% url 'cart:cart_detail' %}">Корзина <span id="cart_qty">[]</span></a>
-                        </li>
-                    </ul>
-                </div>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12 col-sm-12 col-lg-12">
-                    <div class="menu_phone " id="menu_phone">
+                </li>
+            {% endfor %}
+            <li class="left-menu__item"><a href="{% url 'shop:brand_list' %}">Бренды</a></li>
+            <li class="left-menu__item"><a href="#">Sale</a></li>
+        </ul>
+    </div>
+    <div class="logo col-md-2 col-sm-4 col-lg-2">
+        <a href="{% url 'shop:index' %}"><img class="logo-img" src=" {% static 'img/logo.png' %}"
+                                              alt="logo">
+        </a>
+        <a class="cart" href="#"></a>
+    </div>
+    <div class="auth col-md-5 col-sm-3 col-lg-5 menu-container" id="products-menu-right">
+    <ul class="right-auth">
+    <li class="right-menu__item"><a href="#">Блог</a></li>
+{% endcache %}
+<li class="right-menu__item"><a href="
 
-                    </div>
-                </div>
-            </div>
-        </div>
+
+
+        {% if user.is_authenticated %}{% url 'account:profile' %}{% else %}{% url 'account:login' %}{% endif %}">Профиль</a>
+</li>
+<li class="right-menu__item"><a class="search" href="#">Поиск</a></li>
+<li class="right-menu__item"><a href="{% url 'cart:cart_detail' %}">Корзина <span id="cart_qty">[]</span></a>
+</li>
+</ul>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-lg-12">
+            <div class="menu_phone " id="menu_phone">
+
             </div>
         </div>
     </div>
+</div>
+</div>
+</div>
+</div>
 
 <br>
 <br>
@@ -93,6 +99,27 @@
 <div class="wrapper">
     {% block content %}
         {% include 'account/messages.html' %}
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-2 col-sm-2 col-lg-2"></div>
+                    <div class="col-md-8 col-sm-8 col-lg-8">
+                        <div class="swiper indexSwiper">
+                            <div class="swiper-wrapper">
+                                {% for banner in banners %}
+                                    <div class="swiper-slide">
+                                        <a href="#"><img src={% thumbnail banner.image "1420x466" as im %}"{{ im.url }}"{% endthumbnail %}></a>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="swiper-pagination"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-lg-2"></div>
+                </div>
+            </div>
+        </div>
+
     {% endblock content %}
     {% cache 86400 footer %}
         <div class="footer">
@@ -141,9 +168,11 @@
             })
         }, 100)
     }
+
     updateQtyCart()
 </script>
 <script src="{% static 'js/libs/jquery/jquery-3.6.0.min.js' %}"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script src="{% static 'js/common.js' %}"></script>
 </body>
 </html>

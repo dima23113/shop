@@ -22,6 +22,12 @@ class ProductInline(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
 
 
+class BrandInline(admin.StackedInline):
+    model = Brand
+    max_num = 50
+    extra = 0
+
+
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'slug']
@@ -51,4 +57,9 @@ class BrandAdmin(admin.ModelAdmin):
 
 @admin.register(Favorites)
 class FavoritesAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Banners)
+class BannersAdmin(admin.ModelAdmin):
     pass
