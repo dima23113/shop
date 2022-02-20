@@ -140,3 +140,4 @@ dmypy.json
 /blog/migrations/
 /search/migrations/
 /loyalty_program/migrations/
+/discount_system/migrations/
