@@ -74,6 +74,8 @@
 
 
 
+
+
         {% if user.is_authenticated %}{% url 'account:profile' %}{% else %}{% url 'account:login' %}{% endif %}">Профиль</a>
 </li>
 <li class="right-menu__item"><a class="search" href="#">Поиск</a></li>
@@ -126,12 +128,13 @@
                 <div class="row">
                     <div class="col-md-2 col-sm-2 col-lg-2"></div>
                     <div class="col-md-8 col-sm-8 col-lg-8">
-                        <div class="small_banner">
-                            <div class="small_banners">
-                                {% for sb in small_banners %}
-                                <a href="#"><img src={% thumbnail sb.image "276x276" as im %}"{{ im.url }}"{% endthumbnail %}></a>
-                                {% endfor %}
-                            </div>
+                        <div class="small_banners">
+                            {% for sb in small_banners %}
+                                <div class="small_banner">
+                                    <a href="#"><img
+                                            src={% thumbnail sb.image "240x240" as im %}"{{ im.url }}"{% endthumbnail %}></a>
+                                </div>
+                            {% endfor %}
                         </div>
                     </div>
                     <div class="col-md-2 col-sm-2 col-lg-2"></div>

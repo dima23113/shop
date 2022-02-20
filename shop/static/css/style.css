@@ -1151,3 +1151,21 @@ body {
     position: relative;
     overflow: hidden;
 }
+.small_banners {
+    margin-top: 10px;
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+}
+
+.small_banner a img{
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    padding-right: 2px;
+}
+
+.small_banner a img:first-child {
+    padding-left: 3px;
+}
+
