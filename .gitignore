@@ -139,3 +139,4 @@ dmypy.json
 /favorites/migrations/
 /blog/migrations/
 /search/migrations/
+/loyalty_program/migrations/
