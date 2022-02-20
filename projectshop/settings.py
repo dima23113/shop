@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'cart.apps.CartConfig',
     'blog.apps.BlogConfig',
     'loyalty_program.apps.LoyaltyProgramConfig',
+    'discount_system.apps.DiscountSystemConfig',
     'search.apps.SearchConfig',
     'shop.apps.ShopConfig',
     'orders.apps.OrdersConfig',
