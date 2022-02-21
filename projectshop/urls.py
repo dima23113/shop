@@ -15,4 +15,6 @@ urlpatterns = [
     path('__debug__/', include('debug_toolbar.urls')),
     path('email/', include(email_urls)),
     path('tinymce/', include('tinymce.urls')),
+    path('chaining/', include('smart_selects.urls')),
+
 ]

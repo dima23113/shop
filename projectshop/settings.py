@@ -196,3 +196,5 @@ TINYMCE_DEFAULT_CONFIG = {
     'menubar': True,
     'statusbar': True,
 }
+
+USE_DJANGO_JQUERY = True

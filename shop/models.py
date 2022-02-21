@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from smart_selects.db_fields import ChainedForeignKey, GroupedForeignKey
 from sorl.thumbnail import ImageField
 from account.models import CustomUser
 
@@ -43,7 +44,7 @@ class Subcategory(models.Model):
 class SubcategoryType(models.Model):
     name = models.CharField(max_length=256, verbose_name='Тип подкатегории')
     slug = models.SlugField(max_length=256, verbose_name='Слаг типа подкатегории')
-    subcategory = models.ForeignKey(Subcategory, related_name='subcategory_type', on_delete=models.CASCADE,
+    subcategory = GroupedForeignKey(Subcategory, 'category', related_name='subcategory_type', on_delete=models.CASCADE,
                                     verbose_name='Подкатегория')
 
     class Meta:
@@ -104,9 +105,10 @@ class SmallBanner(models.Model):
 
 class Product(models.Model):
     category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE, verbose_name='Категория')
-    subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE, verbose_name='Подкатегория',
+    subcategory = GroupedForeignKey(Subcategory, 'category', on_delete=models.CASCADE, verbose_name='Подкатегория',
                                     related_name='subcategory_products')
-    subcategory_type = models.ForeignKey(SubcategoryType, on_delete=models.CASCADE, verbose_name='Тип подкатегории',
+    subcategory_type = GroupedForeignKey(SubcategoryType, 'subcategory', on_delete=models.CASCADE,
+                                         verbose_name='Тип подкатегории',
                                          blank=True, null=True, related_name='subcategory_type_products')
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, verbose_name='Название бренда')
     name = models.CharField(max_length=256, verbose_name='Название товара')
