@@ -16,7 +16,7 @@ class ProductSizeInline(admin.StackedInline):
 
 class ProductInline(admin.ModelAdmin):
     inlines = [ProductImgInline, ProductSizeInline]
-    list_display = ['name', 'slug', 'price', 'available', 'created', 'updated']
+    list_display = ['name', 'price', 'price_discount', 'available', 'created', 'updated']
     list_filter = ['name', 'slug']
     list_editable = ['price', 'available']
     prepopulated_fields = {'slug': ('name',)}

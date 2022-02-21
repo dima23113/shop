@@ -4,7 +4,8 @@ from shop.models import Category, Subcategory, SubcategoryType, Brand, Product
 
 
 class Discount(models.Model):
-    amount_of_discount = models.PositiveIntegerField(validators=[MaxValueValidator(80)], verbose_name='Размер скидки')
+    amount_of_discount = models.DecimalField(validators=[MaxValueValidator(80.00)], max_digits=10, decimal_places=2,
+                                             verbose_name='Размер скидки')
     is_active = models.BooleanField(verbose_name='Акция активна?')
     date_of_completion = models.DateTimeField(verbose_name='Дата завершения Акции')
 
