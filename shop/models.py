@@ -121,10 +121,12 @@ class Product(models.Model):
     article = models.CharField(max_length=256, verbose_name='Артикул')
     type_of = models.CharField(max_length=256, verbose_name='Тип', blank=True)
     mark = models.CharField(max_length=256, verbose_name='Марка', blank=True)
-    gender = models.CharField(max_length=256, verbose_name='Пол')
+    gender = models.CharField(max_length=256, verbose_name='Пол', null=True, blank=True)
     compound = models.CharField(max_length=256, verbose_name='Состав', blank=True)
     image = models.ImageField(blank=True, null=True, upload_to='main_image', verbose_name='Главное изображение')
     favorite = models.ManyToManyField(CustomUser, through='Favorites', related_name='favorite')
+    price_discount = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True,
+                                         verbose_name='Цена товара со скидкой')
 
     class Meta:
         ordering = ('name',)
@@ -134,6 +136,10 @@ class Product(models.Model):
 
     def __str__(self):
         return f'{self.category.name} - {self.name}'
+
+    def save(self, *args, **kwargs):
+        self.price_discount = self.price
+        super(Product, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse('shop:product_detail', kwargs={'slug': self.slug})
