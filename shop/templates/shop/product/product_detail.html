@@ -39,7 +39,14 @@
                                    href="{% url 'shop:product_list_by_brand' product.brand.slug %}">{{ product.brand.name|upper }}</a>
                             </li>
                             <li><span class="name" itemprop="name">{{ product.name }}</span></li>
-                            <li><span itemprop="price" class="product-price">{{ product.price }} руб.</span></li>
+                            <li>
+                                {% if product.price == product.price_discount %}
+                                <span itemprop="price" class="product-price">{{ product.price }} руб.</span>
+                                {% else %}
+                                <span itemprop="price" class="product-price"><s>{{ product.price }} руб.</s></span>
+                                <span itemprop="price" class="product-price">{{ product.price_discount }} руб.</span>
+                                {% endif %}
+                            </li>
                             <li>
                                 <div class="choose_size_wrapper">
                                     <div class="choose_size_label"><label>Размер:</label></div>

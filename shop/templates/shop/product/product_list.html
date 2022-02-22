@@ -27,7 +27,14 @@
                                                 <p>{{ i.brand }}</p>
                                                 <p>{{ i.name }}</p>
                                             </div>
-                                            <div class="price">{{ i.price }} руб.</div>
+                                            <div class="price">
+                                                {% if i.price == i.price_discount %}
+                                                {{ i.price }}
+                                                {% else %}
+                                                    <s>{{ i.price }}</s>
+                                                    <span>{{ i.price_discount }}</span>
+                                                {% endif %}
+                                            </div>
                                         </div>
                                     </div>
                                 </li>
@@ -57,64 +64,5 @@
             </div>
         </div>
     </div>
-    <!--
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-
-            let producttype = []
-            let brand = []
-            let size = []
-            let category = $('.products_type').data('id')
-            console.log(category)
-            $(".product_type").click(function () {
-                var product_type = $(this).data('id')
-                producttype.push(product_type)
-                getProductByFilter(producttype, brand, size, category)
-            });
-
-            $('.brands').click(function () {
-                var brands = $(this).data('id')
-                brand.push(brands)
-                getProductByFilter(producttype, brand, size, category)
-            });
-
-            $('.sizes').click(function () {
-                var sizes = $(this).data('id')
-                size.push(sizes)
-                getProductByFilter(producttype, brand, size, category)
-            })
-
-            $(".clear_filter").click(function () {
-                location.reload()
-            })
-
-        });
-
-        function getProductByFilter(product_type, brand, size, category) {
-            console.log(product_type)
-            $.ajax({
-                data: {'product_type': product_type, 'brand': brand, 'size': size, 'category': category},
-                url: ,
-                success: function (response) {
-                    render(response['render'])
-                    if ($('.clear_all ').attr('class') == 'clear_all clear_all_active') {
-
-                    } else {
-                        $('.clear_all').toggleClass('clear_all_active')
-                    }
-                },
-                error: function (response) {
-                    console.log(response.responseJSON.errors)
-                }
-            });
-        }
-
-        function render(rendered) {
-            $('.products-list').remove()
-            $('.product-list').append(rendered)
-        }
-
-    </script>
-    -->
     <script src="{% static 'js/product_filter.js' %}"></script>
 {% endblock %}

@@ -171,6 +171,7 @@ a:active {
 .product-list {
     padding: 0;
     text-align: left;
+
 }
 
 .paginator-list {
@@ -1169,3 +1170,20 @@ body {
     padding-left: 3px;
 }
 
+.col-item-about {
+    display: flex;
+}
+
+.col-item__title {
+    flex: 70%;
+    text-align: left;
+}
+
+.price {
+    flex: 30%;
+    text-align: right;
+}
+
+.products-list {
+    padding-left: 0;
+}
