@@ -96,7 +96,7 @@ class CartPriceView(View):
 
     def get(self, request, *args, **kwargs):
         cart = Cart(request)
-        response = {'price': cart.get_total_price()}
+        response = {'price': cart.get_total_price(), 'price_discount': cart.get_total_discount_price()}
         return JsonResponse(response)
 
 

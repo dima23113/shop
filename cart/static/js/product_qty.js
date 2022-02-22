@@ -19,11 +19,14 @@ function updatePrice() {
         $.ajax({
             url: 'price/',
             success: function (response) {
-                console.log(response['price'])
                 c = ['Стоимость товаров: ', 'Стоимость товаров со скидкой: ', 'Итого: ']
+                c1 = []
+                c1.push('Стоимость товаров: ' + response['price'])
+                c1.push('Стоимость товаров со скидкой: ' + response['price_discount'])
+                c1.push('Стоимость товаров: ' + response['price'])
                 r = document.getElementsByClassName('price_')
                 for (var i = 0; i < r.length; i++) {
-                    r[i].innerHTML = c[i] + response['price']
+                    r[i].innerHTML = c1[i]
                 }
             }
         })
