@@ -3,9 +3,6 @@ from django.conf import settings
 from shop.models import Product, ProductSize
 
 
-# сделать возможность добавлять одинаковый товар, но с разными размерами. ключ будет product_id + размер. Добавить методы проверки ко-ва размеров в jsonresponse
-
-
 class Cart(object):
 
     def __init__(self, request, new_session=None):
@@ -24,7 +21,8 @@ class Cart(object):
             self.cart[product_id] = {
                 'qty': 0,
                 'price': str(product.price),
-                'size': size
+                'size': size,
+                'discount_price': str(product.price_discount)
             }
         if update_qty:
             self.cart[product_id]['qty'] = qty
@@ -34,6 +32,7 @@ class Cart(object):
             else:
                 pass
         self.save()
+        print(self.cart)
 
     def save(self):
         self.session[settings.CART_SESSION_ID] = self.cart
@@ -50,7 +49,6 @@ class Cart(object):
         tst2 = []
         for i in product_ids:
             tst2.append(i)
-        print(tst2)
         for i in range(len(tst2)):
             self.cart[tst2[i]]['product'] = Product.objects.get(id=tst2[i].split('-')[0])
         for item in self.cart.values():
@@ -63,6 +61,9 @@ class Cart(object):
 
     def get_total_price(self):
         return sum(Decimal(item['price']) * item['qty'] for item in self.cart.values())
+
+    def get_total_discount_price(self):
+        return sum(Decimal(item['discount_price']) * item['qty'] for item in self.cart.values())
 
     def clear(self):
         del self.session[settings.CART_SESSION_ID]
