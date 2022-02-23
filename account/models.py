@@ -1,13 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as _
-from.managers import CustomUserManager
+from .managers import CustomUserManager
 
 
 class CustomUser(AbstractUser):
     username = None
     email = models.EmailField(_('email address'), unique=True)
-    email_mailing = models.BooleanField(default=True, verbose_name='Рассылка акций и предложений', blank=True, null=True)
+    email_mailing = models.BooleanField(default=True, verbose_name='Рассылка акций и предложений', blank=True,
+                                        null=True)
     surname = models.CharField(max_length=256, verbose_name='Отчество', null=True, blank=True)
     phone = models.CharField(max_length=256, verbose_name='Телефон', blank=True, null=True)
     birthday = models.DateField(null=True, blank=True, verbose_name='Дата рождения')
@@ -15,6 +16,8 @@ class CustomUser(AbstractUser):
     address = models.CharField(max_length=256, verbose_name='Адрес', blank=True, null=True)
     city = models.CharField(max_length=256, verbose_name='Город', blank=True, null=True)
     country = models.CharField(max_length=256, verbose_name='Стана', blank=True, null=True)
+    amount_of_purchases = models.DecimalField(max_digits=15, decimal_places=2, default=0,
+                                              verbose_name='Сумма покупок')
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

@@ -15,6 +15,7 @@ from .forms import LoginForm, PasswordChangeForm, UserRegisterForm, UserChangeBi
 from django_email_verification import send_email
 from cart.cart import Cart
 from orders.models import Order
+from loyalty_program.models import UserBonuses
 
 
 class UserLoginView(View):
@@ -62,6 +63,7 @@ class ProfileView(View):
 
     def get(self, request, *args, **kwargs):
         user = CustomUser.objects.get(email=request.user)
+        bonuses = UserBonuses.objects.get(user=user)
         form_bio = UserChangeBioForm()
         form_phone = UserChangePhoneForm()
         form_password = PasswordChangeForm()
@@ -69,6 +71,7 @@ class ProfileView(View):
         form_email = EmailChangeForm()
         context = {
             'user': user,
+            'bonuses': bonuses,
             'form_bio': form_bio,
             'form_phone': form_phone,
             'form_password': form_password,
