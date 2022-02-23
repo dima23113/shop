@@ -1163,11 +1163,6 @@ body {
     object-fit: cover;
     height: 100%;
     width: 100%;
-    padding-right: 2px;
-}
-
-.small_banner a img:first-child {
-    padding-left: 3px;
 }
 
 .col-item-about {
@@ -1186,4 +1181,21 @@ body {
 
 .products-list {
     padding-left: 0;
+}
+
+.indexSwiper {
+border: 5px solid
+}
+
+.small_banners {
+    border: 5px solid;
+    width: 100%;
+}
+
+.small_banner {
+    border-right: 5px solid;
+}
+
+.small_banner:last-child {
+    border-right: 0;
 }

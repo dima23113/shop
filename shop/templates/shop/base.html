@@ -71,11 +71,6 @@
 {% endcache %}
 <li class="right-menu__item"><a href="
 
-
-
-
-
-
         {% if user.is_authenticated %}{% url 'account:profile' %}{% else %}{% url 'account:login' %}{% endif %}">Профиль</a>
 </li>
 <li class="right-menu__item"><a class="search" href="#">Поиск</a></li>
@@ -132,7 +127,7 @@
                             {% for sb in small_banners %}
                                 <div class="small_banner">
                                     <a href="#"><img
-                                            src={% thumbnail sb.image "240x240" as im %}"{{ im.url }}"{% endthumbnail %}></a>
+                                            src={% thumbnail sb.image "250x250" as im %}"{{ im.url }}"{% endthumbnail %}></a>
                                 </div>
                             {% endfor %}
                         </div>
