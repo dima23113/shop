@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MaxValueValidator
+from smart_selects.db_fields import GroupedForeignKey
 from shop.models import Category, Subcategory, SubcategoryType, Brand, Product
 
 
@@ -26,8 +27,9 @@ class CategoryDiscount(Discount):
 
 
 class SubcategoryDiscount(Discount):
-    subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE, related_name='subcategory_discount',
-                                    verbose_name='Скидка для подкатегории товаров')
+    subcategory = GroupedForeignKey(Subcategory, 'category', on_delete=models.CASCADE,
+                                    verbose_name='Скидка для подкатегории товаров',
+                                    related_name='subcategory_discount')
 
     class Meta:
         verbose_name = 'Скидки для подкатегорий'
@@ -38,9 +40,9 @@ class SubcategoryDiscount(Discount):
 
 
 class SubcategoryTypeDiscount(Discount):
-    subcategory_type = models.ForeignKey(SubcategoryType, on_delete=models.CASCADE,
-                                         related_name='subcategory_type_discount',
-                                         verbose_name='Скидка для типа подкатегории товаров')
+    subcategory_type = GroupedForeignKey(SubcategoryType, 'subcategory', on_delete=models.CASCADE,
+                                         verbose_name='Скидка для типа подкатегории товаров',
+                                         related_name='subcategory_type_discount')
 
     class Meta:
         verbose_name = 'Скидки для типа подкатегорий'

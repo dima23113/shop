@@ -1,6 +1,6 @@
 from django.db import models
 from django.urls import reverse
-from smart_selects.db_fields import ChainedForeignKey, GroupedForeignKey
+from smart_selects.db_fields import GroupedForeignKey
 from sorl.thumbnail import ImageField
 from account.models import CustomUser
 
