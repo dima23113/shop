@@ -18,12 +18,20 @@ class Cart(object):
     def add(self, product, qty=1, size=None, update_qty=False):
         product_id = str(product.id) + '-' + size
         if product_id not in self.cart:
-            self.cart[product_id] = {
-                'qty': 0,
-                'price': str(product.price),
-                'size': size,
-                'discount_price': str(product.price_discount)
-            }
+            if product.price_discount is None:
+                self.cart[product_id] = {
+                    'qty': 0,
+                    'price': str(product.price),
+                    'size': size,
+                    'discount_price': str(product.price)
+                }
+            else:
+                self.cart[product_id] = {
+                    'qty': 0,
+                    'price': str(product.price),
+                    'size': size,
+                    'discount_price': str(product.price)
+                }
         if update_qty:
             self.cart[product_id]['qty'] = qty
         else:
