@@ -28,7 +28,7 @@
                                                 <p>{{ i.name }}</p>
                                             </div>
                                             <div class="price">
-                                                {% if product.price == product.price_discount or product.price_discount == None %}
+                                                {% if i.price == i.price_discount or i.price_discount is None %}
                                                 {{ i.price }}
                                                 {% else %}
                                                     <s>{{ i.price }}</s>

@@ -30,7 +30,7 @@ class Cart(object):
                     'qty': 0,
                     'price': str(product.price),
                     'size': size,
-                    'discount_price': str(product.price)
+                    'discount_price': str(product.price_discount)
                 }
         if update_qty:
             self.cart[product_id]['qty'] = qty

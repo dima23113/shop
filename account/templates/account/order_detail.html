@@ -36,9 +36,9 @@
 
                         <div>
                             <p class="price_">Стомость товаров: {{ order.get_total_cost }} руб.</p>
-                            <p class="price_">Стомость товаров со скидкой: {{ order.get_total_cost }}
+                            <p class="price_">Стомость товаров со скидкой: {{ order.get_total_discount_cost }}
                                 руб.</p>
-                            <p class="price_">Итого: {{ order.get_total_cost }} руб.</p>
+                            <p class="price_">Итого: {{ order.get_total_discount_cost }} руб.</p>
                         </div>
                     </div>
                 </div>

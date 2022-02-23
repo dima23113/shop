@@ -44,6 +44,9 @@ class Order(models.Model):
     def get_total_cost(self):
         return sum(item.get_cost() for item in self.items.all())
 
+    def get_total_discount_cost(self):
+        return sum(item.get_discount_cost() for item in self.items.all())
+
     def get_absolute_url(self):
         return reverse('account:order_detail', kwargs={'id': self.id})
 
@@ -51,9 +54,11 @@ class Order(models.Model):
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE, verbose_name='Заказ')
     product = models.ForeignKey(Product, related_name='order_items', on_delete=models.CASCADE, verbose_name='Позиция')
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    qty = models.PositiveIntegerField(default=1)
+    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Цена товара')
+    qty = models.PositiveIntegerField(default=1, verbose_name='Ко-во товара')
     size = models.CharField(max_length=10, verbose_name='Рамзер', blank=True, null=True)
+    price_discount = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True,
+                                         verbose_name='Цена товара со скидкой')
 
     class Meta:
         verbose_name = 'Позиция'
@@ -64,3 +69,6 @@ class OrderItem(models.Model):
 
     def get_cost(self):
         return self.price * self.qty
+
+    def get_discount_cost(self):
+        return self.price_discount * self.qty

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.views.generic import View
 from django.contrib import messages
 from django.db.models import F
@@ -25,8 +25,8 @@ class OrderCreateView(View):
             order.save()
             for item in cart:
                 OrderItem.objects.create(order=order, product=item['product'], price=item['price'], qty=item['qty'],
-                                         size=item['size'])
-                product = ProductSize.objects.filter(product_id=item['product'], name=item['size']).update(
+                                         size=item['size'], price_discount=item['discount_price'])
+                ProductSize.objects.filter(product_id=item['product'], name=item['size']).update(
                     qty=F('qty') - int(item['qty']))
 
             cart.clear()
