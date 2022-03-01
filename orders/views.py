@@ -2,7 +2,7 @@ from django.shortcuts import redirect
 from django.views.generic import View
 from django.contrib import messages
 from .forms import CreateOrderForm
-from .services import update_amount_of_purchases, order_create
+from .services import order_create
 from account.models import CustomUser
 from cart.cart import Cart
 

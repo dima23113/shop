@@ -71,6 +71,12 @@
 {% endcache %}
 <li class="right-menu__item"><a href="
 
+
+
+
+
+
+
         {% if user.is_authenticated %}{% url 'account:profile' %}{% else %}{% url 'account:login' %}{% endif %}">Профиль</a>
 </li>
 <li class="right-menu__item"><a class="search" href="#">Поиск</a></li>
@@ -129,6 +135,27 @@
                                             src={% thumbnail sb.image "250x250" as im %}"{{ im.url }}"{% endthumbnail %}></a>
                                 </div>
                             {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-lg-2"></div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-2 col-sm-2 col-lg-2"></div>
+                    <div class="col-md-8 col-sm-8 col-lg-8">
+                        <div class="swiper new-items">
+                            <div class="swiper-wrapper">
+                                {% for item in new_items %}
+                                    <div class="swiper-slide">
+                                        <a href="#"><img
+                                                src={% thumbnail item.image "250x250" as im %}"{{ im.url }}"{% endthumbnail %}></a>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-pagination"></div>
                         </div>
                     </div>
                     <div class="col-md-2 col-sm-2 col-lg-2"></div>

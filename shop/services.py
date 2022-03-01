@@ -1,3 +1,5 @@
+import datetime
+
 from .models import *
 
 
@@ -65,4 +67,9 @@ def get_banners_for_index_page():
     banners = Banner.objects.filter(is_actual=True)[:5]
     small_banners = SmallBanner.objects.filter(is_actual=True)[:5]
     return banners, small_banners
+
+
+def get_new_items():
+    items = Product.objects.filter(created__gt=datetime.date(2022, 1, 20))
+    return items
 

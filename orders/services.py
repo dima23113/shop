@@ -1,7 +1,7 @@
 from django.db.models import F
 from .models import OrderItem, Order
 from shop.models import ProductSize
-from loyalty_program.models import UserBonuses
+from loyalty_program.services import bonus_accrual
 
 
 def update_amount_of_purchases(user):
@@ -14,7 +14,7 @@ def update_amount_of_purchases(user):
 
 
 def order_create(cd, user, cart):
-    """Создаем заказ."""
+    """Создаем заказ"""
     order = Order.objects.create(first_name=user.first_name, last_name=user.last_name, email=user.email,
                                  address=user.address, zip_code=user.zip_code, ship_type=cd['ship_type'],
                                  paid=False,
@@ -32,11 +32,3 @@ def create_order_item(cart, order):
                                  size=item['size'], price_discount=item['discount_price'])
         ProductSize.objects.filter(product_id=item['product'], name=item['size']).update(
             qty=F('qty') - int(item['qty']))
-
-
-def bonus_accrual(user, order):
-    """Начисляем бонусы за покупку товара."""
-    bonuses = UserBonuses.objects.get(user=user)
-    bonuses.bonuses = bonuses.bonuses + (
-            (bonuses.bonuses_program.bonus_percentage / 100) * float(order.get_total_discount_cost()))
-    bonuses.save()
