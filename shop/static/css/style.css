@@ -1203,9 +1203,18 @@ border: 5px solid
 .new-items {
     margin-top: 10px;
     border: 5px solid;
+    margin-bottom: 20px;
 }
 
 .new-items .swiper-wrapper .swiper-slide a {
     width: 100%;
     height: 100%;
+}
+
+.new-items_, .sale-items_ h2{
+    text-align: center;
+}
+
+.mail-img {
+
 }

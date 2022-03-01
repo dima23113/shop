@@ -13,12 +13,13 @@ class IndexView(View):
 
     def get(self, request, *args, **kwargs):
         banners, small_banners = get_banners_for_index_page()
-        new_items = get_new_items()
+        new_items, sale_items = get_new_items()
 
         context = {
             'banners': banners,
             'small_banners': small_banners,
-            'new_items': new_items
+            'new_items': new_items,
+            'sale_items': sale_items
         }
         return render(request, 'shop/base.html', context=context)
 

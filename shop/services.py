@@ -70,6 +70,8 @@ def get_banners_for_index_page():
 
 
 def get_new_items():
-    items = Product.objects.filter(created__gt=datetime.date(2022, 1, 20))
-    return items
+    product = Product.objects.all()
+    new_items = product.filter(created__gt=datetime.date(2022, 1, 20))
+    sales_items = product.filter(sale=True)[:5]
+    return new_items, sales_items
 

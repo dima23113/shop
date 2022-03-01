@@ -7,6 +7,7 @@ def product_discount_by_category_discount():
     for discount in CategoryDiscount.objects.filter(is_active=True):
         for product in Product.objects.filter(available=True, category=discount.category):
             product.price_discount = product.price - (product.price * (discount.amount_of_discount / 100))
+            product.sale = True
             product.save()
 
 
@@ -23,6 +24,7 @@ def product_discount_by_subcategory_type_discount():
     for discount in SubcategoryTypeDiscount.objects.filter(is_active=True):
         for product in Product.objects.filter(available=True, subcategory_type=discount.subcategory_type):
             product.price_discount = product.price - (product.price * (discount.amount_of_discount / 100))
+            product.sale = True
             product.save()
 
 
@@ -31,6 +33,7 @@ def product_discount_by_brand_discount():
     for discount in BrandDiscount.objects.filter(is_active=True):
         for product in Product.objects.filter(available=True, brand=discount.brand):
             product.price_discount = product.price - (product.price * (discount.amount_of_discount / 100))
+            product.sale = True
             product.save()
 
 
@@ -39,4 +42,5 @@ def product_discount_by_product_discount():
     for discount in ProductDiscount.objects.filter(is_active=True):
         for product in Product.objects.filter(available=True, product=discount.product):
             product.price_discount = product.price - (product.price * (discount.amount_of_discount / 100))
+            product.sale = True
             product.save()

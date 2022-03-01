@@ -129,6 +129,7 @@ class Product(models.Model):
     favorite = models.ManyToManyField(CustomUser, through='Favorites', related_name='favorite')
     price_discount = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True,
                                          verbose_name='Цена товара со скидкой')
+    sale = models.BooleanField(default=False, verbose_name='Индикатор активности скидки')
 
     class Meta:
         ordering = ('name',)
