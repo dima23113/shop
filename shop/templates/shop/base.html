@@ -70,13 +70,6 @@
     <li class="right-menu__item"><a href="#">Блог</a></li>
 {% endcache %}
 <li class="right-menu__item"><a href="
-
-
-
-
-
-
-
         {% if user.is_authenticated %}{% url 'account:profile' %}{% else %}{% url 'account:login' %}{% endif %}">Профиль</a>
 </li>
 <li class="right-menu__item"><a class="search" href="#">Поиск</a></li>

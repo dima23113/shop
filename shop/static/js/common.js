@@ -153,7 +153,7 @@ var indexSwiper = new Swiper(".indexSwiper", {
 var new_items = new Swiper(".new-items", {
         slidesPerView: 6,
         spaceBetween: 30,
-        slidesPerGroup: 3,
+        slidesPerGroup: 2,
         loop: true,
         loopFillGroupWithBlank: true,
         pagination: {
