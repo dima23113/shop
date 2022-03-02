@@ -75,3 +75,8 @@ def get_new_items():
     sales_items = product.filter(sale=True)[:5]
     return new_items, sales_items
 
+
+def get_sales_items():
+    products = Product.objects.filter(available=True, sale=True)
+    category, subcategory, subcategory_type, sizes, brands = get_left_filter_submenu(products)
+    return subcategory, products, category, subcategory_type, brands, sizes

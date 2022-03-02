@@ -6,7 +6,8 @@ from django.http import JsonResponse
 from django.template.loader import render_to_string
 from cart.forms import CartAddProductForm
 from .models import *
-from .services import sort_brand_list_into_2_columns, get_product_list_by, get_banners_for_index_page, get_new_items
+from .services import sort_brand_list_into_2_columns, get_product_list_by, get_banners_for_index_page, get_new_items, \
+    get_sales_items
 
 
 class IndexView(View):
@@ -155,3 +156,18 @@ class JsonFilterProductView(ListView):
         queryset = list(self.get_queryset())
         rendered = render_to_string('shop/product/product_by_filter.html', {'products': queryset})
         return JsonResponse({'products': queryset, 'render': rendered})
+
+
+class SaleListView(View):
+
+    def get(self, request, *args, **kwargs):
+        subcategory, products, category, subcategory_type, brands, sizes = get_sales_items()
+        context = {
+            'subcategory': subcategory,
+            'products': products,
+            'category': category,
+            'subcategory_type': subcategory_type,
+            'brand': brands,
+            'sizes': sizes
+        }
+        return render(request, 'shop/product/product_list.html', context=context)

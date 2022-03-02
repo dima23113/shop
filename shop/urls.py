@@ -18,5 +18,6 @@ urlpatterns = [
     path('subcategory_type/<slug:slug>/', cache_page(60*100)(ProductListBySubcategoryType.as_view()),
          name='product_list_by_subcategory_type'),
     path('products/<slug:slug>/', cache_page(60*100)(ProductDetail.as_view()), name='product_detail'),
-    path('json-filter/', JsonFilterProductView.as_view(), name='json_filter')
+    path('json-filter/', JsonFilterProductView.as_view(), name='json_filter'),
+    path('sales/', SaleListView.as_view(), name='products_sale')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

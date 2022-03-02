@@ -120,5 +120,6 @@ function getProductByFilter(category, subcategory, subcategory_type, brand, size
 
 function render(rendered) {
     $('.products-list').remove()
+    $('.paginator-list').remove()
     $('.product-list').append(rendered)
 }
