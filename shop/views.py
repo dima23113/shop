@@ -162,9 +162,12 @@ class SaleListView(View):
 
     def get(self, request, *args, **kwargs):
         subcategory, products, category, subcategory_type, brands, sizes = get_sales_items()
+        paginator = Paginator(products, 50)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
         context = {
             'subcategory': subcategory,
-            'products': products,
+            'products': page_obj,
             'category': category,
             'subcategory_type': subcategory_type,
             'brand': brands,
