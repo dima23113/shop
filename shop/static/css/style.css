@@ -1142,7 +1142,7 @@ body {
     max-width: 1420px;
 }
 
-.swiper-slide a img{
+.swiper-slide a img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -1152,6 +1152,7 @@ body {
     position: relative;
     overflow: hidden;
 }
+
 .small_banners {
     margin-top: 10px;
     position: relative;
@@ -1159,7 +1160,7 @@ body {
     display: inline-flex;
 }
 
-.small_banner a img{
+.small_banner a img {
     object-fit: cover;
     height: 100%;
     width: 100%;
@@ -1184,7 +1185,7 @@ body {
 }
 
 .indexSwiper {
-border: 5px solid
+    border: 5px solid
 }
 
 .small_banners {
@@ -1211,10 +1212,48 @@ border: 5px solid
     height: 100%;
 }
 
-.new-items_, .sale-items_ h2{
+.new-items_, .sale-items_ h2 {
     text-align: center;
 }
 
-.mail-img {
+.more_detail {
+    color: #c8bfbf;
+    font-size: 14px;
+}
 
+.article_post a img {
+    width: 100%;
+    height: 100%;
+}
+
+.data_article a {
+    text-decoration: none;
+    text-align: justify;
+}
+
+.data_article a:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.article_text {
+    font-size: 14px;
+}
+
+.article_title {
+    font-size: 22px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.date_article {
+    font-size: 13px;
+}
+.article_post {
+    border: 3px black solid;
+    margin-bottom: 10px;
+}
+.data_article {
+    padding-right: 5px;
+    padding-left: 5px;
 }

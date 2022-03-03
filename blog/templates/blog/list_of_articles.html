@@ -15,12 +15,12 @@
                         {% endthumbnail %}
                     </a>
                     <div class="data_article">
-                        <div class="data_article">
+                        <div class="date_article">
                             {{ article.created }}
                         </div>
                         <a href="{% url 'blog:article_detail' article.slug %}"><div class="article_title">{{ article.title }}</div></a>
-                        <a href="{% url 'blog:article_detail' article.slug %}"><div class="article_text">{{ article.content|striptags |truncatewords:25 }}...</div></a>
-                        <a href="{% url 'blog:article_detail' article.slug %}">Читать подробнее...</a>
+                        <a href="{% url 'blog:article_detail' article.slug %}"><div class="article_text">{{ article.content|striptags |truncatewords:40 }}...</div></a>
+                        <a class="more_detail" href="{% url 'blog:article_detail' article.slug %}">Читать подробнее...</a>
                         <div class="counter_article_view">
                             <span class="count_view">{{ article.views_counter }}</span>
                         </div>
