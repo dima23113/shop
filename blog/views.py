@@ -1,12 +1,12 @@
 from django.shortcuts import render
 from django.views.generic import View
-from .models import TextEditor
+from .models import Article
 
 
 class ArticleListView(View):
 
     def get(self, request, *args, **kwargs):
-        articles = TextEditor.objects.all()
+        articles = Article.objects.all()
         context = {
             'articles': articles
         }
@@ -16,7 +16,7 @@ class ArticleListView(View):
 class ArticleDetailView(View):
 
     def get(self, request, *args, **kwargs):
-        article = TextEditor.objects.get()
+        article = Article.objects.get()
         context = {
             'article': article
         }

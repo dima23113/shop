@@ -2,7 +2,7 @@ from django.db import models
 from django.urls import reverse
 
 
-class TextEditor(models.Model):
+class Article(models.Model):
     title = models.CharField(max_length=50, verbose_name='Название статьи')
     content = models.TextField(verbose_name='Содержимое')
     views_counter = models.PositiveIntegerField(verbose_name='Счетчик просмотров статьи', default=0)

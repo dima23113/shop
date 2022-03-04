@@ -1,4 +1,4 @@
-from .models import TextEditor
+from .models import Article
 from django.contrib import admin
 from django.db import models
 from tinymce.widgets import TinyMCE
@@ -12,4 +12,4 @@ class TextEditorAdmin(admin.ModelAdmin):
     }
 
 
-admin.site.register(TextEditor, TextEditorAdmin)
+admin.site.register(Article, TextEditorAdmin)
