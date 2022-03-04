@@ -41,10 +41,11 @@
                             <li><span class="name" itemprop="name">{{ product.name }}</span></li>
                             <li>
                                 {% if product.price == product.price_discount or product.price_discount == None %}
-                                <span itemprop="price" class="product-price">{{ product.price }} руб.</span>
+                                    <span itemprop="price" class="product-price">{{ product.price }} руб.</span>
                                 {% else %}
-                                <span itemprop="price" class="product-price"><s>{{ product.price }} руб.</s></span>
-                                <span itemprop="price" class="product-price">{{ product.price_discount }} руб.</span>
+                                    <span itemprop="price" class="product-price"><s>{{ product.price }} руб.</s></span>
+                                    <span itemprop="price"
+                                          class="product-price">{{ product.price_discount }} руб.</span>
                                 {% endif %}
                             </li>
                             <li>
@@ -146,7 +147,14 @@
                                                     <p>{{ i.brand|upper }}</p>
                                                     <p>{{ i.name|upper }}</p>
                                                 </div>
-                                                <div class="price">{{ i.price }} руб.</div>
+                                                <div class="price">
+                                                    {% if i.price == i.price_discount or i.price_discount is None %}
+                                                        {{ i.price }}
+                                                    {% else %}
+                                                        <s>{{ i.price }}</s>
+                                                        <span>{{ i.price_discount }}</span>
+                                                    {% endif %}
+                                                </div>
                                             </div>
                                         </div>
                                     </li>
