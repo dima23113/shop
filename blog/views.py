@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.db.models import F
 from django.views.generic import View
 from .models import Article
 
@@ -16,8 +17,9 @@ class ArticleListView(View):
 class ArticleDetailView(View):
 
     def get(self, request, *args, **kwargs):
-        article = Article.objects.get()
+        article = Article.objects.filter(slug=kwargs['slug'])
         context = {
-            'article': article
+            'article': article.first()
         }
+        article.update(views_counter=F('views_counter')+1)
         return render(request, 'blog/article_detail.html', context=context)
