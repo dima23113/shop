@@ -1221,7 +1221,7 @@ body {
     font-size: 14px;
 }
 
-.article_post a img {
+.article_post a img, .article_logo img, .article_content p span img, .article_content p span iframe{
     width: 100%;
     height: 100%;
 }
@@ -1248,6 +1248,9 @@ body {
 
 .date_article {
     font-size: 13px;
+}
+.date_article *{
+    font-size: 15px;
 }
 .article_post {
     border: 3px black solid;

@@ -1,5 +1,6 @@
 {% extends 'shop/base.html' %}
 {% load thumbnail %}
+{% load static %}
 {% block title %}Блог-Ноябрь{% endblock %}
 
 {% block content %}
@@ -16,14 +17,12 @@
                     </a>
                     <div class="data_article">
                         <div class="date_article">
+                            <span class="count_view">{{ article.views_counter }}<img src="{% static 'img/show.png'%}"></span>
                             {{ article.created }}
                         </div>
                         <a href="{% url 'blog:article_detail' article.slug %}"><div class="article_title">{{ article.title }}</div></a>
-                        <a href="{% url 'blog:article_detail' article.slug %}"><div class="article_text">{{ article.content|striptags |truncatewords:40 }}...</div></a>
+                        <a href="{% url 'blog:article_detail' article.slug %}"><div class="article_text">{{ article.content|striptags |truncatewords:40 }}</div></a>
                         <a class="more_detail" href="{% url 'blog:article_detail' article.slug %}">Читать подробнее...</a>
-                        <div class="counter_article_view">
-                            <span class="count_view">{{ article.views_counter }}</span>
-                        </div>
                     </div>
                 </div>
                 {% endfor %}
