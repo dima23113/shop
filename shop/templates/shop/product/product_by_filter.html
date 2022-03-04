@@ -15,7 +15,14 @@
                         <p>{{ i.brand__name }}</p>
                         <p>{{ i.name }}</p>
                     </div>
-                    <div class="price">{{ i.price }} руб.</div>
+                    <div class="price">
+                        {% if i.price == i.price_discount or i.price_discount is None %}
+                            {{ i.price }}
+                        {% else %}
+                            <s>{{ i.price }}</s>
+                            <span>{{ i.price_discount }}</span>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </li>
