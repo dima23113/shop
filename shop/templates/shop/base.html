@@ -32,7 +32,7 @@
     </div>
     <div class="container-fluid">
     <div class="row">
-    <div class="products col-md-5 col-sm-3 col-lg-5 menu-container" id="products-menu">
+    <div class="products col-md-5 col-sm-5 col-lg-5 menu-container" id="products-menu">
         <i class="menu-toggle"></i>
         <ul class="left-menu">
             {% for i in categories %}
@@ -59,13 +59,13 @@
             <li class="left-menu__item"><a href="{% url 'shop:products_sale' %}">Sale</a></li>
         </ul>
     </div>
-    <div class="logo col-md-2 col-sm-4 col-lg-2">
+    <div class="logo col-md-2 col-sm-2 col-lg-2">
         <a href="{% url 'shop:index' %}"><img class="logo-img" src=" {% static 'img/logo.png' %}"
                                               alt="logo">
         </a>
         <a class="cart" href="#"></a>
     </div>
-    <div class="auth col-md-5 col-sm-3 col-lg-5 menu-container" id="products-menu-right">
+    <div class="auth col-md-5 col-sm-5 col-lg-5 menu-container" id="products-menu-right">
     <ul class="right-auth">
     <li class="right-menu__item"><a href="{% url 'blog:article_list' %}">Блог</a></li>
 {% endcache %}
