@@ -7,7 +7,7 @@ from django.template.loader import render_to_string
 from cart.forms import CartAddProductForm
 from .models import *
 from .services import sort_brand_list_into_2_columns, get_product_list_by, get_banners_for_index_page, get_new_items, \
-    get_sales_items
+    get_sales_items, get_new_articles
 
 
 class IndexView(View):
@@ -15,12 +15,14 @@ class IndexView(View):
     def get(self, request, *args, **kwargs):
         banners, small_banners = get_banners_for_index_page()
         new_items, sale_items = get_new_items()
+        articles = get_new_articles()
 
         context = {
             'banners': banners,
             'small_banners': small_banners,
             'new_items': new_items,
-            'sale_items': sale_items
+            'sale_items': sale_items,
+            'articles': articles
         }
         return render(request, 'shop/base.html', context=context)
 

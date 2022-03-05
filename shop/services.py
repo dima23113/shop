@@ -1,7 +1,7 @@
 import datetime
 
 from .models import *
-
+from blog.models import Article
 
 def sort_brand_list_into_2_columns():
     """Создаем список для сортировки брендов по алфавиту и группировки их по первой букве. Делим список на 2 для
@@ -80,3 +80,8 @@ def get_sales_items():
     products = Product.objects.filter(available=True, sale=True)
     category, subcategory, subcategory_type, sizes, brands = get_left_filter_submenu(products)
     return subcategory, products, category, subcategory_type, brands, sizes
+
+
+def get_new_articles():
+    articles = Article.objects.all().order_by('created')[:3]
+    return articles

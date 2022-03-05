@@ -72,6 +72,9 @@
 <li class="right-menu__item"><a href="
 
 
+
+
+
         {% if user.is_authenticated %}{% url 'account:profile' %}{% else %}{% url 'account:login' %}{% endif %}">Профиль</a>
 </li>
 <li class="right-menu__item"><a class="search" href="#">Поиск</a></li>
@@ -176,6 +179,28 @@
                             <div class="swiper-button-next"></div>
                             <div class="swiper-button-prev"></div>
                             <div class="swiper-pagination"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-lg-2"></div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-2 col-sm-2 col-lg-2"></div>
+                    <div class="col-md-8 col-sm-8 col-lg-8">
+                        <div class="new-items_"><h2>Новые статьи</h2></div>
+                        <div class="articles">
+                            {% for article in articles %}
+                                <div class="article">
+                                    <a href="{% url 'blog:article_detail' article.slug %}">
+                                        {% thumbnail article.img "402x300" as im %}
+                                            <img src="{{ im.url }}">
+                                        {% endthumbnail %}
+                                    </a>
+                                </div>
+                            {% endfor %}
                         </div>
                     </div>
                     <div class="col-md-2 col-sm-2 col-lg-2"></div>
