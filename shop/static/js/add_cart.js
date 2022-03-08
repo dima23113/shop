@@ -34,7 +34,6 @@ document.addEventListener('DOMContentLoaded', function () {
             var product = $(this).data('id');
             var redirect = $(this).data('info')
             var in_fav = document.getElementsByClassName('add_to_fav')[0].getAttribute('data-in_fav')
-            console.log(product, in_fav)
             if (redirect === 'log') {
                 window.location.replace("../../account/login/");
             } else {

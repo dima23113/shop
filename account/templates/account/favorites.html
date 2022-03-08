@@ -1,5 +1,6 @@
 {% extends 'account/user_profile.html' %}
 {% load thumbnail %}
+{% load static %}
 {% block title %}Изранное-Ноябрь{% endblock %}
 
 {% block info %}
@@ -7,7 +8,7 @@
     <div class="product-list col-md-10 col-sm-10 col-lg-10">
         <ul class="products-list">
             {% for i in favorites %}
-                <li class="product">
+                <li class="product" id="{{ i.id }}">
                     <div class="col-item">
                         {% thumbnail i.image "300x340" crop="20%" as im %}
                             <a class="col-item-a" href="{% url 'shop:product_detail' i.slug %}"><img
@@ -15,13 +16,23 @@
                                     src="{{ im.url }}"
                                     width="{{ im.width }}"
                                     height="{{ im.height }}"></a>
+                            <div class="remove">
+                                <a class="remove_link" data-id="{{ i.id }}" href="#"><img src="{% static 'img/added.png' %}"></a>
+                            </div>
                         {% endthumbnail %}
                         <div class="col-item-about">
                             <div class="col-item__title">
                                 <p>{{ i.brand }}</p>
                                 <p>{{ i.name }}</p>
                             </div>
-                            <div class="price">{{ i.price }} руб.</div>
+                            <div class="price">
+                                {% if i.price == i.price_discount or i.price_discount is None %}
+                                    {{ i.price }}
+                                {% else %}
+                                    <s>{{ i.price }}</s>
+                                    <span>{{ i.price_discount }}</span>
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
                 </li>

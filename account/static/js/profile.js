@@ -1,3 +1,20 @@
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+const csrftoken = getCookie('csrftoken');
+
 document.addEventListener('DOMContentLoaded', function () {
 
 
@@ -54,4 +71,22 @@ document.addEventListener('DOMContentLoaded', function () {
         $('.email-form').removeClass('form_active');
     }
 
-});
+    $(document).ready(function () {
+        $(".remove_link").click(function () {
+            var product = $(this).data('id')
+            $.ajax({
+                data: {'product': product, 'csrfmiddlewaretoken': csrftoken},
+                url: 'http://127.0.0.1:8000/favorites/remove/' + product + '/',
+                method: 'post',
+                success: function (response) {
+                    $('#' + product).remove()
+                },
+                error: function (response) {
+                    console.log(response)
+                }
+            })
+
+        });
+    });
+})
+;
