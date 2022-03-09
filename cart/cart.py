@@ -40,7 +40,6 @@ class Cart(object):
             else:
                 pass
         self.save()
-        print(self.cart)
 
     def save(self):
         self.session[settings.CART_SESSION_ID] = self.cart

@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
+from yookassa import Configuration
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -198,3 +199,7 @@ TINYMCE_DEFAULT_CONFIG = {
 }
 
 USE_DJANGO_JQUERY = True
+
+#  Данные для идентификации магазина в api юкасса
+Configuration.account_id = '888013'
+Configuration.secret_key = 'test_Ba76Z9PKpIee2P-esHZl8SYXl9D0TWX7ixs5fEVtt1w'

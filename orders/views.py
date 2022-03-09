@@ -15,14 +15,14 @@ class OrderCreateView(View):
         if form.is_valid():
             cd = form.cleaned_data
             user = CustomUser.objects.get(email=request.user)
-            order_create(cd, user, cart)
+            pay = order_create(cd, user, cart)
             cart.clear()
-            if cd['ship_type'] == 'Доставка':
+            if cd['ship_type'] == 'Самовывоз':
                 messages.add_message(request, messages.INFO,
                                      'Ожидание оплаты')
                 return redirect('shop:index')
             else:
-                return redirect('account:orders')
+                return redirect(pay)
 
         else:
             messages.add_message(request, messages.INFO,
