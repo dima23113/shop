@@ -22,7 +22,7 @@ def order_create(cd, user, cart):
     """Создаем заказ"""
     order = Order.objects.create(first_name=user.first_name, last_name=user.last_name, email=user.email,
                                  address=user.address, zip_code=user.zip_code, ship_type=cd['ship_type'],
-                                 paid=False,
+                                 payment_status='Не оплачен',
                                  customer=user, pay_type=cd['pay_type'], phone=user.phone)
     order.save()
     cart_items = create_order_item(cart, order)
@@ -90,11 +90,3 @@ def confirm_payment(id, order):
             'currency': 'RUB'
         }
     })
-
-
-"""{"amount": {"currency": "RUB", "value": "4409.99"}, "confirmation": {"confirmation_url": 
-"https://yoomoney.ru/checkout/payments/v2/contract?orderId=29ba9cbe-000f-5000-9000-110b28453918", "return_url": 
-"https://6b5e-5-18-218-97.ngrok.io", "type": "redirect"}, "created_at": "2022-03-09T11:01:18.962Z", "description": 
-"Заказ №72", "id": "29ba9cbe-000f-5000-9000-110b28453918", "metadata": {}, "paid": false, "payment_method": {"id": 
-"29ba9cbe-000f-5000-9000-110b28453918", "saved": false, "type": "bank_card"}, "recipient": {"account_id": "888013", 
-"gateway_id": "1949997"}, "refundable": false, "status": "pending", "test": true} """

@@ -18,6 +18,24 @@ class Order(models.Model):
         (online, 'Онлайн'),
         (offline, 'При получении'),
     ]
+    awaiting_confirmation = 'Ожидает подтверждения'
+    payment_error = 'Ошибка оплаты'
+    canceled = 'Отменен'
+    returned = 'Возвращен'
+    partially_returned = 'Частично возвращен'
+    in_processing = 'В обработке'
+    not_paid = 'Не оплачен'
+    paid = 'Оплачен'
+    payment = [
+        (awaiting_confirmation, 'Ожидает подтверждения'),
+        ( payment_error, 'Ошибка оплаты'),
+        (canceled, 'Отменен'),
+        (returned, 'Отменен'),
+        (partially_returned, 'Частично возвращен'),
+        (in_processing, 'В обработке'),
+        (not_paid, 'Не оплачен'),
+        (paid, 'Оплачен')
+    ]
 
     first_name = models.CharField(max_length=50, verbose_name='Имя')
     last_name = models.CharField(max_length=50, verbose_name='Фамилия')
@@ -27,11 +45,12 @@ class Order(models.Model):
     ship_type = models.CharField(choices=ship, default=self_delivery, verbose_name='Тип доставки', max_length=50)
     created = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания заказа')
     updated = models.DateTimeField(auto_now=True, verbose_name='Дата обновления заказа')
-    paid = models.BooleanField(default=False, verbose_name='Статус оплаты')
+    payment_status = models.CharField(choices=payment, default=not_paid, max_length=50, verbose_name='Статус платежа')
     customer = models.ForeignKey(CustomUser, on_delete=models.CASCADE, verbose_name='Покупатель', related_name='order')
     pay_type = models.CharField(choices=pay, verbose_name='Тип оплаты', default=online, max_length=50)
     phone = models.CharField(max_length=20, verbose_name='Телефон', null=True, blank=True)
     status = models.CharField(max_length=256, verbose_name='Статус заказа', null=True, blank=True)
+    payment_id = models.CharField(max_length=50, verbose_name='Номер платежа', null=True, blank=True)
 
     class Meta:
         ordering = ('-created',)
