@@ -30,7 +30,7 @@ class Order(models.Model):
         (awaiting_confirmation, 'Ожидает подтверждения'),
         ( payment_error, 'Ошибка оплаты'),
         (canceled, 'Отменен'),
-        (returned, 'Отменен'),
+        (returned, 'Возвращен'),
         (partially_returned, 'Частично возвращен'),
         (in_processing, 'В обработке'),
         (not_paid, 'Не оплачен'),
