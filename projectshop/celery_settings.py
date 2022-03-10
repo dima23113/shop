@@ -1,15 +1,18 @@
 import os
 from celery import Celery
-from celery.schedules import crontab
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'projectshop.settings')
 
 app = Celery('projectshop')
-app.config_from_object('django.conf.settings', namespace='CELERY')
+app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks()
 app.conf.timezone = 'Europe/London'
+app.conf.beat_schedule = {
+    'every-30-seconds': {
+        'task': 'orders.tasks.confirm_payment',
+        'schedule': 30.0,
+    },
+}
 
 
-@app.on_after_configure.connect
-def setup_periodic_tasks(sender, **kwargs):
-    pass
+#  celery -A projectshop flower worker -l info -P gevent

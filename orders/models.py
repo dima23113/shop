@@ -28,7 +28,7 @@ class Order(models.Model):
     paid = 'Оплачен'
     payment = [
         (awaiting_confirmation, 'Ожидает подтверждения'),
-        ( payment_error, 'Ошибка оплаты'),
+        (payment_error, 'Ошибка оплаты'),
         (canceled, 'Отменен'),
         (returned, 'Возвращен'),
         (partially_returned, 'Частично возвращен'),

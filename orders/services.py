@@ -24,12 +24,17 @@ def order_create(cd, user, cart):
                                  address=user.address, zip_code=user.zip_code, ship_type=cd['ship_type'],
                                  payment_status='Не оплачен',
                                  customer=user, pay_type=cd['pay_type'], phone=user.phone)
-    order.save()
     cart_items = create_order_item(cart, order)
     bonus_accrual(user, order)
     update_amount_of_purchases(user)
-    payment = create_payment(cart_items, order, user)
-    return payment['confirmation']['confirmation_url']
+    if (cd['ship_type'] == 'Самовывоз' and cd['pay_type'] == 'Онлайн') or (
+            cd['ship_type'] == 'Доставка' and cd['pay_type'] == 'Онлайн'):
+        payment = create_payment(cart_items, order, user)
+        order.payment_id = payment['id']
+        order.save()
+        return payment['confirmation']['confirmation_url']
+    else:
+        order.save()
 
 
 def create_order_item(cart, order):
@@ -45,9 +50,9 @@ def create_order_item(cart, order):
         a['description'] = f'{item["product"]}'
         a['quantity'] = item['qty']
         a['amount'] = {
-                          'value': item['price'],
-                          'currency': Currency.RUB
-                      }
+            'value': item['price'],
+            'currency': Currency.RUB
+        }
         a['vat_code'] = 2
         items.append(a)
         a = {}
