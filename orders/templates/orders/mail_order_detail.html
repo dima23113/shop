@@ -1,0 +1,174 @@
+{% load static %}
+{% load thumbnail %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Новый заказ!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+
+        body {
+            font-family: "Raleway", sans-serif;
+            font-size: 19px;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3%;
+            border: 1px black solid;
+        }
+
+        .logo {
+            text-align: center;
+        }
+
+        .msg, .order-info, .cart-side, .change-order, header, .order {
+            margin-bottom: 10px;
+        }
+
+        .order-info * {
+            padding-bottom: 10px;
+        }
+
+
+        .separator {
+            border: 1px solid black;
+            margin-bottom: 20px;
+        }
+
+        .cart-side {
+            border: 1px solid;
+            padding: 20px;
+        }
+
+        .items-wrapper__product:not(:last-child) {
+            border-bottom: 1px solid
+        }
+
+        .product__descr {
+            flex-basis: 84%;
+            padding-left: 16px;
+        }
+
+        .cart-side * {
+            font-family: 'Raleway', sans-serif;
+            font-size: 16px;
+        }
+
+        .items-wrapper__product a:hover {
+            color: black;
+            text-decoration: underline;
+        }
+
+        .items-wrapper__product * {
+            text-decoration: none;
+        }
+
+        .items-wrapper__product {
+            padding-bottom: 16px;
+            margin-bottom: 16px;
+            display: flex;
+        }
+
+        .items-wrapper__product:last-child {
+            border-bottom: 1px solid
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <header>
+        <div class="logo">
+            <a href="{% url 'shop:index' %}"><img src="{% static "img/logo.png" %}" alt="logo"></a>
+        </div>
+        <div class="order">
+            <span>
+                <b>Заказ <a href="{% url 'account:order_detail' order.id %}"> #{{ order.id }}</a></b>
+            </span>
+            <span>
+                Подтвержден
+            </span>
+        </div>
+        <div class="separator"></div>
+    </header>
+
+    <div class="content">
+        <div class="msg">
+            <p>{{ order.first_name }}, Ваш заказ подтвержден!</p>
+        </div>
+        <div class="order-info">
+            <p>
+                Заказ уже передан на сборку нашему складу.
+            </p>
+            <p>
+                <b>Заказ уже передан на сборку нашему складу. Как только мы подготовим заказ, сразу пришлем письмо с
+                    информацией о доставке и отслеживании.</b>
+            </p>
+        </div>
+        <div class="order">
+            <p><strong>Состав заказа:</strong></p>
+            <div class="cart-side">
+                <div class="items-wrapper">
+                    {% for item in order_items %}
+                        {% with product=item.product %}
+                            <div class="items-wrapper__product">
+                                <div class="product__image">
+                                    {% thumbnail product.image "100x100" crop="20%" as im %}
+                                        <a class="img" href="{{ product.get_absolute_url }}">
+                                            <img src="{{ im.url }}">
+                                        </a>
+                                    {% endthumbnail %}
+                                </div>
+                                <div class="product__descr">
+                                    <div class="title">
+                                        <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+                                    </div>
+                                    <div>Размер: {{ item.size }}</div>
+                                    <div>Количество: {{ item.qty }}</div>
+                                    <div>Артикул: {{ product.article }}</div>
+                                </div>
+                            </div>
+                        {% endwith %}
+                    {% endfor %}
+                </div>
+
+                <div>
+                    <p class="price_">Стомость товаров: {{ order.get_total_cost }} руб.</p>
+                    <p class="price_">Стомость товаров со скидкой: {{ order.get_total_discount_cost }}
+                        руб.</p>
+                    <p class="price_">Итого: {{ order.get_total_discount_cost }} руб.</p>
+                </div>
+            </div>
+            <div class="info">
+                <p><strong>Информация о заказе:</strong></p>
+            </div>
+            <div class="cart-side">
+                <p>Статус заказа: {{ order.status }}</p>
+                <p>Получатель: {{ order.first_name }} {{ order.last_name }}</p>
+                <p>Адрес: {{ order.address }}</p>
+                <p>Телефон: {{ order.phone }}</p>
+                <p>Способ доставки: {{ order.ship_type }}</p>
+                <p>Способ оплаты: {{ order.pay_type }}</p>
+                <p>Статус оплаты: {{ order.payment_status }}</p>
+                <p>Дата оплаты:</p>
+            </div>
+            <div class="change-order">
+                <p>Если нужно внести корректировки, свяжитесь с менеджером по нашему телефону или ответьте на это
+                    письмо.</p>
+            </div>
+            <div class="contacts">
+                <h3>Контактная информация</h3>
+                <p>Email: <a href="mailto:info@noyabrskateshop.ru" target="_blank">info@noyabrskateshop.ru</a></p>
+                <p>Телефон: 8 996 777 34 80</p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
