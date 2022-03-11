@@ -9,6 +9,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 from django.template.loader import render_to_string
 from django.core.mail import send_mail, BadHeaderError
+from django.core.paginator import Paginator
 from .models import CustomUser
 from .forms import LoginForm, PasswordChangeForm, UserRegisterForm, UserChangeBioForm, UserChangePhoneForm, \
     UserEmailMailingForm, EmailChangeForm, AddressChangeForm
@@ -235,7 +236,10 @@ class OrderListView(View):
 
     def get(self, request, *args, **kwargs):
         orders = Order.objects.all().only('id', 'created', 'address', 'ship_type', 'status')
-        return render(request, 'account/order_list.html', {'orders': orders})
+        paginator = Paginator(orders, 10)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        return render(request, 'account/order_list.html', {'orders': page_obj})
 
 
 class OrderDetailView(View):

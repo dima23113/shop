@@ -152,6 +152,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
+
+#  Настройки для подтверждения регистрации
 EMAIL_VERIFIED_CALLBACK = verified_callback
 EMAIL_FROM_ADDRESS = 'noreply@aliasaddress.com'
 EMAIL_MAIL_SUBJECT = 'Confirm your email'
@@ -161,15 +163,18 @@ EMAIL_TOKEN_LIFE = 60 * 60
 EMAIL_PAGE_TEMPLATE = 'confirm_template.html'
 EMAIL_PAGE_DOMAIN = 'http://127.0.0.1:8000/'
 
+#  Настройки для smtp
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'mymail@gmail.com'
-EMAIL_HOST_PASSWORD = 'mYC00lP4ssw0rd'  # os.environ['password_key'] suggested
+EMAIL_HOST_PASSWORD = 'mYC00lP4ssw0rd'
 EMAIL_USE_TLS = True
 
+#  Ключ корзины для сессии
 CART_SESSION_ID = 'cart'
 
+#  Конфиг для редактора tinyMCE
 TINYMCE_DEFAULT_CONFIG = {
     'height': 360,
     'width': 750,
@@ -199,6 +204,7 @@ TINYMCE_DEFAULT_CONFIG = {
     'statusbar': True,
 }
 
+#  Smart selector for admin page
 USE_DJANGO_JQUERY = True
 
 #  Данные для идентификации магазина в api юкасса
