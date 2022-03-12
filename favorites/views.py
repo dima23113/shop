@@ -1,6 +1,6 @@
-from django.shortcuts import render
 from django.views.generic import View
 from django.http import JsonResponse
+
 from shop.models import Product
 from account.models import CustomUser
 

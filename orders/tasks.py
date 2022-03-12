@@ -1,12 +1,16 @@
 import json
 import uuid
-from celery import shared_task
-from yookassa import Payment
-from orders.models import Order
+
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.core.mail import send_mail
 from django.conf import settings
+
+from celery import shared_task
+from yookassa import Payment
+
+from orders.models import Order
+from loyalty_program.tasks import bonus_accrual, update_amount_of_purchases
 
 
 @shared_task
@@ -30,6 +34,10 @@ def confirm_payment():
                 idempotence_key
             )
             print(response.json())
+            order.payment_status = 'Оплачен'
+            order.save()
+            bonus_accrual(order)
+            update_amount_of_purchases(order)
             send_order_information(order)
 
 

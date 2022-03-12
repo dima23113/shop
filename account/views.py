@@ -10,10 +10,12 @@ from django.utils.encoding import force_bytes
 from django.template.loader import render_to_string
 from django.core.mail import send_mail, BadHeaderError
 from django.core.paginator import Paginator
+
+from django_email_verification import send_email
+
 from .models import CustomUser
 from .forms import LoginForm, PasswordChangeForm, UserRegisterForm, UserChangeBioForm, UserChangePhoneForm, \
     UserEmailMailingForm, EmailChangeForm, AddressChangeForm
-from django_email_verification import send_email
 from cart.cart import Cart
 from orders.models import Order
 from loyalty_program.models import UserBonuses

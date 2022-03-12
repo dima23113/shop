@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import View
 from django.http import JsonResponse
+
 from shop.models import Product, ProductSize
 from .cart import Cart
 from .forms import CartUpdateProductForm, CartAddProductForm
@@ -56,6 +57,11 @@ class CartUpdateView(View):
 
 
 class QtyProductSizeView(View):
+    """"
+    В методе get получаем информацию по товару в корзине и вовзращаем название товара, ко-во товара и размер.
+    В методе post получаем название товара, максимальное ко-во, ко-во в корзине и размер.
+     Если количество больше максимального, то не даем увеличить товар в козине.
+    """
 
     def get(self, request, *args, **kwargs):
         product = request.GET.get('product', None)

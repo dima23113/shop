@@ -1,6 +1,8 @@
 from django.db import models
 from django.core.validators import MaxValueValidator
+
 from smart_selects.db_fields import GroupedForeignKey
+
 from shop.models import Category, Subcategory, SubcategoryType, Brand, Product
 
 

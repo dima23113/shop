@@ -1,34 +1,23 @@
 import json
+
 from django.db.models import F
-from django.conf import settings
+
 from yookassa import Payment
 from yookassa.domain.models.currency import Currency
 
 from .models import OrderItem, Order
 from shop.models import ProductSize
-from loyalty_program.services import bonus_accrual
-
-
-def update_amount_of_purchases(user):
-    """Обновление суммы покупок для покупателя."""
-    amount_of_purchases = 0
-    for order in Order.objects.filter(customer=user):
-        amount_of_purchases += order.get_total_discount_cost()
-    user.amount_of_purchases = amount_of_purchases
-    user.save()
 
 
 def order_create(cd, user, cart):
+    # todo: Подумать, как обработать увеличение бонусов и сумму покупок для тех, кто платит в магазине
     """Создаем заказ"""
     order = Order.objects.create(first_name=user.first_name, last_name=user.last_name, email=user.email,
                                  address=user.address, zip_code=user.zip_code, ship_type=cd['ship_type'],
                                  payment_status='Не оплачен',
                                  customer=user, pay_type=cd['pay_type'], phone=user.phone)
     cart_items = create_order_item(cart, order)
-    bonus_accrual(user, order)
-    update_amount_of_purchases(user)
-    if (cd['ship_type'] == 'Самовывоз' and cd['pay_type'] == 'Онлайн') or (
-            cd['ship_type'] == 'Доставка' and cd['pay_type'] == 'Онлайн'):
+    if cd['pay_type'] == 'Онлайн':
         payment = create_payment(cart_items, order, user)
         order.payment_id = payment['id']
         order.save()
@@ -38,7 +27,9 @@ def order_create(cd, user, cart):
 
 
 def create_order_item(cart, order):
-    """Связываем товар с заказом и уменьшаем ко-во размеров у купленного товара."""
+    """Связываем товар с заказом и уменьшаем ко-во размеров у купленного товара.
+        Формируем чек для юкассы.
+    """
     a = {}
     items = [
     ]
@@ -60,7 +51,7 @@ def create_order_item(cart, order):
 
 
 def create_payment(cart_items, order, user):
-    """Создание платежа"""
+    """Создание платежа в юкассе"""
     payment = Payment.create({
         "amount": {
             "value": order.get_total_discount_cost(),
@@ -84,14 +75,3 @@ def create_payment(cart_items, order, user):
     })
     payment = payment.json()
     return json.loads(payment)
-
-
-def confirm_payment(id, order):
-    """Подтверждение платежа"""
-    payment_id = id
-    res = Payment.capture(payment_id, {
-        'amount': {
-            'value': order.get_total_discount_cost(),
-            'currency': 'RUB'
-        }
-    })

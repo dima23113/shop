@@ -4,6 +4,7 @@ from django.core.paginator import Paginator
 from django.views.generic import ListView, View
 from django.http import JsonResponse
 from django.template.loader import render_to_string
+
 from cart.forms import CartAddProductForm
 from .models import *
 from .services import sort_brand_list_into_2_columns, get_product_list_by, get_banners_for_index_page, get_new_items, \
