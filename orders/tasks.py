@@ -36,9 +36,9 @@ def confirm_payment():
             print(response.json())
             order.payment_status = 'Оплачен'
             order.save()
-            bonus_accrual(order)
-            update_amount_of_purchases(order)
-            send_order_information(order)
+            bonus_accrual.delay(order)
+            update_amount_of_purchases.delay(order)
+            send_order_information.delay(order)
 
 
 @shared_task
