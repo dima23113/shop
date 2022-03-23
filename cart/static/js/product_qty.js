@@ -18,6 +18,7 @@ function updatePrice() {
     setTimeout(function () {
         $.ajax({
             url: 'price/',
+            headers: {'Access-Control-Allow-Origin': '*'},
             success: function (response) {
                 c = ['Стоимость товаров: ', 'Стоимость товаров со скидкой: ', 'Итого: ']
                 c1 = []
@@ -38,6 +39,7 @@ function updateQtyCart() {
     setTimeout(function () {
         $.ajax({
             url: 'cart-qty/',
+            headers: {'Access-Control-Allow-Origin': '*'},
             success: function (response) {
                 console.log(response['cart_qty'])
                 r = document.getElementById('cart_qty')
@@ -60,6 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
             $.ajax({
                 data: {'product_id': product_id, 'csrfmiddlewaretoken': csrftoken},
                 url: "remove/",
+                headers: {'Access-Control-Allow-Origin': '*'},
                 method: 'post',
                 success: function (response) {
                     var els = document.getElementById(response['id'])
@@ -78,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 var product = $(this).data('name')
                 var sign = $(this).html()
                 var id = $(this).data('id')
-                tmp = 'intLimitTextBox'+id
+                tmp = 'intLimitTextBox' + id
                 var textinp = document.getElementById(tmp)
                 var size = textinp.getAttribute('data-size')
                 console.log(textinp)
@@ -116,6 +119,7 @@ document.addEventListener('DOMContentLoaded', function () {
         $.ajax({
             data: {'product': product, 'qty': qty, 'max_qty': max_qty, 'size': size, 'csrfmiddlewaretoken': csrftoken},
             url: 'qty/',
+            headers: {'Access-Control-Allow-Origin': '*'},
             method: 'post',
             success: function (response) {
                 console.log(response)
@@ -131,6 +135,7 @@ document.addEventListener('DOMContentLoaded', function () {
             $.ajax({
                 data: {'remove_all': true, 'csrfmiddlewaretoken': csrftoken},
                 url: "remove/",
+                headers: {'Access-Control-Allow-Origin': '*'},
                 method: 'post',
                 success: function (response) {
                     console.log(response)
@@ -152,6 +157,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 var size = a.getAttribute('data-size')
                 $.ajax({
                     data: {'product': product, 'size': size},
+                    headers: {'Access-Control-Allow-Origin': '*'},
                     url: 'qty/',
                     success: function (response) {
                         console.log(response)

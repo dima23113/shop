@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function () {
             brand.push(document.getElementsByClassName('brands')[0].getAttribute('data-id'))
         }
 
-       if (document.getElementsByClassName('size').length > 1) {
+        if (document.getElementsByClassName('size').length > 1) {
             for (var e = 0; e < document.getElementsByClassName('size').length; e++) {
                 size.push(document.getElementsByClassName('size')[e].getAttribute('data-id'))
             }
@@ -88,6 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
     }
+
     updateFilters()
     console.log(category, subcategory, subcategory_type, brand, size)
 });
@@ -103,6 +104,7 @@ function getProductByFilter(category, subcategory, subcategory_type, brand, size
             'brand': brand,
             'size': size
         },
+        headers: {'Access-Control-Allow-Origin': '*'},
         url: "/json-filter/",
         success: function (response) {
             render(response['render'])

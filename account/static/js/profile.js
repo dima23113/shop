@@ -77,6 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
             $.ajax({
                 data: {'product': product, 'csrfmiddlewaretoken': csrftoken},
                 url: 'http://127.0.0.1:8000/favorites/remove/' + product + '/',
+                headers: {'Access-Control-Allow-Origin': '*'},
                 method: 'post',
                 success: function (response) {
                     $('#' + product).remove()

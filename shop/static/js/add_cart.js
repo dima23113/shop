@@ -20,8 +20,8 @@ document.addEventListener('DOMContentLoaded', function () {
     $(document).ready(function () {
         $(".size").click(function () {
             var buttonData = $(this).data("mydata");
-            for (var i = 0; i < document.getElementsByClassName('size').length; i++){
-                document.getElementsByClassName('size')[i].className='size'
+            for (var i = 0; i < document.getElementsByClassName('size').length; i++) {
+                document.getElementsByClassName('size')[i].className = 'size'
             }
             $(this).toggleClass('size_active')
             var preview = document.getElementById("id_size");
@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         data: {'product': product, 'csrfmiddlewaretoken': csrftoken},
                         url: 'http://127.0.0.1:8000/favorites/add/' + product + '/',
                         method: 'post',
+                        headers: {'Access-Control-Allow-Origin': '*'},
                         success: function (response) {
                             console.log(response)
                             document.getElementById('img-fav').src = '../../static/img/added.png'
@@ -55,6 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     $.ajax({
                         data: {'product': product, 'csrfmiddlewaretoken': csrftoken},
                         url: 'http://127.0.0.1:8000/favorites/remove/' + product + '/',
+                        headers: {'Access-Control-Allow-Origin': '*'},
                         method: 'post',
                         success: function (response) {
                             console.log(response)

@@ -13,7 +13,6 @@ import os
 from yookassa import Configuration
 from pathlib import Path
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -21,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-*l%z&$c$lo9(+tkd9*j@iwk)@h0rpr=t$&=_b#uh+)an6fts5o'
+SECRET_KEY = os.environ.get('SECRET_KEY', default='django-insecure-*l%z&$c$lo9(+tkd9*j@iwk)@h0rpr=t$&=_b#uh+)an6fts5o')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -55,12 +54,14 @@ INSTALLED_APPS = [
     'sorl.thumbnail',
     'debug_toolbar',
     'django_email_verification',
-    'tinymce'
+    'tinymce',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -96,12 +97,23 @@ WSGI_APPLICATION = 'projectshop.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
+"""DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': '11081998',
+    }
+}"""
+
+DATABASES = {
+    "default": {
+        "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.postgresql"),
+        "NAME": os.environ.get("SQL_DATABASE", "postgres"),
+        "USER": os.environ.get("SQL_USER", "postgres"),
+        "PASSWORD": os.environ.get("SQL_PASSWORD", "11081998"),
+        "HOST": os.environ.get("SQL_HOST", "localhost"),
+        "PORT": os.environ.get("SQL_PORT", "5432"),
     }
 }
 
@@ -210,3 +222,18 @@ USE_DJANGO_JQUERY = True
 #  Данные для идентификации магазина в api юкасса
 Configuration.account_id = '888013'
 Configuration.secret_key = 'test_Ba76Z9PKpIee2P-esHZl8SYXl9D0TWX7ixs5fEVtt1w'
+
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
+
+
+CELERY_BROKER_URL = os.environ.get('BROKER_URL', default='')
+CELERY_RESULT_BACKEND = os.environ.get('RESULT_BACKEND', default='')
