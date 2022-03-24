@@ -234,6 +234,5 @@ CORS_ALLOW_METHODS = [
     'PUT',
 ]
 
-
-CELERY_BROKER_URL = os.environ.get('BROKER_URL', default='')
-CELERY_RESULT_BACKEND = os.environ.get('RESULT_BACKEND', default='')
+CELERY_BROKER_URL = os.environ.get("CELERY_BROKER", "redis://redis:6379/0")
+CELERY_RESULT_BACKEND = os.environ.get("CELERY_BROKER", "redis://redis:6379/0")

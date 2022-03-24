@@ -22,8 +22,6 @@ python3 manage.py makemigrations blog
 python3 manage.py makemigrations account
 python3 manage.py migrate
 
-celery -A projectshop worker -l info
-
 
 
 exec "$@"
