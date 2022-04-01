@@ -1,0 +1,232 @@
+{% extends 'account/user_profile.html' %}
+
+{% block title %}Заказы-Ноябрь{% endblock %}
+
+{% block info %}
+    <div class="col-md-1 col-sm-1 col-lg-1"></div>
+    <div class="orders-info col-md-10 col-sm-10 col-lg-10">
+        <div class="ticket-create">
+            <div class="customer-login">
+                <button id="myBtn">Новое обращение</button>
+            </div>
+        </div>
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+            <!-- Модальное содержание -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="close">&times;</span>
+                    <h2>Новое обращение</h2>
+                </div>
+                <div class="customer-login">
+                    <form action="{% url 'tickets:create_ticket' %}" method="post">
+                        <div class="modal-body">
+                            <div class="block-a">
+                                <label class="label-form">
+                                    {{ form.subject.label }}
+                                </label>
+                                <select name="subject" required=""
+                                        id="id_subject" style="text-align: center">
+                                    {% for val in form.subject %}
+                                        {{ val }}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="block-a">
+                                <label class="label-form">
+                                    {{ form.order_number.label }}
+                                </label>
+                                <input type="number" name="order_number" min="0" required=""
+                                       id="id_order_number" style="text-align: center">
+                            </div>
+                            <div class="block-a">
+                                <label class="label-form">
+                                    {{ form.text.label }}
+                                </label>
+                                <textarea name="text" cols="5" rows="5" required="" id="id_text"
+                                          style="text-align: center"></textarea>
+                            </div>
+                            {% csrf_token %}
+                        </div>
+                        <div class="modal-footer">
+                            <h3>
+                                <div class="block-submit">
+                                    <input type="submit" value="Сохранить">
+                                </div>
+                            </h3>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <table class="table_tickets_list">
+            <tr>
+                <th>№</th>
+                <th>Обновлено</th>
+                <th>Тема</th>
+                <th>Сообщений</th>
+                <th>Индикатор</th>
+                <th>Статус</th>
+            </tr>
+            {% for ticket in tickets %}
+                <tr class="order-list">
+                    <td class="txt_gray">
+                        <a href="{% url 'account:ticket_detail' ticket.id %}">№{{ forloop.counter }}</a>
+                    </td>
+                    <td>{{ ticket.updated|date:'Y-m-d' }}</td>
+                    <td>{{ ticket.subject }}</td>
+                    <td>{{ ticket.number_of_messages }}</td>
+                    <td>{{ ticket.indicator }}</td>
+                    <td>{{ ticket.status }}</td>
+                </tr>
+                <tr style="border-top: 1px solid black;">
+                    <td colspan="6" style="padding:0 0 5px 0;"></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="col-md-1 col-sm-1 col-lg-1"></div>
+
+    <style>
+        .link-profile {
+            border-bottom: none;
+        }
+
+        .link-my-treatment {
+            border-bottom: 2px solid;
+        }
+
+        .modal {
+            display: none; /* Скрыто по умолчанию */
+            position: fixed; /* Оставаться на месте */
+            z-index: 1; /* Сидеть на вершине */
+            padding-top: 100px; /* Расположение коробки */
+            left: 0;
+            top: 0;
+            width: 100%; /* Полная ширина */
+            height: 100%; /* Полная высота */
+            overflow: auto; /* Включите прокрутку, если это необходимо */
+
+        }
+
+        /* Модальное содержание */
+        .modal-content {
+            position: relative;
+            background-color: #fefefe;
+            margin: auto;
+            padding: 0;
+            border: 3px solid black;
+            width: 30%;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            -webkit-animation-name: animatetop;
+            -webkit-animation-duration: 0.4s;
+            animation-name: animatetop;
+            animation-duration: 0.4s
+        }
+
+        /* Добавить анимацию */
+        @-webkit-keyframes animatetop {
+            from {
+                top: -300px;
+                opacity: 0
+            }
+            to {
+                top: 0;
+                opacity: 1
+            }
+        }
+
+        @keyframes animatetop {
+            from {
+                top: -300px;
+                opacity: 0
+            }
+            to {
+                top: 0;
+                opacity: 1
+            }
+        }
+
+        /* Кнопка закрытия */
+        .close {
+            color: white;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            color: black;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-header {
+            padding: 2px 16px;
+            background-color: white;
+            color: black;
+        }
+
+        .modal-body {
+            padding: 2px 16px;
+
+        }
+
+        .modal-footer {
+            padding: 2px 16px;
+            background-color: white;
+            color: black;
+            text-align: center;
+        }
+
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        .customer-login button {
+            background-color: white;
+            color: black;
+            border: 2px solid black; /* Green */
+            font-size: 25px;
+        }
+
+
+    </style>
+    <script>
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("myBtn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal
+        btn.onclick = function () {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+{% endblock %}

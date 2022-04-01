@@ -1001,7 +1001,7 @@ body {
 }
 
 
-.table_order_list {
+.table_order_list, .table_tickets_list {
     width: 100%;
 }
 

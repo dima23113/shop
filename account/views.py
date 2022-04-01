@@ -19,6 +19,8 @@ from .forms import LoginForm, PasswordChangeForm, UserRegisterForm, UserChangeBi
 from cart.cart import Cart
 from orders.models import Order
 from loyalty_program.models import UserBonuses
+from tickets.models import Ticket, TicketMessage
+from tickets.forms import CreateTicketForm
 
 
 class UserLoginView(View):
@@ -257,3 +259,27 @@ class FavoritesDetailView(View):
         user = CustomUser.objects.get(email=request.user)
         fav = user.favorite.all()
         return render(request, 'account/favorites.html', {'favorites': fav})
+
+
+class TicketListView(View):
+
+    def get(self, request, *args, **kwargs):
+        ticket_list = Ticket.objects.filter(user__email=request.user)
+        form = CreateTicketForm()
+        context = {
+            'tickets': ticket_list,
+            'form': form
+        }
+        return render(request, 'account/tickets_list.html', context=context)
+
+
+class TicketDetailView(View):
+
+    def get(self, request, *args, **kwargs):
+        ticket = Ticket.objects.get(id=kwargs['id'])
+        msg = TicketMessage.objects.filter(ticket=ticket)
+        context = {
+            'ticket': ticket,
+            'msg': msg,
+        }
+        return render(request, 'account/ticket_detail.html', context=context)

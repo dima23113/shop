@@ -7,6 +7,7 @@ urlpatterns = [
     path('account/', include('account.urls', namespace='account')),
     path('order/', include('orders.urls', namespace='orders')),
     path('favorites/', include('favorites.urls', namespace='favorites')),
+    path('tickets/', include('tickets.urls', namespace='tickets')),
     path('search/', include('search.urls', namespace='search')),
     path('loyalty/', include('loyalty_program.urls', namespace='loyalty_program')),
     path('blog/', include('blog.urls', namespace='blog')),

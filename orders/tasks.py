@@ -17,11 +17,9 @@ from loyalty_program.tasks import bonus_accrual, update_amount_of_purchases
 def confirm_payment():
     for order in Order.objects.filter(pay_type='Онлайн', payment_status='Не оплачен', payment_id__isnull=False):
         if order:
-            print(order)
             payment_id = order.payment_id
             payment = Payment.find_one(payment_id)
             payment = json.loads(payment.json())
-            print(payment)
             if payment['status'] == 'waiting_for_capture' and payment['paid']:
                 idempotence_key = str(uuid.uuid4())
                 response = Payment.capture(
@@ -34,7 +32,6 @@ def confirm_payment():
                     },
                     idempotence_key
                 )
-                print(response.json())
                 order.payment_status = 'Оплачен'
                 order.save()
                 bonus_accrual.apply_async(args=(order.id,))

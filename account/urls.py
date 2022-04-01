@@ -21,5 +21,7 @@ urlpatterns = [
          name='address'),
     path('orders/<int:id>/', OrderDetailView.as_view(), name='order_detail'),
     path('orders/', OrderListView.as_view(), name='orders'),
+    path('tickets/<int:id>/', TicketDetailView.as_view(), name='ticket_detail'),
+    path('tickets/', TicketListView.as_view(), name='tickets'),
     path('favorites/', FavoritesDetailView.as_view(), name='favorites')
 ]
