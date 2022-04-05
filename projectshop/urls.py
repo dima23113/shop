@@ -1,6 +1,14 @@
 from django.contrib import admin
 from django.urls import path, include
 from django_email_verification import urls as email_urls
+from rest_framework import routers
+
+from shop.views import ProductAPIView
+from tickets.views import TicketAPIView
+
+router = routers.DefaultRouter()
+router.register('ticket', TicketAPIView, basename='ticket')
+router.register('product', ProductAPIView, basename='product')
 
 urlpatterns = [
     path('cart/', include('cart.urls', namespace='cart')),
@@ -18,5 +26,6 @@ urlpatterns = [
     path('email/', include(email_urls)),
     path('tinymce/', include('tinymce.urls')),
     path('chaining/', include('smart_selects.urls')),
+    path('api/v1/', include(router.urls))
 
 ]

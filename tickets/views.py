@@ -1,7 +1,12 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.views.generic import View
+from rest_framework.generics import ListAPIView, RetrieveUpdateDestroyAPIView, ListCreateAPIView
+from rest_framework.viewsets import ViewSet, mixins, GenericViewSet
+
 from .forms import CreateTicketForm
+from .models import Ticket
+from .serializers import TicketSerializer
 from account.models import CustomUser
 
 
@@ -15,3 +20,9 @@ class CreateTicketView(View):
             ticket.user = user
             ticket.save()
         return redirect('account:tickets')
+
+
+class TicketAPIView(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.ListModelMixin,
+                    mixins.DestroyModelMixin, GenericViewSet):
+    queryset = Ticket.objects.all()
+    serializer_class = TicketSerializer

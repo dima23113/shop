@@ -4,9 +4,11 @@ from django.core.paginator import Paginator
 from django.views.generic import ListView, View
 from django.http import JsonResponse
 from django.template.loader import render_to_string
+from rest_framework.viewsets import mixins, GenericViewSet
 
 from cart.forms import CartAddProductForm
 from .models import *
+from .serializers import ProductSerializer
 from .services import sort_brand_list_into_2_columns, get_product_list_by, get_banners_for_index_page, get_new_items, \
     get_sales_items, get_new_articles
 
@@ -177,3 +179,9 @@ class SaleListView(View):
             'sizes': sizes
         }
         return render(request, 'shop/product/product_list.html', context=context)
+
+
+class ProductAPIView(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.ListModelMixin,
+                     GenericViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
