@@ -57,7 +57,8 @@ INSTALLED_APPS = [
     'django_email_verification',
     'tinymce',
     'corsheaders',
-    'rest_framework'
+    'rest_framework',
+    'drf_yasg'
 ]
 
 MIDDLEWARE = [

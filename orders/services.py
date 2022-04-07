@@ -54,7 +54,7 @@ def create_payment(cart_items, order, user):
     """Создание платежа в юкассе"""
     payment = Payment.create({
         "amount": {
-            "value": order.get_total_discount_cost(),
+            "value": order.total_discount_cost(),
             "currency": "RUB"
         },
         'receipt': {

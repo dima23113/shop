@@ -75,6 +75,7 @@ class TicketMessage(models.Model):
     ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE, verbose_name='Сообщение в обращении',
                                related_name='ticket_msg')
     msg = models.TextField(verbose_name='Сообщение')
+    is_admin = models.BooleanField(default=False, verbose_name='Сообщение от админа')
 
     class Meta:
         verbose_name = 'Сообщения в обращении'

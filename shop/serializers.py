@@ -2,7 +2,7 @@ from rest_framework import serializers
 from rest_framework.relations import PrimaryKeyRelatedField
 from rest_framework.serializers import ModelSerializer
 
-from .models import Product, ProductSize, ImgProduct
+from .models import Product, ProductSize, ImgProduct, Brand
 
 
 class ImgSerializer(ModelSerializer):
@@ -29,3 +29,9 @@ class ProductSerializer(ModelSerializer):
         model = Product
         fields = ['category', 'subcategory', 'subcategory_type', 'brand', 'name', 'slug', 'description',
                   'specifications', 'price', 'available', 'price_discount', 'product_sizer', 'product_img']
+
+
+class BrandSerializer(ModelSerializer):
+    class Meta:
+        model = Brand
+        fields = ['name', 'description', 'image']

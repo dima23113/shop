@@ -24,5 +24,8 @@ class CreateTicketView(View):
 
 class TicketAPIView(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.ListModelMixin,
                     mixins.DestroyModelMixin, GenericViewSet):
-    queryset = Ticket.objects.all()
     serializer_class = TicketSerializer
+
+    def get_queryset(self):
+        queryset = Ticket.objects.select_related('user').prefetch_related('ticket_msg').all()
+        return queryset

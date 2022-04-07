@@ -1,11 +1,14 @@
 from django.shortcuts import redirect
 from django.views.generic import View
 from django.contrib import messages
+from rest_framework.viewsets import mixins, GenericViewSet
 
 from .forms import CreateOrderForm
 from .services import order_create
 from account.models import CustomUser
 from cart.cart import Cart
+from .serializers import OrderSerializer
+from .models import Order
 
 
 class OrderCreateView(View):
@@ -37,3 +40,13 @@ class OrderCreateView(View):
             messages.add_message(request, messages.INFO,
                                  'Не выбран тип оплаты/способ доставки или не заполнены данные профиля')
             return redirect('cart:cart_detail')
+
+
+class OrderAPIView(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.ListModelMixin,
+                   GenericViewSet):
+    serializer_class = OrderSerializer
+
+    def get_queryset(self):
+        queryset = Order.objects.select_related('customer').prefetch_related('items').prefetch_related(
+            'items__product').all()
+        return queryset

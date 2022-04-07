@@ -8,7 +8,7 @@ from rest_framework.viewsets import mixins, GenericViewSet
 
 from cart.forms import CartAddProductForm
 from .models import *
-from .serializers import ProductSerializer
+from .serializers import ProductSerializer, BrandSerializer
 from .services import sort_brand_list_into_2_columns, get_product_list_by, get_banners_for_index_page, get_new_items, \
     get_sales_items, get_new_articles
 
@@ -183,5 +183,16 @@ class SaleListView(View):
 
 class ProductAPIView(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.ListModelMixin,
                      GenericViewSet):
-    queryset = Product.objects.all()
     serializer_class = ProductSerializer
+
+    def get_queryset(self):
+        queryset = Product.objects.select_related('category').select_related('subcategory').select_related(
+            'subcategory_type').select_related('brand').prefetch_related('product_img').prefetch_related(
+            'product_sizer').all()
+        return queryset
+
+
+class BrandAPIView(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.ListModelMixin,
+                   GenericViewSet):
+    queryset = Brand.objects.all()
+    serializer_class = BrandSerializer

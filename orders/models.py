@@ -61,10 +61,10 @@ class Order(models.Model):
     def __str__(self):
         return f'Заказ #{self.id}'
 
-    def get_total_cost(self):
+    def total_cost(self):
         return sum(item.get_cost() for item in self.items.all())
 
-    def get_total_discount_cost(self):
+    def total_discount_cost(self):
         return sum(item.get_discount_cost() for item in self.items.all())
 
     def get_absolute_url(self):
