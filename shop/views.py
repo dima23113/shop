@@ -183,6 +183,7 @@ class SaleListView(View):
 
 class ProductAPIView(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.ListModelMixin,
                      GenericViewSet):
+    """API для получения списка товаров. Можно редактировать товары и добавлять новые"""
     serializer_class = ProductSerializer
 
     def get_queryset(self):

@@ -3,6 +3,7 @@ import datetime
 from .models import *
 from blog.models import Article
 
+
 def sort_brand_list_into_2_columns():
     """Создаем список для сортировки брендов по алфавиту и группировки их по первой букве. Делим список на 2 для
     вывода списка брендов в 2 колонки """
@@ -70,18 +71,21 @@ def get_banners_for_index_page():
 
 
 def get_new_items():
+    """Получаем новые товары"""
     product = Product.objects.all()
-    new_items = product.filter(created__gt=datetime.date(2022, 1, 20))
-    sales_items = product.filter(sale=True)[:5]
+    new_items = product.filter(created__gt=datetime.date(2022, 1, 20)).values('image', 'slug')
+    sales_items = product.filter(sale=True)[:5].values('image', 'slug')
     return new_items, sales_items
 
 
 def get_sales_items():
+    """Получаем товары со скидкой"""
     products = Product.objects.filter(available=True, sale=True)
     category, subcategory, subcategory_type, sizes, brands = get_left_filter_submenu(products)
     return subcategory, products, category, subcategory_type, brands, sizes
 
 
 def get_new_articles():
+    """Получаем новые статьи"""
     articles = Article.objects.all().order_by('created')[:3]
     return articles

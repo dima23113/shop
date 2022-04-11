@@ -18,8 +18,6 @@ django-debug-toolbar==3.2.4
 django-email-verification==0.1.1rc1
 django-smart-selects==1.5.9
 django-tinymce4-lite==1.8.0
-elasticsearch==7.17.0
-elasticsearch-dsl==7.4.0
 flower==1.0.0
 gevent==21.12.0
 greenlet==1.1.2
