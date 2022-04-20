@@ -73,7 +73,7 @@ def get_banners_for_index_page():
 def get_new_items():
     """Получаем новые товары"""
     product = Product.objects.all()
-    new_items = product.filter(created__gt=datetime.date(2022, 1, 20)).values('image', 'slug')
+    new_items = product.filter(created__gt=datetime.date.today()-datetime.timedelta(31)).values('image', 'slug')
     sales_items = product.filter(sale=True)[:5].values('image', 'slug')
     return new_items, sales_items
 

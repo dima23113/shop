@@ -14,6 +14,9 @@
     .product {
         margin-bottom: 30px;
     }
+    .col-item__title {
+        font-size: 13px;
+    }
 }
 
 /* lg <= Extra large (xl) */
@@ -33,6 +36,9 @@
 
     .products-list li {
         flex-basis: 19.6%;
+    }
+    .col-item__title {
+        font-size: 12px;
     }
 
 }
@@ -83,6 +89,9 @@
 
     .left-menu > li:hover .sub-menu {
         display: none;
+    }
+    .col-item__title {
+        font-size: 12px;
     }
 
 
@@ -137,8 +146,8 @@
     }
 
     .col-item__title * {
-        font-size: 8px;
-        margin-bottom: 0;
+        font-size: 14px;
+        margin-bottom: 13px;
 
     }
 
@@ -161,7 +170,7 @@
     }
 
     .product-list * {
-        text-align: center;
+        text-align: left;
     }
 
     .social ul {
@@ -253,6 +262,9 @@
 
     .product {
         margin-bottom: 0;
+    }
+    .col-item__title {
+        font-size: 12px;
     }
 
 }

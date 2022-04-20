@@ -21,3 +21,8 @@ def update_amount_of_purchases(order):
     user = order.customer
     user.amount_of_purchases += order.total_discount_cost()
     user.save()
+
+
+@shared_task
+def update_user_loyalty_program():
+    pass

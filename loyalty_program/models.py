@@ -22,8 +22,8 @@ class UserBonuses(models.Model):
     bonuses = models.PositiveIntegerField(verbose_name='Количество бонусов', default=0)
     created = models.DateTimeField(auto_now_add=True, verbose_name='Дата появления бонусов')
     updated = models.DateTimeField(auto_now=True, verbose_name='Дата обновления ко-ва бонусов')
-    bonuses_program = models.ForeignKey(BonusesProgram, on_delete=models.SET_NULL, verbose_name='Бонусная программа',
-                                        null=True)
+    bonuses_program = models.OneToOneField(BonusesProgram, on_delete=models.SET_NULL, verbose_name='Бонусная программа',
+                                           null=True)
 
     class Meta:
         verbose_name = 'Бонусы пользователя'

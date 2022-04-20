@@ -68,7 +68,7 @@ class ProfileView(View):
 
     def get(self, request, *args, **kwargs):
         user = CustomUser.objects.get(email=request.user)
-        bonuses = UserBonuses.objects.get(user=user)
+        bonuses = UserBonuses.objects.values('bonuses').get(user=user)
         form_bio = UserChangeBioForm()
         form_phone = UserChangePhoneForm()
         form_password = PasswordChangeForm()

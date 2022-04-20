@@ -5,6 +5,7 @@ from django.views.generic import ListView, View
 from django.http import JsonResponse
 from django.template.loader import render_to_string
 from rest_framework.viewsets import mixins, GenericViewSet
+from rest_framework.pagination import LimitOffsetPagination
 
 from cart.forms import CartAddProductForm
 from .models import *
@@ -185,6 +186,7 @@ class ProductAPIView(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.
                      GenericViewSet):
     """API для получения списка товаров. Можно редактировать товары и добавлять новые"""
     serializer_class = ProductSerializer
+    pagination_class = LimitOffsetPagination
 
     def get_queryset(self):
         queryset = Product.objects.select_related('category').select_related('subcategory').select_related(
