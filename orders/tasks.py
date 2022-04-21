@@ -10,7 +10,7 @@ from celery import shared_task
 from yookassa import Payment
 
 from orders.models import Order
-from loyalty_program.tasks import bonus_accrual, update_amount_of_purchases
+from loyalty_program.tasks import bonus_accrual, update_amount_of_purchases, update_user_loyalty_program
 
 
 @shared_task
@@ -22,7 +22,7 @@ def confirm_payment():
             payment = json.loads(payment.json())
             if payment['status'] == 'waiting_for_capture' and payment['paid']:
                 idempotence_key = str(uuid.uuid4())
-                response = Payment.capture(
+                Payment.capture(
                     payment_id,
                     {
                         'amount': {
@@ -36,6 +36,7 @@ def confirm_payment():
                 order.save()
                 bonus_accrual.apply_async(args=(order.id,))
                 update_amount_of_purchases.apply_async(args=(order.id,))
+                update_user_loyalty_program(args=(order.id,))
                 send_order_information.apply_async(args=(order.id,))
         else:
             return 'Нечего подтверждать'
