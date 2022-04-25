@@ -1,6 +1,9 @@
+import datetime
+
+from django.utils.timezone import get_current_timezone
 from celery import shared_task
+
 from .models import UserBonuses, BonusesProgram
-from account.models import CustomUser
 from orders.models import Order
 
 
@@ -32,12 +35,18 @@ def update_user_loyalty_program(order):
         if user.amount_of_purchases >= program.required_amount:
             bonuses_program = user.user_bonuses.first()
             bonuses_program.bonuses_program = program
+            bonuses_program.save()
         else:
             pass
-    bonuses_program.save()
 
 
 @shared_task
 def remove_user_bonuses():
     """Проверка срока начисления бонусов и их удалении при длительном неиспользовании"""
-    pass
+    for program in BonusesProgram.objects.all():
+        for bonuses in UserBonuses.objects.filter(bonuses_program=program,
+                                                  updated__gte=datetime.datetime.now(
+                                                      tz=get_current_timezone()) - datetime.timedelta(
+                                                      program.validity_period)):
+            bonuses.bonuses = 0
+            bonuses.save()

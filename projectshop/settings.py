@@ -229,7 +229,6 @@ Configuration.secret_key = 'test_Ba76Z9PKpIee2P-esHZl8SYXl9D0TWX7ixs5fEVtt1w'
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_METHODS = [
-    'DELETE',
     'GET',
     'OPTIONS',
     'PATCH',

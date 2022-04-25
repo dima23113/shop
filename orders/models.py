@@ -52,6 +52,8 @@ class Order(models.Model):
     phone = models.CharField(max_length=20, verbose_name='Телефон', null=True, blank=True)
     status = models.CharField(max_length=256, verbose_name='Статус заказа', null=True, blank=True)
     payment_id = models.CharField(max_length=50, verbose_name='Номер платежа', null=True, blank=True)
+    confirmation_url = models.URLField(max_length=256, verbose_name='Ссылка на оплату платежа',
+                                       blank=True, null=True)
 
     class Meta:
         ordering = ('-created',)

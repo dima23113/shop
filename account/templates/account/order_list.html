@@ -25,7 +25,8 @@
                     <td>{{ order.address }}</td>
                     <td>{{ order.ship_type }}</td>
                     <td>{{ order.get_total_discount_cost }} руб.</td>
-                    <td>{{ order.status }}</td>
+                    <td>{% if order.confirmation_url %}
+                        <a href="{{ order.confirmation_url }}">{% endif %}{{ order.payment_status }}</a></td>
                 </tr>
                 <tr style="border-top: 1px solid black;">
                     <td colspan="6" style="padding:0 0 5px 0;"></td>

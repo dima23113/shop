@@ -20,6 +20,7 @@ def order_create(cd, user, cart):
     if cd['pay_type'] == 'Онлайн':
         payment = create_payment(cart_items, order, user)
         order.payment_id = payment['id']
+        order.confirmation_url = payment['confirmation']['confirmation_url']
         order.save()
         return payment['confirmation']['confirmation_url']
     else:
@@ -63,9 +64,6 @@ def create_payment(cart_items, order, user):
                 'email': user.email
             },
             'items': cart_items
-        },
-        "payment_method_data": {
-            "type": "bank_card"
         },
         "confirmation": {
             "type": "redirect",
