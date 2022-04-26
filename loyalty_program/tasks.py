@@ -43,10 +43,15 @@ def update_user_loyalty_program(order):
 @shared_task
 def remove_user_bonuses():
     """Проверка срока начисления бонусов и их удалении при длительном неиспользовании"""
-    for program in BonusesProgram.objects.all():
+    """for program in BonusesProgram.objects.all():
         for bonuses in UserBonuses.objects.filter(bonuses_program=program,
                                                   updated__gte=datetime.datetime.now(
                                                       tz=get_current_timezone()) - datetime.timedelta(
                                                       program.validity_period)):
+            bonuses.bonuses = 0
+            bonuses.save()"""
+    for bonuses in UserBonuses.objects.all():
+        if bonuses.updated <= datetime.datetime.now(tz=get_current_timezone()) - datetime.timedelta(
+                bonuses.bonuses_program.validity_period):
             bonuses.bonuses = 0
             bonuses.save()

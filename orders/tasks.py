@@ -10,6 +10,7 @@ from django.utils.timezone import get_current_timezone
 
 from celery import shared_task
 from yookassa import Payment
+from collections import Counter
 
 from orders.models import Order
 from loyalty_program.tasks import bonus_accrual, update_amount_of_purchases, update_user_loyalty_program
@@ -78,8 +79,8 @@ def send_payment_completion_request(order):
     order_items = order.items.all()
 
     if order.created + datetime.timedelta(minutes=60) > datetime.datetime.now(tz=get_current_timezone()):
-        order_lifetime = (order.created + datetime.timedelta(minutes=60)) - datetime.datetime.now(
-            tz=get_current_timezone())
+        order_lifetime = (order.created + datetime.timedelta(minutes=60)) - \
+                         datetime.datetime.now(tz=get_current_timezone())
     else:
         order_lifetime = None
         order.confirmation_url = None
@@ -98,31 +99,23 @@ def send_payment_completion_request(order):
 def get_order_statistics():
     """Получаем статику заказов за прошедшие сутки"""
     sum_order_prices = 0
-    top_of_products = {}
     orders = Order.objects.all()
-    pending_orders = orders.filter(payment_status='Не оплачен').count()
+    products = []
+    canceled_orders = orders.filter(payment_status='Отменен',
+                                    created__day=datetime.date.today().day - datetime.timedelta(0).days).count()
     for order in orders.prefetch_related('items').filter(
-            created=datetime.datetime.now(get_current_timezone()) - datetime.timedelta(1),
-            payment_status='Оплачен'):
+            created=datetime.datetime.now(get_current_timezone()) - datetime.timedelta(0), payment_status='Оплачен'):
         sum_order_prices += order.total_discount_cost()
         for product in order.items.all():
-            if top_of_products[product.name]['qty'] > 1:
-                top_of_products[product.name]['qty'] = top_of_products[product.name]['qty'] + 1
-            else:
-                top_of_products = {
-                    product.name: {
-                        'name': product,
-                        'qty': 1,
-                        'img': product.image,
-                        'available': product.available
-                    }
-                }
-
-    html_template = render_to_string(template_name='orders/order_statistics.html',
-                                     context={'orders_price_sum': sum_order_prices, 'top_products': top_of_products,
-                                              'pending_orders': pending_orders, 'orders': orders.filter(
-                                             created=datetime.datetime.now(get_current_timezone()) -
-                                                     datetime.timedelta(1)).count()})
+            products.append(product.name)
+    products = Counter(products)
+    products = products.most_common()
+    context = {'orders_price_sum': sum_order_prices,
+               'top_products': products,
+               'canceled_orders': canceled_orders,
+               'orders': orders.filter(created__day=datetime.date.today().day - datetime.timedelta(0).days).count()
+               }
+    html_template = render_to_string(template_name='orders/order_statistics.html', context=context)
     html_template = strip_tags(html_template)
     subject = f'Очет статистики заказов за {datetime.date.today() - datetime.timedelta(1)}'
     send_mail(subject, html_template, settings.EMAIL_HOST_USER, ['namedima4@gmail.com'], fail_silently=True)

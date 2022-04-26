@@ -96,7 +96,7 @@
         </div>
         <div class="order-info">
             <p>
-                Заказов ожидает оплаты {{ pending_orders }}
+                Отмененных заказов {{ pending_orders }}
             </p>
         </div>
         <div class="order">
@@ -104,7 +104,7 @@
             <div class="cart-side">
                 <div class="items-wrapper">
                     {% for item in top_products %}
-                        {% with product=item.name %}
+                        {% with product=item.0 %}
                             <div class="items-wrapper__product">
                                 <div class="product__image">
                                     {% thumbnail product.image "100x100" crop="20%" as im %}
