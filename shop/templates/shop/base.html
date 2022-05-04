@@ -172,7 +172,7 @@
                                 {% for item in sale_items %}
                                     <div class="swiper-slide">
                                         <a href="{% url 'shop:product_detail' item.slug %}"><img
-                                                src={% thumbnail item.image "250x250" as im %}"{{ im.url }}"{% endthumbnail %}></a>
+                                                src={% thumbnail item.image "250x250" as im %}"{{ im.url }}"{% endthumbnail %} loading="lazy"></a>
                                     </div>
                                 {% endfor %}
                             </div>
@@ -196,7 +196,7 @@
                                 <div class="article">
                                     <a href="{% url 'blog:article_detail' article.slug %}">
                                         {% thumbnail article.img "402x300" as im %}
-                                            <img src="{{ im.url }}">
+                                            <img src="{{ im.url }}" loading="lazy">
                                         {% endthumbnail %}
                                     </a>
                                 </div>

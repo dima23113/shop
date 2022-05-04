@@ -140,7 +140,7 @@
                                             {% thumbnail i.image "319x344" crop="20%" as im %}
                                                 <a class="col-item-a" href="{% url 'shop:product_detail' i.slug %}"><img
                                                         alt="image"
-                                                        src="{{ im.url }}"></a>
+                                                        src="{{ im.url }}" loading="lazy"></a>
                                             {% endthumbnail %}
                                             <div class="col-item-about">
                                                 <div class="col-item__title">

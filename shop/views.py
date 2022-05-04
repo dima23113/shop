@@ -99,7 +99,7 @@ class JsonFilterProductView(ListView):
                                                     'slug',
                                                     'brand__name',
                                                     'image',
-                                                    'price')
+                                                    'price', 'price_discount')
         return queryset
 
     def get(self, request, *args, **kwargs):
