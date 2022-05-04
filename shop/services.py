@@ -74,7 +74,8 @@ def get_new_items():
 
 def get_sales_items():
     """Получаем товары со скидкой"""
-    products = Product.objects.filter(available=True, sale=True)
+    products = Product.objects.filter(available=True, sale=True).select_related(
+        'brand').only('image', 'slug', 'brand', 'name', 'price', 'id')
     category, subcategory, subcategory_type, sizes, brands = get_left_filter_submenu(products)
     return subcategory, products, category, subcategory_type, brands, sizes
 
