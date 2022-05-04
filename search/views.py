@@ -24,6 +24,6 @@ class SearchProductListView(View):
             context = {
                 'products': page_obj
             }
-            return render(request, 'search/product_search.html', context=context)
+            return render(request, 'shop/product/product_list.html', context=context)
         else:
-            return render(request, 'search/product_search.html')
+            return render(request, 'shop/product/product_list.html')

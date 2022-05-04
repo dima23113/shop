@@ -65,13 +65,6 @@ def send_order_information(order):
     send_mail(subject, html_template, settings.EMAIL_HOST_USER, [order.email], fail_silently=True)
 
 
-"""@shared_task
-def check_payment_completion():
-    for order in Order.objects.filter(pay_type='Онлайн', payment_status='Не оплачен', payment_id__isnull=False):
-        send_payment_completion_request.apply_async(args=(order.id,))
-"""
-
-
 @shared_task
 def send_payment_completion_request(order):
     """Отправляем письмо с информацией по заказу и просьбой завешить платеж"""

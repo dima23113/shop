@@ -25,31 +25,25 @@ def sort_brand_list_into_2_columns():
     return context
 
 
-def get_product_list_by(category=None, brand=None, subcategory=None, subcategory_type=None):
+def get_product_list(obj, slug):
     """Выдаем товары и submenu для выбранной категории/подкатегории/типа подкатегории"""
-    if category:
-        products = Product.objects.filter(category__slug=category,
+    if obj == 'category':
+        products = Product.objects.filter(category__slug=slug,
                                           available=True).select_related(
             'brand').only('image', 'slug', 'brand', 'name', 'price', 'id')
-        category, subcategory, subcategory_type, sizes, brands = get_left_filter_submenu(products)
-        return category, sizes, products, subcategory, subcategory_type, brands
-    if brand:
-        products = Product.objects.filter(brand__slug=brand, available=True)
-        category, subcategory, subcategory_type, sizes, brand = get_left_filter_submenu(products)
-        return brand, products, category, subcategory, subcategory_type, sizes
+    if obj == 'brand':
+        products = Product.objects.filter(brand__slug=slug, available=True)
 
-    if subcategory:
+    if obj == 'subcategory':
         products = Product.objects.filter(
-            subcategory__slug=subcategory,
+            subcategory__slug=slug,
             available=True).only('image', 'slug', 'brand', 'name', 'price', 'id')
-        category, subcategory, subcategory_type, sizes, brands = get_left_filter_submenu(products)
-        return subcategory, products, category, subcategory_type, brands, sizes
 
-    if subcategory_type:
-        products = Product.objects.filter(subcategory_type__slug=subcategory_type,
+    if obj == 'subcategorytype':
+        products = Product.objects.filter(subcategory_type__slug=slug,
                                           available=True).only('image', 'slug', 'brand', 'name', 'price', 'id')
-        category, subcategory, subcategory_type, sizes, brands = get_left_filter_submenu(products)
-        return subcategory_type, products, category, subcategory, sizes, brands
+    category, subcategory, subcategory_type, sizes, brand = get_left_filter_submenu(products)
+    return products, brand, category, subcategory, subcategory_type, sizes
 
 
 def get_left_filter_submenu(product):
@@ -73,7 +67,7 @@ def get_banners_for_index_page():
 def get_new_items():
     """Получаем новые товары"""
     product = Product.objects.all()
-    new_items = product.filter(created__gt=datetime.date.today()-datetime.timedelta(31)).values('image', 'slug')
+    new_items = product.filter(created__gt=datetime.date.today() - datetime.timedelta(31)).values('image', 'slug')
     sales_items = product.filter(sale=True)[:5].values('image', 'slug')
     return new_items, sales_items
 

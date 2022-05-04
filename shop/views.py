@@ -11,8 +11,9 @@ from rest_framework.pagination import LimitOffsetPagination
 from cart.forms import CartAddProductForm
 from .models import *
 from .serializers import ProductSerializer, BrandSerializer
-from .services import sort_brand_list_into_2_columns, get_product_list_by, get_banners_for_index_page, get_new_items, \
+from .services import sort_brand_list_into_2_columns, get_banners_for_index_page, get_new_items, \
     get_sales_items, get_new_articles
+from .utils import ProductsObjectMixin
 
 
 class IndexView(View):
@@ -39,80 +40,22 @@ class BrandList(View):
         return render(request, 'shop/product/brand_list.html', context=context)
 
 
-class ProductListByCategory(View):
-
-    def get(self, request, *args, **kwargs):
-        category, sizes, products, subcategory, subcategory_type, brands = get_product_list_by(category=kwargs['slug'])
-        paginator = Paginator(products, 5)
-        page_number = request.GET.get('page')
-        page_obj = paginator.get_page(page_number)
-        context = {
-            'products': page_obj,
-            'category': category,
-            'brand': brands,
-            'sizes': sizes,
-            'subcategory': subcategory,
-            'subcategory_type': subcategory_type
-        }
-
-        return render(request, 'shop/product/product_list.html', context=context)
+class ProductListByCategory(ProductsObjectMixin, View):
+    model = Category
 
 
-class ProductListByBrand(View):
-
-    def get(self, request, *args, **kwargs):
-        brand, products, category, subcategory, subcategory_type, sizes = get_product_list_by(brand=kwargs['slug'])
-        paginator = Paginator(products, 5)
-        page_number = request.GET.get('page')
-        page_obj = paginator.get_page(page_number)
-        context = {
-            'products': page_obj,
-            'brand': brand,
-            'sizes': sizes,
-            'category': category,
-            'subcategory': subcategory,
-            'subcategory_type': subcategory_type
-        }
-        return render(request, 'shop/product/product_by_brand.html', context=context)
+class ProductListByBrand(ProductsObjectMixin, View):
+    model = Brand
 
 
-class ProductListBySubcategory(View):
+class ProductListBySubcategory(ProductsObjectMixin, View):
 
-    def get(self, request, *args, **kwargs):
-        subcategory, products, category, subcategory_type, brands, sizes = get_product_list_by(
-            subcategory=kwargs['slug'])
-        paginator = Paginator(products, 50)
-        page_number = request.GET.get('page')
-        page_obj = paginator.get_page(page_number)
-        context = {
-            'products': page_obj,
-            'brand': brands,
-            'sizes': sizes,
-            'category': category,
-            'subcategory': subcategory,
-            'subcategory_type': subcategory_type
-        }
-        return render(request, 'shop/product/product_list.html', context=context)
+    model = Subcategory
 
 
-class ProductListBySubcategoryType(View):
+class ProductListBySubcategoryType(ProductsObjectMixin, View):
 
-    def get(self, request, *args, **kwargs):
-        subcategory_type, products, category, subcategory, sizes, brands = get_product_list_by(
-            subcategory_type=kwargs['slug'])
-        paginator = Paginator(products, 50)
-        page_number = request.GET.get('page')
-        page_obj = paginator.get_page(page_number)
-
-        context = {
-            'products': page_obj,
-            'brand': brands,
-            'sizes': sizes,
-            'category': category,
-            'subcategory': subcategory,
-            'subcategory_type': subcategory_type
-        }
-        return render(request, 'shop/product/product_list.html', context=context)
+    model = SubcategoryType
 
 
 class ProductDetail(View):
