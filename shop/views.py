@@ -61,7 +61,7 @@ class ProductListBySubcategoryType(ProductsObjectMixin, View):
 class ProductDetail(View):
 
     def get(self, request, *args, **kwargs):
-        product = Product.objects.select_related('brand'). \
+        product = Product.objects.select_related('brand').prefetch_related('product_sizer'). \
             defer('compound',
                   'gender',
                   'mark',
