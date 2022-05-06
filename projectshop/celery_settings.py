@@ -24,6 +24,10 @@ app.conf.beat_schedule = {
     'ever_day_discount_check': {
         'task': 'discount_system.tasks.discount_check',
         'schedule': crontab(),
+    },
+    'ever_week_notification_for_favorites': {
+        'task': 'favorites.tasks.send_notification_for_favorites',
+        'schedule': crontab(),
     }
 
 }

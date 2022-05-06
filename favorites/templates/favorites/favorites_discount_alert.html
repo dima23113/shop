@@ -1,0 +1,131 @@
+{% load static %}
+{% load thumbnail %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Новый заказ!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+
+        body {
+            font-family: "Raleway", sans-serif;
+            font-size: 19px;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3%;
+            border: 1px black solid;
+        }
+
+        .logo {
+            text-align: center;
+        }
+
+        .msg, .order-info, .cart-side, .change-order, header, .order {
+            margin-bottom: 10px;
+        }
+
+        .order-info * {
+            padding-bottom: 10px;
+        }
+
+
+        .separator {
+            border: 1px solid black;
+            margin-bottom: 20px;
+        }
+
+        .cart-side {
+            border: 1px solid;
+            padding: 20px;
+        }
+
+        .items-wrapper__product:not(:last-child) {
+            border-bottom: 1px solid
+        }
+
+        .product__descr {
+            flex-basis: 84%;
+            padding-left: 16px;
+        }
+
+        .cart-side * {
+            font-family: 'Raleway', sans-serif;
+            font-size: 16px;
+        }
+
+        .items-wrapper__product a:hover {
+            color: black;
+            text-decoration: underline;
+        }
+
+        .items-wrapper__product * {
+            text-decoration: none;
+        }
+
+        .items-wrapper__product {
+            padding-bottom: 16px;
+            margin-bottom: 16px;
+            display: flex;
+        }
+
+        .items-wrapper__product:last-child {
+            border-bottom: 1px solid
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <header>
+        <div class="logo">
+            <a href="{% url 'shop:index' %}"><img src="{% static "img/logo.png" %}" alt="logo"></a>
+        </div>
+        <div class="separator"></div>
+    </header>
+
+    <div class="content">
+        <div class="msg">
+            <p>{{ user.first_name }}, на товар из избранного действует скидка!</p>
+        </div>
+        <div class="order">
+            <p><strong>Избранное со скидкой:</strong></p>
+            <div class="cart-side">
+                <div class="items-wrapper">
+                    {% for item in favorites %}
+                        {% with product=item.product %}
+                            <div class="items-wrapper__product">
+                                <div class="product__image">
+                                    {% thumbnail product.image "100x100" crop="20%" as im %}
+                                        <a class="img" href="{{ product.get_absolute_url }}">
+                                            <img src="{{ im.url }}">
+                                        </a>
+                                    {% endthumbnail %}
+                                </div>
+                                <div class="product__descr">
+                                    <div class="title">
+                                        <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+                                    </div>
+                                    <div>Цена со скидкой: {{ item.price_discount }}</div>
+                                </div>
+                            </div>
+                        {% endwith %}
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="contacts">
+                <h3>Контактная информация</h3>
+                <p>Email: <a href="mailto:info@noyabrskateshop.ru" target="_blank">info@noyabrskateshop.ru</a></p>
+                <p>Телефон: 8 996 777 34 80</p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
