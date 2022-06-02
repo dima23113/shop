@@ -5,6 +5,7 @@
 - Redis
 - Docker
 - PostgresSQL
+- Celery
 
 ## Установка
 
