@@ -24,7 +24,7 @@
                     <td>{{ order.created|date:'Y-m-d' }}</td>
                     <td>{{ order.address }}</td>
                     <td>{{ order.ship_type }}</td>
-                    <td>{{ order.get_total_discount_cost }} руб.</td>
+                    <td>{{ order.total_discount_cost }} руб.</td>
                     <td>{% if order.confirmation_url %}
                         <a href="{{ order.confirmation_url }}">{% endif %}{{ order.payment_status }}</a></td>
                 </tr>

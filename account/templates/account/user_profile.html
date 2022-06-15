@@ -35,146 +35,146 @@
                     {% block info %}
                         <div class="col-md-1 col-sm-1 col-lg-1"></div>
                         <div class="account-info col-md-10 col-sm-10 col-lg-10">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <duv class="user-info col-md-4 col-sm-4 col-lg-4">
-                                            <p><b>{{ user.get_full_name }}</b></p>
-                                            <div class="user-edit-block">
-                                                <a class="phone" href="#">{{ user.phone }}</a><br>
-                                                <a class="email" href="#">{{ user.email }}</a><br>
-                                                <a class="birthday" href="#">{{ user.birthday }}</a><br>
-                                                <a class="bio" href="#">Редактировать личные данные</a><br>
-                                                <a class="password" href="#">Изменить пароль</a><br>
-                                                <a class="mailing" href="#">Управление подпиской</a><br>
-                                                <a class="logout" href="{% url 'account:logout' %}">Выйти из аккаунта</a>
-                                            </div>
-                                        </duv>
-                                        <div class="user-info col-md-4 col-sm-4 col-lg-4">
-                                            <p>Сумма покупок - {{ user.amount_of_purchases }}</p>
-                                            <p>Бонусов - {{ bonuses.bonuses }} </p>
-                                            <p>Для повышения статуса карты совершите покупки на сумму: </p>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <duv class="user-info col-md-4 col-sm-4 col-lg-4">
+                                        <p><b>{{ user.get_full_name }}</b></p>
+                                        <div class="user-edit-block">
+                                            <a class="phone" href="#">{{ user.phone }}</a><br>
+                                            <a class="email" href="#">{{ user.email }}</a><br>
+                                            <a class="birthday" href="#">{{ user.birthday }}</a><br>
+                                            <a class="bio" href="#">Редактировать личные данные</a><br>
+                                            <a class="password" href="#">Изменить пароль</a><br>
+                                            <a class="mailing" href="#">Управление подпиской</a><br>
+                                            <a class="logout" href="{% url 'account:logout' %}">Выйти из аккаунта</a>
                                         </div>
-                                        <div class="user-info col-md-4 col-sm-4 col-lg-4">
-                                            <div class="customer-login">
-                                                <form class="bio-form" method="post"
-                                                      action="{% url 'account:profile' %}"
-                                                      style="padding-top: 0; margin-top: 0">
-                                                    <div class="block-a">
-                                                        <h1 style="text-align: center; font-size: 25px;padding-top: 0px;margin-top: 0px; ">
-                                                            Личные данные</h1>
-                                                    </div>
-                                                    <div class="block-a">
-                                                        <label class="label-form">
-                                                            {{ form_bio.first_name.label }}
-                                                        </label>
-                                                        <input type="first_name" name="first_name" required=""
-                                                               id="id_first_name" value="{{ user.first_name }}"
-                                                               style="text-align: center">
-                                                    </div>
-                                                    <div class="block-a">
-                                                        <label class="label-form">
-                                                            {{ form_bio.last_name.label }}
-                                                        </label>
-                                                        <input type="last_name" name="last_name" required=""
-                                                               id="id_last_name"
-                                                               value="{{ user.last_name }}" style="text-align: center">
-                                                    </div>
-                                                    <div class="block-a">
-                                                        <label class="label-form">
-                                                            {{ form_bio.surname.label }}
-                                                        </label>
-                                                        <input type="surname" name="surname" required="" id="id_surname"
-                                                               value="{{ user.surname }}" style="text-align: center">
-                                                    </div>
-                                                    {% csrf_token %}
-                                                    <div class="block-submit">
-                                                        <input type="submit" value="Сохранить">
-                                                    </div>
-                                                </form>
-                                                <form class="phone-form" method="post"
-                                                      action="{% url 'account:profile' %}"
-                                                      style="padding-top: 0; margin-top: 0">
-                                                    <div class="block-a">
-                                                        <h1 style="text-align: center; font-size: 25px;padding-top: 0px;margin-top: 0px; ">
-                                                            Изменить телефон</h1>
-                                                    </div>
-                                                    <div class="block-a">
-                                                        <label class="label-form">
-                                                            {{ form_phone.phone.label }}
-                                                        </label>
-                                                        <input type="phone" name="phone" required=""
-                                                               id="id_phone" value="{{ user.phone }}"
-                                                               style="text-align: center">
-                                                    </div>
-                                                    {% csrf_token %}
-                                                    <div class="block-submit">
-                                                        <input type="submit" value="Сохранить">
-                                                    </div>
-                                                </form>
-                                                <form class="password-change-form" method="post"
-                                                      action="{% url 'account:profile' %}"
-                                                      style="padding-top: 0; margin-top: 0">
-                                                    <div class="block-a">
-                                                        <h1 style="text-align: center; font-size: 25px;padding-top: 0px;margin-top: 0px; ">
-                                                            Смена пароля</h1>
-                                                    </div>
-                                                    <div class="block-a">
-                                                        <label class="label-form">
-                                                            {{ form_password.new_password.label }}
-                                                        </label>
-                                                        <input type="password" name="password" required=""
-                                                               id="id_password">
-                                                    </div>
-                                                    <div class="block-a">
-                                                        <label class="label-form">
-                                                            {{ form_password.confirm_password.label }}
-                                                        </label>
-                                                        <input type="password" name="password" required=""
-                                                               id="id_password">
-                                                    </div>
-                                                    {% csrf_token %}
-                                                    <div class="block-submit">
-                                                        <input type="submit" value="Сохранить">
-                                                    </div>
-                                                </form>
-                                                <form class="mailing-form" method="post"
-                                                      action="{% url 'account:profile' %}"
-                                                      style="padding-top: 0; margin-top: 0">
-                                                    <div class="block-a">
-                                                        <h1 style="text-align: center; font-size: 25px;padding-top: 0px;margin-top: 0px; ">
-                                                            Рассылка предложений</h1>
-                                                    </div>
-                                                    <div class="block-a">
-                                                        <label style="text-align: center">{{ form_mailing.mailing_yes.label }}</label>
-                                                        <input type="checkbox" name="mailing_yes" id="id_mailing_yes"
-                                                               checked>
-                                                    </div>
-                                                    {% csrf_token %}
-                                                    <div class="block-submit">
-                                                        <input type="submit" value="Сохранить">
-                                                    </div>
-                                                </form>
-                                                <form class="email-form" method="post"
-                                                      action="{% url 'account:profile' %}"
-                                                      style="padding-top: 0; margin-top: 0">
-                                                    <div class="block-a">
-                                                        <h1 style="text-align: center; font-size: 25px;padding-top: 0px;margin-top: 0px; ">
-                                                            Изменить E-Mail</h1>
-                                                    </div>
-                                                    <div class="block-a">
-                                                        <label>{{ form_email.email.label }}</label>
-                                                        <input type="email" name="email" id="id_email"
-                                                               value="{{ user.email }}">
-                                                    </div>
-                                                    {% csrf_token %}
-                                                    <div class="block-submit">
-                                                        <input type="submit" value="Сохранить">
-                                                    </div>
-                                                </form>
-                                            </div>
+                                    </duv>
+                                    <div class="user-info col-md-4 col-sm-4 col-lg-4">
+                                        <p>Сумма покупок - {{ user.amount_of_purchases }}</p>
+                                        <p>Бонусная программа - {{ bonuses.bonuses_program__name }}</p>
+                                        <p>Бонусов - {{ bonuses.bonuses }} </p>
+                                    </div>
+                                    <div class="user-info col-md-4 col-sm-4 col-lg-4">
+                                        <div class="customer-login">
+                                            <form class="bio-form" method="post"
+                                                  action="{% url 'account:profile' %}"
+                                                  style="padding-top: 0; margin-top: 0">
+                                                <div class="block-a">
+                                                    <h1 style="text-align: center; font-size: 25px;padding-top: 0px;margin-top: 0px; ">
+                                                        Личные данные</h1>
+                                                </div>
+                                                <div class="block-a">
+                                                    <label class="label-form">
+                                                        {{ form_bio.first_name.label }}
+                                                    </label>
+                                                    <input type="first_name" name="first_name" required=""
+                                                           id="id_first_name" value="{{ user.first_name }}"
+                                                           style="text-align: center">
+                                                </div>
+                                                <div class="block-a">
+                                                    <label class="label-form">
+                                                        {{ form_bio.last_name.label }}
+                                                    </label>
+                                                    <input type="last_name" name="last_name" required=""
+                                                           id="id_last_name"
+                                                           value="{{ user.last_name }}" style="text-align: center">
+                                                </div>
+                                                <div class="block-a">
+                                                    <label class="label-form">
+                                                        {{ form_bio.surname.label }}
+                                                    </label>
+                                                    <input type="surname" name="surname" required="" id="id_surname"
+                                                           value="{{ user.surname }}" style="text-align: center">
+                                                </div>
+                                                {% csrf_token %}
+                                                <div class="block-submit">
+                                                    <input type="submit" value="Сохранить">
+                                                </div>
+                                            </form>
+                                            <form class="phone-form" method="post"
+                                                  action="{% url 'account:profile' %}"
+                                                  style="padding-top: 0; margin-top: 0">
+                                                <div class="block-a">
+                                                    <h1 style="text-align: center; font-size: 25px;padding-top: 0px;margin-top: 0px; ">
+                                                        Изменить телефон</h1>
+                                                </div>
+                                                <div class="block-a">
+                                                    <label class="label-form">
+                                                        {{ form_phone.phone.label }}
+                                                    </label>
+                                                    <input type="phone" name="phone" required=""
+                                                           id="id_phone" value="{{ user.phone }}"
+                                                           style="text-align: center">
+                                                </div>
+                                                {% csrf_token %}
+                                                <div class="block-submit">
+                                                    <input type="submit" value="Сохранить">
+                                                </div>
+                                            </form>
+                                            <form class="password-change-form" method="post"
+                                                  action="{% url 'account:profile' %}"
+                                                  style="padding-top: 0; margin-top: 0">
+                                                <div class="block-a">
+                                                    <h1 style="text-align: center; font-size: 25px;padding-top: 0px;margin-top: 0px; ">
+                                                        Смена пароля</h1>
+                                                </div>
+                                                <div class="block-a">
+                                                    <label class="label-form">
+                                                        {{ form_password.new_password.label }}
+                                                    </label>
+                                                    <input type="password" name="password" required=""
+                                                           id="id_password">
+                                                </div>
+                                                <div class="block-a">
+                                                    <label class="label-form">
+                                                        {{ form_password.confirm_password.label }}
+                                                    </label>
+                                                    <input type="password" name="password" required=""
+                                                           id="id_password">
+                                                </div>
+                                                {% csrf_token %}
+                                                <div class="block-submit">
+                                                    <input type="submit" value="Сохранить">
+                                                </div>
+                                            </form>
+                                            <form class="mailing-form" method="post"
+                                                  action="{% url 'account:profile' %}"
+                                                  style="padding-top: 0; margin-top: 0">
+                                                <div class="block-a">
+                                                    <h1 style="text-align: center; font-size: 25px;padding-top: 0px;margin-top: 0px; ">
+                                                        Рассылка предложений</h1>
+                                                </div>
+                                                <div class="block-a">
+                                                    <label style="text-align: center">{{ form_mailing.mailing_yes.label }}</label>
+                                                    <input type="checkbox" name="mailing_yes" id="id_mailing_yes"
+                                                           checked>
+                                                </div>
+                                                {% csrf_token %}
+                                                <div class="block-submit">
+                                                    <input type="submit" value="Сохранить">
+                                                </div>
+                                            </form>
+                                            <form class="email-form" method="post"
+                                                  action="{% url 'account:profile' %}"
+                                                  style="padding-top: 0; margin-top: 0">
+                                                <div class="block-a">
+                                                    <h1 style="text-align: center; font-size: 25px;padding-top: 0px;margin-top: 0px; ">
+                                                        Изменить E-Mail</h1>
+                                                </div>
+                                                <div class="block-a">
+                                                    <label>{{ form_email.email.label }}</label>
+                                                    <input type="email" name="email" id="id_email"
+                                                           value="{{ user.email }}">
+                                                </div>
+                                                {% csrf_token %}
+                                                <div class="block-submit">
+                                                    <input type="submit" value="Сохранить">
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                         </div>
                         <div class="col-md-1 col-sm-1 col-lg-1"></div>
                     {% endblock %}

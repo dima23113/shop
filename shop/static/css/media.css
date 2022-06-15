@@ -123,6 +123,9 @@
     .product {
         margin-bottom: 60px;
     }
+    .modal-content {
+        width: 45%;
+    }
 }
 
 /* sm <= Medium (md) */
@@ -266,12 +269,18 @@
     .col-item__title {
         font-size: 12px;
     }
+    .modal-content {
+        width: 60%;
+    }
 
 }
 
 @media (max-width: 500px) {
     .products-list li {
         max-height: 290px;
+    }
+    .modal-content {
+        width: 60%;
     }
 }
 

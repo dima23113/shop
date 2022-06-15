@@ -49,12 +49,10 @@ class ProductListByBrand(ProductsObjectMixin, View):
 
 
 class ProductListBySubcategory(ProductsObjectMixin, View):
-
     model = Subcategory
 
 
 class ProductListBySubcategoryType(ProductsObjectMixin, View):
-
     model = SubcategoryType
 
 
@@ -83,6 +81,7 @@ class ProductDetail(View):
             'cart_add': form,
             'images': product_image
         }
+
         return render(request, 'shop/product/product_detail.html', context=context)
 
 
@@ -141,5 +140,6 @@ class ProductAPIView(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.
 
 class BrandAPIView(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.ListModelMixin,
                    GenericViewSet):
+    """API для получения списка брендов. Можно редактировать бренды и добавлять новые"""
     queryset = Brand.objects.all()
     serializer_class = BrandSerializer

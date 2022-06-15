@@ -18,7 +18,7 @@ from .forms import LoginForm, PasswordChangeForm, UserRegisterForm, UserChangeBi
     UserEmailMailingForm, EmailChangeForm, AddressChangeForm
 from cart.cart import Cart
 from orders.models import Order
-from loyalty_program.models import UserBonuses
+from loyalty_program.models import UserBonuses, BonusesProgram
 from tickets.models import Ticket, TicketMessage
 from tickets.forms import CreateTicketForm
 
@@ -47,7 +47,7 @@ class UserLoginView(View):
                                          'Успешно!')
                     return redirect('shop:index')
                 else:
-                    messages.error(request, 'Аккаунт заблокирован')
+                    messages.error(request, 'Подтвердите регистрацию. На ваш email выслано письмо для подтверждения')
                     return redirect('account:login')
             else:
                 messages.error(request, 'Неверный логин/пароль или аккаунт не активирован!')
@@ -68,7 +68,8 @@ class ProfileView(View):
 
     def get(self, request, *args, **kwargs):
         user = CustomUser.objects.get(email=request.user)
-        bonuses = UserBonuses.objects.values('bonuses').get(user=user)
+        bonuses = UserBonuses.objects.select_related('bonuses_program').values('bonuses', 'bonuses_program__name').get(
+            user=user)
         form_bio = UserChangeBioForm()
         form_phone = UserChangePhoneForm()
         form_password = PasswordChangeForm()
@@ -172,6 +173,8 @@ class UserRegisterView(View):
             else:
                 user = CustomUser.objects.create_user(email=cd['email'], password=cd['password'])
                 user.is_active = False
+                bonuses_program = BonusesProgram.objects.get(name='Silver')
+                UserBonuses.objects.create(user=user, bonuses_program=bonuses_program)
                 send_email(user)
                 messages.add_message(request, messages.INFO,
                                      'Вам на почту отправлено письмо с подтвержением регистрациии!')
@@ -239,7 +242,7 @@ class AddressesProfileView(View):
 class OrderListView(View):
 
     def get(self, request, *args, **kwargs):
-        orders = Order.objects.all().only('id', 'created', 'address', 'ship_type', 'status')
+        orders = Order.objects.all()
         paginator = Paginator(orders, 10)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)

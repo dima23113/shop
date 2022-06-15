@@ -35,7 +35,8 @@ def create_order_item(cart, order):
     items = [
     ]
     for item in cart:
-        OrderItem.objects.create(order=order, product=item['product'], price=item['price'], qty=item['qty'],
+        OrderItem.objects.create(order=order, product=item['product'], price=item['price'],
+                                 qty=item['qty'],
                                  size=item['size'], price_discount=item['discount_price'])
         ProductSize.objects.filter(product_id=item['product'], name=item['size']).update(
             qty=F('qty') - int(item['qty']))
